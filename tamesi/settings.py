@@ -99,6 +99,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'client/static_collected'
+MEDIA_ROOT = 'client/uploads'
 
 STATICFILES_DIRS = (
     # NB: grunt should copy here (on build), including bower_components!
@@ -111,7 +112,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'client/uploads')
 
 
 # Try to import local settings (if any)
