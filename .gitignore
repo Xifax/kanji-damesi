@@ -1,4 +1,5 @@
 venv
 *.pyc
 static
+local_*
 __pycache__

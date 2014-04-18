@@ -20,9 +20,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 'eln9&^t=5c_mc0-y5q+pfm=#q54+8gg3ou0#se##n9lr-1k*h8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -67,6 +67,8 @@ DATABASES = {
     "default": dj_database_url.config(default='postgres://localhost'),
 }
 
+# DATABASES['default'] =  dj_database_url.config()
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 
@@ -86,3 +88,10 @@ USE_TZ = True
 
 STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
+
+
+# Try to import local settings
+try:
+  from local_settings import *
+except ImportError:
+  pass
