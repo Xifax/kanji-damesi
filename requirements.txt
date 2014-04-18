@@ -1,0 +1,4 @@
+Django==1.6.2
+Pygments==1.6
+bpython==0.12
+wsgiref==0.1.2
