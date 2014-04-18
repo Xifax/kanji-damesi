@@ -3,27 +3,37 @@ from django.db import models
 # Models
 
 class Kanji(models.Model):
-    # Kanji and relations
+    # Kanji and its relations
     front = models.CharField(max_length=1)
-    # kanji is unique to group
-    group = models.ForeignKey(
-            'KanjiGroup', related_name='kanji', null=True, blank=True
+    group = models.ForeignKey(  # kanji is unique to group
+            'KanjiGroup',
+            related_name='kanji',
+            null=True,
+            blank=True
     )
     radicals = models.ManyToManyField(
-            'Radical', related_name='kanji', null=True, blank=True
+            'Radical',
+            related_name='kanji',
+            null=True,
+            blank=True
     )
     compounds = models.ManyToManyField(
-            'Compound', related_name='kanji', null=True, blank=True
+            'Compound',
+            related_name='kanji',
+            null=True,
+            blank=True
     )
 
     # Readings and translations
     on = models.CharField(max_length=100, null=True, blank=True)
     kun = models.CharField(max_length=100, null=True, blank=True)
-    namae = models.CharField(max_length=100, null=True, blank=True)
+    nanori = models.CharField(max_length=100, null=True, blank=True)
     gloss = models.CharField(max_length=1000, null=True, blank=True)
 
     # Additional info
-    # JLPT, grade, id, etc
+    jlpt = models.IntegerField(null=True, blank=True)
+    grade = models.IntegerField(null=True, blank=True)
+    strokes = models.IntegerField(null=True, blank=True)
 
     def __unicode__(self):
         return self.front
