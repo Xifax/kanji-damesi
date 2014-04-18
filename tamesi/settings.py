@@ -17,7 +17,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 # See https://docs.djangoproject.com/en/1.6/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'eln9&^t=5c_mc0-y5q+pfm=#q54+8gg3ou0#se##n9lr-1k*h8'
+
+try:
+    with open ('secret_key', 'r') as key:
+        SECRET_KEY = key.read().strip()
+except:
+    pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -90,7 +95,7 @@ STATIC_ROOT = 'static'
 STATIC_URL = '/static/'
 
 
-# Try to import local settings
+# Try to import local settings (if any)
 try:
   from local_settings import *
 except ImportError:
