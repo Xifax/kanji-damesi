@@ -22,7 +22,9 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
-      dist: 'dist'
+      // saiban: '../../saiban/templates',
+      // TODO: may change to static_collected
+      dist: 'static'
     },
 
     // Watches files for changes and runs tasks based on the changed files
@@ -62,7 +64,7 @@ module.exports = function (grunt) {
     // The actual grunt server settings
     connect: {
       options: {
-        port: 9000, // webapp
+        port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: 'localhost',
         livereload: 35729
@@ -140,6 +142,10 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/index.html'],
         ignorePath: '<%= yeoman.app %>/'
       },
+      // app: {
+      //   src: ['<%= yeoman.saiban %>/base.html'],
+      //   ignorePath: '<%= yeoman.saiban %>/'
+      // },
       sass: {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: '<%= yeoman.app %>/bower_components/'
@@ -324,7 +330,8 @@ module.exports = function (grunt) {
             '*.html',
             'views/{,*/}*.html',
             'images/{,*/}*.{webp}',
-            'fonts/*'
+            'fonts/*',
+            'bower_components/**/*'
           ]
         }, {
           expand: true,
@@ -435,7 +442,7 @@ module.exports = function (grunt) {
     'cdnify',
     'cssmin',
     'uglify',
-    'rev',
+    // 'rev',
     'usemin',
     'htmlmin'
   ]);

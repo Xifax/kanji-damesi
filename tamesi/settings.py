@@ -38,11 +38,14 @@ INSTALLED_APPS = (
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
+    'registration',
+    'rest_framework',
     'saiban'
 )
 
@@ -94,17 +97,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-# TODO: debug
-STATIC_ROOT = 'tamesi/client/static_collected'
-
 STATIC_URL = '/static/'
+STATIC_ROOT = 'client/static_collected'
 
 STATICFILES_DIRS = (
-    'tamesi/client/app',
-)
-
-TEMPLATE_DIRS = (
-    'tamesi/templates',
+    # NB: grunt should copy here (on build), including bower_components!
+    'client/static',
 )
 
 from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
@@ -113,7 +111,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
     'django.core.context_processors.request',
 )
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'client/uploads')
 
 
 # Try to import local settings (if any)
