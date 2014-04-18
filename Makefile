@@ -6,3 +6,7 @@ run:
 
 develop:
 	python manage.py runserver 8080
+
+migrate:
+	python manage.py syncdb
+	python manage.py migrate saiban

@@ -35,12 +35,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'south',
+    'saiban'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,8 +94,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = 'static'
+# TODO: debug
+STATIC_ROOT = 'tamesi/client/static_collected'
+
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    'tamesi/client/app',
+)
+
+TEMPLATE_DIRS = (
+    'tamesi/templates',
+)
+
+from django.conf.global_settings import TEMPLATE_CONTEXT_PROCESSORS as TCP
+
+TEMPLATE_CONTEXT_PROCESSORS = TCP + (
+    'django.core.context_processors.request',
+)
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 
 
 # Try to import local settings (if any)
