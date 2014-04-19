@@ -101,7 +101,9 @@ STATIC_ROOT = 'client/static_collected'
 MEDIA_ROOT = 'client/uploads'
 
 STATICFILES_DIRS = (
-    # NB: grunt should copy here (on build), including bower_components!
+    # watch task: grunt uses this folder to compile scripts/styles
+    'client/.tmp',
+    # build task: grunt compiles everything (including bower_components) here
     'client/static',
 )
 

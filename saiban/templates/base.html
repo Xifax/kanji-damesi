@@ -25,6 +25,10 @@
     <script src="{{ STATIC_URL }}scripts/scripts.js"></script>
     {% endblock %}
 
+    {% if debug %}
+        <script src="//localhost:35729/livereload.js"></script>
+    {% endif %}
+
 
 </body>
 </html>

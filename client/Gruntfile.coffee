@@ -24,7 +24,6 @@ module.exports = (grunt) ->
       app: require("./bower.json").appPath or "app"
 
       # saiban: '../../saiban/templates',
-      # TODO: may change to static_collected
       dist: "static"
 
 
@@ -53,7 +52,7 @@ module.exports = (grunt) ->
         ]
 
       gruntfile:
-        files: ["Gruntfile.js"]
+        files: ["Gruntfile.coffee"]
 
       livereload:
         options:
@@ -104,7 +103,7 @@ module.exports = (grunt) ->
         jshintrc: ".jshintrc"
         reporter: require("jshint-stylish")
 
-      all: ["Gruntfile.js"]
+      all: ["Gruntfile.coffee"]
 
 
     # Empties folders to start fresh
