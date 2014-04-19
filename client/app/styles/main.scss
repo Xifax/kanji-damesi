@@ -6,6 +6,20 @@ $icon-font-path: "/static/bower_components/bootstrap-sass-official/vendor/assets
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
 // endbower
 
+// Import mixins
+@import "mixins/main";
+
+// Import additional styles
+@import "main/colors";
+@import "main/fonts";
+@import "main/buttons";
+
+// Import screens styles
+@import "screens/home";
+@import "screens/quiz";
+
+/* General styles */
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;

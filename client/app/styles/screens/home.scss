@@ -1,0 +1,90 @@
+/* Landing page */
+
+@import "main/fonts";
+@import "main/colors";
+@import "mixins/main";
+
+/* Login/register form */
+
+body{
+  // background:#332E2E;
+  // background: $background_light;
+  background-image: url('../images/patterns/stardust.png');
+  color: $foreground_light;
+}
+
+.login-box{
+  text-transform:uppercase;
+  font-family: $monoFont;
+  position: relative;
+  width:90%;
+  max-width:450px;
+  height:auto;
+  margin:0 auto;
+  margin-top: 50px;
+  background:#222;
+  border-radius:7px;
+  box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.9);
+}
+
+.content{
+  width:85%;
+  height:auto;
+  margin:0 auto;
+  padding:30px 0px;
+  text-align:center;
+}
+
+.content h1{
+  font-size: 24px;
+  font-weight:400;
+  color:$yellow_main;
+  letter-spacing:0.125em;
+  text-align:center;
+}
+
+.field{
+  width:100%;
+  margin:10px auto;
+  padding:10px;
+  background:#2c2c2c;
+  border:none;
+  box-shadow: 0px 1px 0px 0px #111;
+  border-radius:3px;
+  outline:none;
+  color:$yellow_main;
+  font-weight:700;
+  letter-spacing:0.125em;
+  text-align:center;
+  // text-transform:uppercase;
+}
+
+@include placeholder {
+  color:#5A5A5A;
+}
+
+
+/* Title, subtitle and info */
+
+.title-box {
+    font-family: $jpFont;
+    position: relative;
+    margin-top: 1%;
+    width: 100%;
+    padding: 20px;
+    font-size: 90px;
+    text-align: center;
+    letter-spacing: 3px;
+
+    p {
+        font-size: 18px;
+        text-transform: uppercase;
+    }
+}
+
+.info-box {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+}
+
