@@ -4,11 +4,8 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'tamesi.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
     url(r'^admin/', include(admin.site.urls)),
     url(r'^user/', include('registration.backends.default.urls')),
-    url(r'^$', include('saiban.urls')),
+    url(r'saiban/', include('saiban.urls')),
+    url(r'^$', 'tamesi.views.landing', name='landing'),
 )

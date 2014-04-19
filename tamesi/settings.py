@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     # 'registration',
+    'debug_toolbar',
     'rest_framework',
     'saiban'
 )
