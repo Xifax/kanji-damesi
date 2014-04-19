@@ -8,10 +8,10 @@
     <p>Kanji Damesi</p>
 </div>
 
-<div ng-controller="UserCtrl">
-    {# <div data-ng-show="false">Test</div> #}
-    {% include "login.html" %}
-    {# {% include "register.html" %} #}
+<div ng-controller="MainCtrl" ng-cloak>
+
+    <div ng-show="login">{% include "login.html" %}</div>
+    <div ng-hide="login">{% include "register.html" %}</div>
 </div>
 
 <!-- Info -->

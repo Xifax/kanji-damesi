@@ -7,6 +7,3 @@ angular.module('clientApp')
       'AngularJS'
       'Karma'
     ]
-
-    $scope.test = false
-    console.log($scope.test)

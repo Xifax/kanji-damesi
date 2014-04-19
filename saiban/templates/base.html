@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title></title>
 </head>
-<body ng-model="clientApp">
+<body ng-app="clientApp">
 
     <div id="header">
     {% block header %}{% endblock %}
@@ -27,6 +27,8 @@
 
     {% if debug %}
         <script src="//localhost:35729/livereload.js"></script>
+        <script src="{{ STATIC_URL }}scripts/app.js"></script>
+        <script src="{{ STATIC_URL }}scripts/controllers/main.js"></script>
     {% endif %}
 
 

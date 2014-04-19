@@ -2,13 +2,14 @@
 <div class="login-box">
     <div class="content">
         <h1>Register</h1>
-        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% if error_message %}<p class="error"><strong>{{ error_message }}</strong></p>{% endif %}
         <form action="{% url 'register' %}" method="post">
         {% csrf_token %}
         <input class="field" type="text" name="username" placeholder="Username"><br>
         <input class="field" type="password" name="password1" placeholder="Password"><br>
         <input class="field" type="password" name="password2" placeholder="Repeat password"><br>
         <input class="btn-dark" type="submit" value="Continue">
+        <a href="" ng-click="switchMode()">Login</a>
         </form>
     </div>
 </div>
