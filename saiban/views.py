@@ -11,7 +11,7 @@ import logging
 
 # General views
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'index.html', {'login': True})
 
 def profile(request):
     if not request.user.is_authenticated():
@@ -26,7 +26,8 @@ def login(request):
             return render(
                     request,
                     'index.html',
-                    {'error_message': 'Sorry, could not login'}
+                    {'error_message': 'Sorry, could not login', 'login': True}
+                    # {'error_message': ' '.join([e.as_text() for e in form.errors.values()])}
             )
 
         # If form is valid, try to authenticate user
@@ -42,11 +43,11 @@ def login(request):
             return render(
                     request,
                     'index.html',
-                    {'error_message': 'Sorry, could not login'}
+                    {'error_message': 'Sorry, could not login', 'login': True}
             )
 
-    # Otherwise, redirect to index
-    return redirect('index')
+    # Otherwise, display login page
+    return render(request, 'index.html', {'login': True})
 
 def logout(request):
     logout_user(request)
@@ -59,17 +60,21 @@ def register(request):
             return render(
                     request,
                     'index.html',
-                    {'error_message': form.errors.values()}
+                    {'error_message': 'Could not create user', 'register': True}
+                    # {'error_message': form.errors.values()}
+            )
+        else:
+            # If valid form -> create user
+            User.objects.create_user(
+                    username=form.cleaned_data['username'],
+                    password=form.cleaned_data['password1']
             )
 
-    # If valid form -> create user
-    User.objects.create_user(
-            username=form.cleaned_data['username'],
-            password=form.cleaned_data['password1']
-    )
+            # Go to profile
+            return redirect('profile')
 
-    # Go to profile
-    return redirect('profile')
+    # Otherwise, display register page
+    return render(request, 'index.html', {'register': True})
 
 def saiban(request):
     pass

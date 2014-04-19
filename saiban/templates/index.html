@@ -10,8 +10,14 @@
 
 <div ng-controller="MainCtrl" ng-cloak>
 
-    <div ng-show="login">{% include "login.html" %}</div>
-    <div ng-hide="login">{% include "register.html" %}</div>
+    {% if login %}
+        {% include "login.html" %}
+    {% endif %}
+
+    {% if register %}
+        {% include "register.html" %}
+    {% endif %}
+
 </div>
 
 <!-- Info -->
@@ -19,6 +25,5 @@
     <p>Kanji quiz tool based on kanji grouping.</p>
     <p>Simple SRS, radical decomposition, compounds and examples.</p>
 </div>
-
 
 {% endblock %}
