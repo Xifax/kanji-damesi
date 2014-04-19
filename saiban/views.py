@@ -11,7 +11,8 @@ import logging
 
 # General views
 def index(request):
-    return render(request, 'index.html', {'login': True})
+    return render(request, 'index.html')
+    # return render(request, 'index.html', {'login': True})
 
 def profile(request):
     if not request.user.is_authenticated():
