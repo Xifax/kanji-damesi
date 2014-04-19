@@ -113,6 +113,8 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 1
 
+# Debug toolbar config
+DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Try to import local settings (if any)
 try:
