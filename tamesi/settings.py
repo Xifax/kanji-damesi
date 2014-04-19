@@ -24,10 +24,7 @@ except:
     pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-TEMPLATE_DEBUG = False
-
+DEBUG = TEMPLATE_DEBUG = False
 ALLOWED_HOSTS = []
 
 
@@ -85,11 +82,8 @@ DATABASES = {
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_L10N = True
-
 USE_TZ = True
 
 
@@ -117,7 +111,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 # Configuration for register module
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 1
-
 
 
 # Try to import local settings (if any)

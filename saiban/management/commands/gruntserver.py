@@ -9,6 +9,7 @@ from django.contrib.staticfiles.management.commands.runserver import Command\
 
 
 class Command(StaticfilesRunserverCommand):
+    """Run Grunt watch in parallel with Django server"""
 
     def inner_run(self, *args, **options):
         self.start_grunt()
@@ -18,8 +19,9 @@ class Command(StaticfilesRunserverCommand):
         self.stdout.write('>>> Starting grunt')
         self.grunt_process = subprocess.Popen(
             [
-                # 'grunt --gruntfile={0}/client/Gruntfile.coffee --base=.'.format(settings.BASE_DIR)
-                'grunt --gruntfile={0}/client/Gruntfile.coffee watch'.format(settings.BASE_DIR)
+                'grunt --gruntfile={0}/client/Gruntfile.coffee watch'.format(
+                    settings.BASE_DIR
+                )
             ],
             shell=True,
             stdin=subprocess.PIPE,
@@ -27,7 +29,9 @@ class Command(StaticfilesRunserverCommand):
             stderr=self.stderr,
         )
 
-        self.stdout.write('>>> Grunt process on pid {0}'.format(self.grunt_process.pid))
+        self.stdout.write(
+                '>>> Grunt process on pid {0}'.format(self.grunt_process.pid)
+        )
 
         def kill_grunt_process(pid):
             self.stdout.write('>>> Closing grunt process')
