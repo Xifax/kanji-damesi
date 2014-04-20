@@ -6,7 +6,7 @@ class Kanji(models.Model):
     '''Kanji info and associated compounds and components'''
 
     # Kanji and its relations
-    front = models.CharField(max_length=1, unique=True)
+    front = models.CharField(max_length=10, unique=True)
     group = models.ForeignKey(  # kanji is unique to group
             'KanjiGroup',
             related_name='kanji',
@@ -33,6 +33,7 @@ class Kanji(models.Model):
     gloss = models.CharField(max_length=1000, null=True, blank=True)
 
     # Additional info
+    processed = models.NullBooleanField(default=False, blank=True)
     jlpt = models.IntegerField(null=True, blank=True)
     grade = models.IntegerField(null=True, blank=True)
     strokes = models.IntegerField(null=True, blank=True)
@@ -51,9 +52,9 @@ class Compound(models.Model):
 
 class Radical(models.Model):
     '''Kanji components, may be identical to kanji for simple ones'''
-    front = models.CharField(max_length=1, unique=True)
+    front = models.CharField(max_length=10, unique=True)
     info = models.CharField(max_length=100, null=True, blank=True)
-    alternative = models.CharField(max_length=1, null=True, blank=True)
+    alternative = models.CharField(max_length=10, null=True, blank=True)
 
     def __unicode__(self):
         return self.front
