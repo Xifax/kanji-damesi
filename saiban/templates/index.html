@@ -6,9 +6,7 @@
 
     <!-- Title -->
     <div class="title-box">
-        <span>
-            漢字験
-        </span>
+        漢字験
         <p>Kanji Damesi</p>
     </div>
 
@@ -34,11 +32,11 @@
     <div ng-controller="MainCtrl" ng-cloak>
 
         {% if login %}
-            {% include "login.html" %}
+            {% include "auth/login.html" %}
         {% endif %}
 
         {% if register %}
-            {% include "register.html" %}
+            {% include "auth/register.html" %}
         {% endif %}
 
     </div>
