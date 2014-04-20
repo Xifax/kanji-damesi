@@ -2,47 +2,53 @@
 
 {% block content %}
 
-<!-- Title -->
-<div class="title-box">
-    漢字験
-    <p>Kanji Damesi</p>
-</div>
+<div class="landing">
 
-{% if not login and not register %}
-
-    <div class="auth-box">
-        <div class="content">
-            <a href="{% url 'login' %}"><h1>
-                Login
-            </h1>
-        </div>
-    </div>
-    <div class="auth-box">
-        <div class="content">
-            <a href="{% url 'register' %}"><h1>
-                Register
-            </h1></a>
-        </div>
+    <!-- Title -->
+    <div class="title-box">
+        <span>
+            漢字験
+        </span>
+        <p>Kanji Damesi</p>
     </div>
 
-{% endif %}
+    {% if not login and not register %}
 
-<div ng-controller="MainCtrl" ng-cloak>
+        <div class="auth-box">
+            <div class="content">
+                <a href="{% url 'login' %}"><h1>
+                    Login
+                </h1>
+            </div>
+        </div>
+        <div class="auth-box">
+            <div class="content">
+                <a href="{% url 'register' %}"><h1>
+                    Register
+                </h1></a>
+            </div>
+        </div>
 
-    {% if login %}
-        {% include "login.html" %}
     {% endif %}
 
-    {% if register %}
-        {% include "register.html" %}
-    {% endif %}
+    <div ng-controller="MainCtrl" ng-cloak>
 
-</div>
+        {% if login %}
+            {% include "login.html" %}
+        {% endif %}
 
-<!-- Info -->
-<div class="info-box">
-    <p>Kanji quiz tool based on kanji grouping.</p>
-    <p>Simple SRS, radical decomposition, compounds and examples.</p>
+        {% if register %}
+            {% include "register.html" %}
+        {% endif %}
+
+    </div>
+
+    <!-- Info -->
+    <div class="info-box">
+        <p>Kanji quiz tool based on kanji grouping.</p>
+        <p>Simple SRS, radical decomposition, compounds and examples.</p>
+    </div>
+
 </div>
 
 {% endblock %}

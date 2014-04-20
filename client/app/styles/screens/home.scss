@@ -6,9 +6,8 @@
 
 /* Login/register form */
 
-body{
-  // background:#332E2E;
-  // background: $background_light;
+.landing {
+  height: 100%;
   background-image: url('../images/patterns/stardust.png');
   color: $foreground_light;
 }
@@ -69,9 +68,9 @@ body{
 .title-box {
     font-family: $jpFont;
     position: relative;
-    margin-top: 1%;
     width: 100%;
     padding: 20px;
+    padding-top: 5%;
     font-size: 90px;
     text-align: center;
     letter-spacing: 3px;
@@ -91,3 +90,4 @@ body{
 .error {
     color: $red_light;
 }
+

@@ -11,8 +11,9 @@ import logging
 
 # General views
 def index(request):
+    if request.user.is_authenticated():
+        redirect('profile')
     return render(request, 'index.html')
-    # return render(request, 'index.html', {'login': True})
 
 def profile(request):
     if not request.user.is_authenticated():
@@ -21,6 +22,9 @@ def profile(request):
     return render(request, 'profile.html', {'user': request.user})
 
 def login(request):
+    if request.user.is_authenticated():
+        return redirect('profile')
+
     if request.method == 'POST':
         form = AuthenticationForm(data=request.POST)
         if not form.is_valid():
@@ -55,6 +59,9 @@ def logout(request):
     return redirect('index')
 
 def register(request):
+    if request.user.is_authenticated():
+        return redirect('profile')
+
     if request.method == 'POST':
         form = UserCreationForm(data=request.POST)
         if not form.is_valid():
@@ -77,5 +84,5 @@ def register(request):
     # Otherwise, display register page
     return render(request, 'index.html', {'register': True})
 
-def saiban(request):
-    pass
+def quiz(request):
+    return render(request, 'quiz.html')
