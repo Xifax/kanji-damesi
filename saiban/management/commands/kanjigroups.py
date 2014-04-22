@@ -9,7 +9,6 @@ from bs4 import BeautifulSoup
 import requests
 
 class Command(BaseCommand):
-    # args = '<poll_id poll_id ...>'
     option_list = BaseCommand.option_list + (
         make_option('--json',
             action='store_true',
@@ -70,6 +69,9 @@ class Command(BaseCommand):
         else:
             self.stdout.write('Filling up the database')
             for group in kanji_groups:
+                # self.stdout.write(
+                #         '\r[{0}] {1}%'.format('#'*(progress/10), progress)
+                # )
                 kanji_group = KanjiGroup(
                     level=group['level'],
                     info=group['info']
@@ -78,7 +80,12 @@ class Command(BaseCommand):
 
                 for kanji in group['kanji']:
                     new_kanji = Kanji(front=kanji, group=kanji_group)
-                    new_kanji.save()
+                    try:
+                        new_kanji.save()
+                    except Exception as e:
+                        self.stdout.write(
+                            'Could not save kanji %s [%s]' % (kanji, e)
+                        )
 
         self.stdout.write('Done!')
 

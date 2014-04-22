@@ -8,7 +8,7 @@ live:
 
 migrate:
 	python manage.py syncdb
-	python manage.py migrate saiban
+	python manage.py migrate
 
 # Misc tasks
 run:

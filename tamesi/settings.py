@@ -34,15 +34,13 @@ INSTALLED_APPS = (
     'suit',
     'django.contrib.admin',
     'django.contrib.auth',
-    # 'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    # 'registration',
     'debug_toolbar',
-    'rest_framework',
+    'tastypie',
     'saiban'
 )
 
@@ -97,6 +95,7 @@ MEDIA_ROOT = 'uploads'
 
 STATICFILES_DIRS = (
     # watch task: grunt uses this folder to compile scripts/styles
+    # TODO: move to local_settings?
     'client/.tmp',
     # build task: grunt compiles everything (including bower_components) here
     'client/static',
@@ -115,9 +114,6 @@ ACCOUNT_ACTIVATION_DAYS = 1
 
 # Debug toolbar config
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
-
-# User settings
-# AUTHENTICATION_BACKENDS = 'django.contrib.auth.backends.ModelBackend'
 
 # Try to import local settings (if any)
 try:

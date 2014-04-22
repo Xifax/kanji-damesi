@@ -11,5 +11,5 @@ urlpatterns = patterns('',
     url(r'^$', 'tamesi.views.landing', name='landing'),
     url(r'^media/(.*)$', 'django.views.static.serve',
         {'document_root' : settings.MEDIA_ROOT}
-    )
+    ),
 )

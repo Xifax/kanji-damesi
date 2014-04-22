@@ -6,17 +6,32 @@
 
 {% block content %}
 
-    <!-- Begin page content -->
-    <div class="container">
-      <div class="page-header">
-          <h1>Quiz page</h1>
-      </div>
-      <p class="lead">There's nothing here, for now</p>
-    </div>
+<div ng-controller="QuizCtrl">
 
-    <div class="container">
-        {{ group }}
+    {# <!-- Begin page content --> #}
+    {# <div class="container"> #}
+    {#   <div class="page-header"> #}
+    {#       <h1>Quiz page</h1> #}
+    {#   </div> #}
+    {#   <p class="lead">There's nothing here, for now</p> #}
+    {# </div> #}
+
+    {# <div class="container"> #}
+    {#     {{ group }} #}
+    {# </div> #}
+
+    {% verbatim %}
+    <div class="container quiz" ng-cloak>
+        <div class="active-kanji-group">
+            <div class="kanji" ng-repeat="kanji in activeGroup.kanji">
+                {{ kanji.fields.front }}
+            </div>
+        </div>
+        <button ng-click="getNextGroup()">Next group</button>
     </div>
+    {% endverbatim %}
+
+</div>
 
 {% endblock %}
 

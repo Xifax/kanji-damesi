@@ -1,0 +1,12 @@
+/* Quiz page */
+
+@import "main/fonts";
+@import "main/colors";
+@import "mixins/main";
+
+.kanji {
+    font-family: $jpFont;
+    float: left;
+    padding: 20px;
+    font-size: 60px;
+}
