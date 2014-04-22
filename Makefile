@@ -1,6 +1,7 @@
 # Core tasks
 update:
-	pip install -r requirements.txt
+	pip install -r requirements.txt && \
+		cd client && npm install && bower update
 
 live:
 	python manage.py gruntserver 8080
@@ -15,4 +16,9 @@ run:
 
 develop:
 	python manage.py runserver 8080
+
+new-migration:
+	python manage.py sql saiban && \
+		python manage.py schemamigration saiban --auto
+
 
