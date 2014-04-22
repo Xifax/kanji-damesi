@@ -116,6 +116,9 @@ ACCOUNT_ACTIVATION_DAYS = 1
 # Debug toolbar config
 DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
+# User settings
+# AUTHENTICATION_BACKENDS = 'django.contrib.auth.backends.ModelBackend'
+
 # Try to import local settings (if any)
 try:
   from local_settings import *

@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import logging
 
-from models import Profile
+from services import new_user_with_profile
 
 # Landing page
 def index(request):
@@ -22,7 +22,7 @@ def index(request):
 def profile(request):
     """Display main profile page"""
     if not request.user.is_authenticated():
-        raise Http404
+        redirect('index')
 
     return render(request, 'profile.html', {'user': request.user})
 
@@ -43,14 +43,11 @@ def register(request):
             )
         else:
             # If valid form -> create user
-            user = User.objects.create_user(
-                    username=form.cleaned_data['username'],
-                    password=form.cleaned_data['password1']
-            )
-            # Associate new profile
-            profile = Profile()
-            profile.user = user
-            profile.save()
+            user, profile = new_user_with_profile(form)
+
+            # Login registered user
+            user.backend = 'django.contrib.auth.backends.ModelBackend'
+            login_user(request, user)
 
             # Go to profile
             return redirect('profile')
