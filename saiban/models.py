@@ -112,6 +112,9 @@ class Profile(models.Model):
         blank=True
     )
 
+    def __unicode__(self):
+        return '%s [streak: %d days]' % (self.user.username, self.streak)
+
 class KanjiStatus(models.Model):
     """Kanji SRS for specific user"""
     # Associated entities: kanji and user
@@ -150,6 +153,9 @@ class KanjiStatus(models.Model):
         """Delay practice for N days"""
         self.next_practice = date.today() + timedelta(days=days)
 
+    def __unicode__(self):
+        return self.level
+
     class Meta:
         ordering = ['next_practice']
 
@@ -162,3 +168,6 @@ class Achievement(models.Model):
             null=True,
             blank=True
     )
+
+    def __unicode__(self):
+        return '%s [%d]' % (self.description, self.points)
