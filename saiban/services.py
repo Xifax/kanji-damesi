@@ -1,15 +1,23 @@
-from saiban.models import(
+import random
+
+from django.contrib.auth.models import User
+
+from models import(
     Kanji,
     KanjiGroup,
     Profile
 )
 
-from django.contrib.auth.models import User
 
 # Working with kanji and groups
 
 def get_random_kanji_group(level=1):
     """Get random kanji group by level"""
+    # NB: could be slow (yet, lazy querysets should be fast!)
+    return random.choice(KanjiGroup.objects.filter(level=level))
+
+def get_scheduled_kanji_group(user):
+    """Get next scheduled kanji group or random one"""
     pass
 
 # User management

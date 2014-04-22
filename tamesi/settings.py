@@ -93,7 +93,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = 'client/static_collected'
-MEDIA_ROOT = 'client/uploads'
+MEDIA_ROOT = 'uploads'
 
 STATICFILES_DIRS = (
     # watch task: grunt uses this folder to compile scripts/styles

@@ -6,4 +6,4 @@ __pycache__
 node_modules
 .tmp
 client/static
-client/uploads
+uploads

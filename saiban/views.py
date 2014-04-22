@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import logging
 
-from services import new_user_with_profile
+from services import new_user_with_profile, get_random_kanji_group
 
 # Landing page
 def index(request):
@@ -98,4 +98,4 @@ def logout(request):
 # Kanji quiz
 def quiz(request):
     """Show quiz page"""
-    return render(request, 'quiz.html')
+    return render(request, 'quiz.html', {'group': get_random_kanji_group()})

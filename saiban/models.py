@@ -98,7 +98,11 @@ class KanjiGroup(models.Model):
 
 class Profile(models.Model):
     """Contains profile studies achivements"""
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, related_name='profile')
+    group_level = models.PositiveIntegerField(default=0)
+
+    # Vanity info
+    vanity_level = models.PositiveIntegerField(default=0)
     streak = models.PositiveIntegerField(default=0)
     avatar = models.ImageField(
             upload_to=settings.MEDIA_ROOT,
