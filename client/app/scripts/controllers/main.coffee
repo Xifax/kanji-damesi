@@ -8,6 +8,3 @@ angular.module('clientApp')
       'Karma'
     ]
 
-    # $scope.login = true
-    # $scope.switchMode = ->
-    #     $scope.login = !$scope.login

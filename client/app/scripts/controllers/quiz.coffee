@@ -1,14 +1,7 @@
 'use strict'
 
-# TODO: isolate scopes as should be done in coffeescript
-
 angular.module('clientApp')
   .controller 'QuizCtrl', ($scope, $http) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
 
     ########
     # Init #
