@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 
+from saiban.models import Profile
+
 # User management
 
 def new_profile(user):

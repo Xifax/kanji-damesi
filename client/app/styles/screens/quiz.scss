@@ -35,18 +35,27 @@
     top: 1px;
 }
 
-.kanji-quiz {
-    font-family: $jpFont;
-    font-size: 20px;
-
-    .meaing {
-        font-family: $serifFont;
-    }
-}
-
 .kanji-zoom {
     font-family: $jpFont;
     font-size: 180px;
     cursor: default;
     @include user-select(none);
 }
+
+/* Question elements */
+
+.kanji-quiz {
+    font-family: $jpFont;
+    font-size: 20px;
+
+    .meaning {
+        font-family: $sansFont;
+        color: tint($foreground_light, 50%)
+    }
+
+    .example {
+        color: shade($foreground_light, 30%)
+    }
+}
+
+
