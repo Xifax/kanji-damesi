@@ -6,8 +6,9 @@ from django.conf import settings
 
 from services.srs import interval
 
-
+#########################################
 # Kanji and related didactical entities #
+#########################################
 
 class Kanji(models.Model):
     """Kanji info and associated compounds and components"""
@@ -122,7 +123,9 @@ class KanjiGroup(models.Model):
             kanji=[kanji.as_json() for kanji in self.kanji.all()]
         )
 
+#################################
 # Profile and SRS related stuff #
+#################################
 
 class Profile(models.Model):
     """Contains profile studies achivements"""
