@@ -39,7 +39,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
-    'debug_toolbar',
     'saiban'
 )
 
@@ -110,9 +109,6 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 # Configuration for register module
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 1
-
-# Debug toolbar config
-DEBUG_TOOLBAR_PATCH_SETTINGS = False
 
 # Try to import local settings (if any)
 try:
