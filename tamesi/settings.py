@@ -40,7 +40,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'debug_toolbar',
-    # 'tastypie',
     'saiban'
 )
 

@@ -1,7 +1,12 @@
 # Core tasks
 update:
-	pip install -r requirements.txt && \
+	pip install -r requirements/dev.txt && \
 		cd client && npm install && bower update
+
+release:
+	pip install -r requirements/master.txt
+	cd client && npm install && bower update && grunt build
+	python manage.py collectstatic
 
 live:
 	python manage.py gruntserver 8080

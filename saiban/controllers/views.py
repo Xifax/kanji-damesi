@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import logging
 
-from services.user import new_user_with_profile
+from saiban.services.user import new_user_with_profile
 
 ###############
 # Controllers #
@@ -102,5 +102,5 @@ def logout(request):
 # Kanji quiz
 def quiz(request):
     """Show quiz page"""
-    return render(request, 'quiz.html', {'group': get_random_kanji_group()})
+    return render(request, 'quiz.html')
 

@@ -1,5 +1,7 @@
 'use strict'
 
+# TODO: isolate scopes as should be done in coffeescript
+
 angular.module('clientApp')
   .controller 'QuizCtrl', ($scope, $http) ->
     $scope.awesomeThings = [
@@ -8,30 +10,49 @@ angular.module('clientApp')
       'Karma'
     ]
 
+    ########
+    # Init #
+    ########
+
+    # Basic settings and utils
     api = '/saiban/api/'
 
-    $scope.groups = []
-    $scope.activeGroup = {}
-    #     kanji: [
-    #         {front: '托'},
-    #         {front: '瑚'},
-    #         {front: '珊'},
-    #         {front: '醐'},
-    #         {front: '醍'}
-    #     ]
-    # }
+    # Show notification
+    fail = (message)->
+        console.log(message)
 
-    $scope.getNextGroup = ->
-        $scope.groups.push($scope.activeGroup)
-        # $scope.activeGroup = {} # get from api
+    # Init models and data
+    $scope.groupsSeen = []
+    $scope.activeGroup = {
+        kanji: [
+            {front: '托'},
+            {front: '瑚'},
+            {front: '珊'},
+            {front: '醐'},
+            {front: '醍'}
+        ]
+    }
 
-        promise = $http.get(api + 'next-group')
+    #######
+    # API #
+    #######
+
+    # Get random group
+    $scope.getRandomGroup = ->
+        promise = $http.get(api + 'random-group')
 
         promise.success (data)->
-            console.log(data)
-            $scope.activeGroup.kanji = data
+            # Add previous group to log & set new active group
+            $scope.groupsSeen.push($scope.activeGroup)
+            $scope.activeGroup = data
 
+        promise.error (data)->
+            fail(data)
 
+    # Get scheduled group
+    $scope.getNextGroup = ->
+        promise = $http.get(api + 'next-group')
+
+    # Answer with kanji
     $scope.answerWith = (kanji) ->
-        # select kanji and send to api
-        $scope.test = ''
+        promise = $http.post(api + 'answer')

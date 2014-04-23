@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
-from srs import interval
+from services.srs import interval
 
 
 # Kanji and related didactical entities #

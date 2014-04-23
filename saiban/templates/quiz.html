@@ -24,10 +24,10 @@
     <div class="container quiz" ng-cloak>
         <div class="active-kanji-group">
             <div class="kanji" ng-repeat="kanji in activeGroup.kanji">
-                {{ kanji.fields.front }}
+                {{ kanji.front }}
             </div>
         </div>
-        <button ng-click="getNextGroup()">Next group</button>
+        <button ng-click="getRandomGroup()">Next group</button>
     </div>
     {% endverbatim %}
 

@@ -15,7 +15,7 @@ def check_request(request):
     if not request.user.is_authenticated():
         raise Http404
 
-    if not request.is_ajax():
-        raise Http404
+    # if not request.is_ajax():
+    #     raise Http404
 
 

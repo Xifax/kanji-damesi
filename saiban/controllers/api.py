@@ -4,27 +4,18 @@ from django.http import HttpResponse, Http404
 import simplejson as json
 import logging
 
-from services.quiz import get_random_kanji_group
-from services.api import json_response, check_request
+from saiban.services.quiz import get_random_kanji_group
+from saiban.services.api import json_response, check_request
 
 ############
 # Quiz API #
 ############
 
-def next_group(request):
+def random_group(request):
+    """Get random kanji group"""
     check_request(request)
 
-    # TODO: get new group
     group = get_random_kanji_group()
-    # for kanji in group.kanji.all():
-        # logging.debug(kanji.front)
-    # data = simplejson.dumps({'group':group.kanji.all()})
-    # kanji = serializers.serialize('json', group.kanji.all())
-    # group = serializers.serialize('json', group)
-    # response = {'group': {'kanji': kanji, 'data': group}}
-    # response = simplejson.dumps({
-    #     'group': {'kanji': group.kanji, 'info': group.info}
-    # })
     return json_response(group.as_json())
 
 def get_next_quiz(request):
