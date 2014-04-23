@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 import logging
 
-from services import new_user_with_profile, get_random_kanji_group
+from services.user import new_user_with_profile
 
 ###############
 # Controllers #
@@ -103,46 +103,4 @@ def logout(request):
 def quiz(request):
     """Show quiz page"""
     return render(request, 'quiz.html', {'group': get_random_kanji_group()})
-
-
-############
-# Quiz API #
-############
-
-# TODO: move somewhere else
-
-from django.core import serializers
-import simplejson
-
-def next_group(request):
-    if not request.user.is_authenticated():
-        raise Http404
-
-    # TODO: get new group
-    group = get_random_kanji_group()
-    # for kanji in group.kanji.all():
-        # logging.debug(kanji.front)
-    # data = simplejson.dumps({'group':group.kanji.all()})
-    kanji = serializers.serialize('json', group.kanji.all())
-    # group = serializers.serialize('json', group)
-    # response = {'group': {'kanji': kanji, 'data': group}}
-    # response = simplejson.dumps({
-    #     'group': {'kanji': group.kanji, 'info': group.info}
-    # })
-    return HttpResponse(kanji, mimetype='application/json')
-
-def get_next_quiz(request):
-    # TODO: get scheduled group by level
-    # TODO: randomize kanji order
-    # TODO get random kanji from group to quiz on
-    # TODO: prepare answer and additional info:
-    # -> all kanji info
-    # -> compounds
-    # -> examples
-    pass
-
-def process_answer(request):
-    # TODO: rate answer
-    # TODO: get next group
-    pass
 

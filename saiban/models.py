@@ -48,6 +48,26 @@ class Kanji(models.Model):
     def __unicode__(self):
         return self.front
 
+    def as_json(self):
+        return dict(
+            # main
+            front=self.front,
+            group=str(self.group),
+            # radicals=[radical.as_json() for radical in self.radicals.all()],
+            # compounds=[compound.as_json() for compound in self.compounds.all()],
+            # NB:SRS is not included
+            # kanji info
+            on=self.on,
+            kun=self.kun,
+            nanori=self.nanori,
+            gloss=self.gloss,
+            # additional info
+            pocessed=self.processed,
+            jlpt=self.jlpt,
+            grade=self.grade,
+            strokes=self.strokes,
+        )
+
 class Compound(models.Model):
     """Kanji compound, usually word or expression, may include kana"""
     front = models.CharField(max_length=10, unique=True)
@@ -92,6 +112,14 @@ class KanjiGroup(models.Model):
                 ' '.join([
                     kanji.front for kanji in self.kanji.all()
                 ])
+        )
+
+    def as_json(self):
+        return dict(
+            id=self.id,
+            level=self.level,
+            info=self.info,
+            kanji=[kanji.as_json() for kanji in self.kanji.all()]
         )
 
 # Profile and SRS related stuff #

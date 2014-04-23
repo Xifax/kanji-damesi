@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url, include
 
-from saiban import views
+from saiban import views, api
 
 # from tastypie.api import Api
 # from api import (
@@ -22,5 +22,5 @@ urlpatterns = patterns('',
     url(r'^logout/', views.logout, name='logout'),
     url(r'^quiz/', views.quiz, name='quiz'),
     # url(r'^api/', include(api.urls)),
-    url(r'^api/next-group/', views.next_group, name='next-group'),
+    url(r'^api/next-group/', api.next_group, name='next-group'),
 )

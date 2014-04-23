@@ -1,35 +1,44 @@
-from tastypie.resources import ModelResource
-from tastypie.authentication import SessionAuthentication
+from django.core import serializers
+from django.http import HttpResponse, Http404
 
-from models import Kanji, KanjiGroup
-from services import (
-    get_random_kanji_group,
-    get_scheduled_kanji_group
-)
+import simplejson as json
+import logging
+
+from services.quiz import get_random_kanji_group
+from services.api import json_response, check_request
 
 ############
 # Quiz API #
 ############
 
-class KanjiResource(ModelResource):
-    class Meta:
-        authentication = SessionAuthentication()
-        queryset = Kanji.objects.all()
-        resource_name = 'kanji'
+def next_group(request):
+    check_request(request)
 
-    def do_something(self, bundle):
-        bundle.request.user
+    # TODO: get new group
+    group = get_random_kanji_group()
+    # for kanji in group.kanji.all():
+        # logging.debug(kanji.front)
+    # data = simplejson.dumps({'group':group.kanji.all()})
+    # kanji = serializers.serialize('json', group.kanji.all())
+    # group = serializers.serialize('json', group)
+    # response = {'group': {'kanji': kanji, 'data': group}}
+    # response = simplejson.dumps({
+    #     'group': {'kanji': group.kanji, 'info': group.info}
+    # })
+    return json_response(group.as_json())
 
-class KanjiGroupResource(ModelResource):
-    class Meta:
-        authentication = SessionAuthentication()
-        queryset = KanjiGroup.objects.all()
-        resource_name = 'kanji-group'
+def get_next_quiz(request):
+    # TODO: get scheduled group by level
+    # TODO: randomize kanji order
+    # TODO get random kanji from group to quiz on
+    # TODO: prepare answer and additional info:
+    # -> all kanji info
+    # -> compounds
+    # -> examples
+    pass
 
-class QuizResource(ModelResource):
-    class Meta:
-        authentication = SessionAuthentication()
-        # TODO: use user and get_scheduled_kanji_group
-        # queryset = get_random_kanji_group()
-        resource_name = 'next-group'
+def process_answer(request):
+    # TODO: rate answer
+    # TODO: get next group
+    pass
 
