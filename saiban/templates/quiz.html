@@ -24,7 +24,8 @@
                 {{ kanji.front }}
             </div>
             <!-- Wildcard (I don't know button) -->
-            <div class="kanji" ng-click="skipQuestion(kanji)">?</div>
+            <!-- TODO: fix & debug -->
+            <div class="kanji" ng-click="skipQuestion(quiz.kanji)">?</div>
 
             <!-- Active question -->
             <div class="kanji-quiz">
@@ -38,7 +39,7 @@
 
         </div>
         <!-- Kanji group END -->
-        <!--button class="btn-dark" ng-click="getRandomGroup()">Next group</button-->
+        <button class="btn-dark" ng-click="getNextGroup()">Get scheduled group</button>
     </div>
     {% endverbatim %}
 

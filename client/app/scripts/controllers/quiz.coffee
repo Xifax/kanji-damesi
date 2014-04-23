@@ -18,24 +18,13 @@ angular.module('clientApp')
         readings: 'さかん, うつくし.い, かがや.き, ゴウ, キョウ, オウ',
         meanings: 'flourishing, successful, beautiful, vigorous',
         examples: 'にっぽんではえいごきょういくがさかんである',
+        answer: 'kanji'
     }
     $scope.groupsSeen = []
-    $scope.activeGroup = {
-        kanji: [
-            {front: '?'},
-            {front: '?'},
-            {front: '?'},
-            {front: '?'},
-            {front: '?'}
-            # Examples #
-            # {front: '托'},
-            # {front: '瑚'},
-            # {front: '珊'},
-            # {front: '醐'},
-            # {front: '醍'}
-        ]
-    }
+    $scope.activeGroup = { kanji: [] }
     $scope.loading = false
+    # Pre-fill active group with '?'
+    $scope.activeGroup.kanji.push({front: '?'}) for [1..5]
 
     #########
     # Utils #
@@ -78,9 +67,18 @@ angular.module('clientApp')
             fin()
 
     # Get scheduled group
-    # TODO: implement
     $scope.getNextGroup = ->
+        start()
         promise = $http.get(api + 'next-group/')
+
+        promise.success (data)->
+            newKanjiGroup(data.group)
+            $scope.quiz = data.quiz
+            fin()
+
+        promise.error (data)->
+            fail(data)
+            fin()
 
     # Answer with kanji
     # TODO: implement
@@ -90,7 +88,7 @@ angular.module('clientApp')
     # Skip this kanji
     $scope.skipQuestion = (kanji) ->
         start()
-        promise = $http.put(api + 'skip/')
+        promise = $http.put(api + 'skip/', {'kanji': kanji.id})
 
         promise.success (data)->
             newKanjiGroup(data)

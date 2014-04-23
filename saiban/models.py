@@ -70,6 +70,10 @@ class Kanji(models.Model):
             strokes=self.strokes,
         )
 
+    def get_reading(self):
+        return u'%s; %s; %s' % (self.kun, self.on, self.nanori)
+
+
 class Compound(models.Model):
     """Kanji compound, usually word or expression, may include kana"""
     front = models.CharField(max_length=10, unique=True)
@@ -153,7 +157,7 @@ class KanjiGroup(models.Model):
 class Profile(models.Model):
     """Contains profile studies achivements"""
     user = models.ForeignKey(User, related_name='profile')
-    group_level = models.PositiveIntegerField(default=0)
+    group_level = models.PositiveIntegerField(default=1)
 
     # Vanity info
     vanity_level = models.PositiveIntegerField(default=0)
@@ -183,6 +187,7 @@ class KanjiStatus(models.Model):
         null=True,
         blank=True
     )
+    group_level = models.PositiveIntegerField(default=1, null=True, blank=True)
 
     # SRS details
     level = models.DecimalField(
@@ -212,7 +217,9 @@ class KanjiStatus(models.Model):
         self.next_practice = date.today() + timedelta(days=days)
 
     def __unicode__(self):
-        return self.level
+        return u'%s: %s [%s]' % (
+            self.kanji, str(self.level), self.user.username
+        )
 
     def as_json(self):
         return dict(
