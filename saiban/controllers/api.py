@@ -1,5 +1,6 @@
 from django.core import serializers
 from django.http import HttpResponse, Http404
+from django.views.decorators.csrf import csrf_exempt
 
 import simplejson as json
 import logging
@@ -18,7 +19,8 @@ def random_group(request):
     group = get_random_kanji_group()
     return json_response(group.as_json())
 
-def get_next_quiz(request):
+def next_group(request):
+    """Get next scheduled kanji group"""
     # TODO: get scheduled group by level
     # TODO: randomize kanji order
     # TODO get random kanji from group to quiz on
@@ -28,8 +30,15 @@ def get_next_quiz(request):
     # -> examples
     pass
 
+@csrf_exempt
 def process_answer(request):
+    """Process user answer"""
     # TODO: rate answer
     # TODO: get next group
     pass
 
+@csrf_exempt
+def skip_kanji(request):
+    """Skip current kanji"""
+    # TODO: update kanji srs
+    return random_group(request)

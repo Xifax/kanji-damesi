@@ -10,10 +10,6 @@ angular.module('clientApp')
     # Basic settings and utils
     api = '/saiban/api/'
 
-    # Show notification
-    fail = (message)->
-        console.log(message)
-
     # Init models and data
     # TODO: also include radical decomposition
     $scope.currentKanji = '?'
@@ -26,14 +22,42 @@ angular.module('clientApp')
     $scope.groupsSeen = []
     $scope.activeGroup = {
         kanji: [
-            {front: '托'},
-            {front: '瑚'},
-            {front: '珊'},
-            {front: '醐'},
-            {front: '醍'}
+            {front: '?'},
+            {front: '?'},
+            {front: '?'},
+            {front: '?'},
+            {front: '?'}
+            # Examples #
+            # {front: '托'},
+            # {front: '瑚'},
+            # {front: '珊'},
+            # {front: '醐'},
+            # {front: '醍'}
         ]
     }
     $scope.loading = false
+
+    #########
+    # Utils #
+    #########
+
+    # Show notification
+    fail = (message)->
+        console.log(message)
+
+    # Set new kanji group
+    newKanjiGroup = (data) ->
+        $scope.groupsSeen.push($scope.activeGroup)
+        $scope.activeGroup = data
+        $scope.currentKanji = '?'
+
+    # Start some time-consuming action
+    start = ->
+        $scope.loading = true
+
+    # Finish time-consuming action
+    fin = ->
+        $scope.loading = false
 
     #######
     # API #
@@ -41,32 +65,49 @@ angular.module('clientApp')
 
     # Get random group
     $scope.getRandomGroup = ->
-        $scope.loading = true
+        start()
         promise = $http.get(api + 'random-group')
 
         promise.success (data)->
             # Add previous group to log & set new active group
-            $scope.groupsSeen.push($scope.activeGroup)
-            $scope.activeGroup = data
-            $scope.currentKanji = '?'
-            $scope.loading = false
+            newKanjiGroup(data)
+            fin()
 
         promise.error (data)->
             fail(data)
-            $scope.loading = false
+            fin()
 
     # Get scheduled group
+    # TODO: implement
     $scope.getNextGroup = ->
-        promise = $http.get(api + 'next-group')
+        promise = $http.get(api + 'next-group/')
 
     # Answer with kanji
+    # TODO: implement
     $scope.answerWith = (kanji) ->
-        promise = $http.post(api + 'answer')
+        promise = $http.put(api + 'answer/')
 
     # Skip this kanji
     $scope.skipQuestion = (kanji) ->
-        promise = $http.post(api + 'skip')
+        start()
+        promise = $http.put(api + 'skip/')
+
+        promise.success (data)->
+            newKanjiGroup(data)
+            fin()
+
+        promise.error (data)->
+            fail(data)
+            fin()
 
     # Zoom kanji (and components) on hover
     $scope.zoomKanji = (kanji) ->
         $scope.currentKanji = kanji.front
+
+    ###########
+    # On load #
+    ###########
+
+    # Get new group on load
+    $scope.getRandomGroup()
+
