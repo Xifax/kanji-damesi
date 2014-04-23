@@ -15,6 +15,14 @@ angular.module('clientApp')
         console.log(message)
 
     # Init models and data
+    # TODO: also include radical decomposition
+    $scope.currentKanji = '?'
+    $scope.quiz = {
+        # TODO: ponder, if shoud use 'meaning' or array of 'meanings' and so on
+        readings: 'さかん, うつくし.い, かがや.き, ゴウ, キョウ, オウ',
+        meanings: 'flourishing, successful, beautiful, vigorous',
+        examples: 'にっぽんではえいごきょういくがさかんである',
+    }
     $scope.groupsSeen = []
     $scope.activeGroup = {
         kanji: [
@@ -38,6 +46,7 @@ angular.module('clientApp')
             # Add previous group to log & set new active group
             $scope.groupsSeen.push($scope.activeGroup)
             $scope.activeGroup = data
+            $scope.currentKanji = '?'
 
         promise.error (data)->
             fail(data)
@@ -49,3 +58,11 @@ angular.module('clientApp')
     # Answer with kanji
     $scope.answerWith = (kanji) ->
         promise = $http.post(api + 'answer')
+
+    # Skip this kanji
+    $scope.skipQuestion = (kanji) ->
+        promise = $http.post(api + 'skip')
+
+    # Zoom kanji (and components) on hover
+    $scope.zoomKanji = (kanji) ->
+        $scope.currentKanji = kanji.front

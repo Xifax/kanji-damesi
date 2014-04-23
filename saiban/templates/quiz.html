@@ -8,26 +8,36 @@
 
 <div ng-controller="QuizCtrl">
 
-    {# <!-- Begin page content --> #}
-    {# <div class="container"> #}
-    {#   <div class="page-header"> #}
-    {#       <h1>Quiz page</h1> #}
-    {#   </div> #}
-    {#   <p class="lead">There's nothing here, for now</p> #}
-    {# </div> #}
-
-    {# <div class="container"> #}
-    {#     {{ group }} #}
-    {# </div> #}
-
+    <!-- Quiz active group-->
     {% verbatim %}
     <div class="container quiz" ng-cloak>
+        <!-- Kanji group -->
         <div class="active-kanji-group">
-            <div class="kanji" ng-repeat="kanji in activeGroup.kanji">
+
+            <!-- TODO: also show radicals on hover -->
+            <p class="kanji-zoom">{{ currentKanji }}</p>
+            <div id="{{kanji.id}}" class="kanji"
+                ng-mouseover="zoomKanji(kanji)"
+                ng-click="answerWith(kanji)"
+                ng-repeat="kanji in activeGroup.kanji">
                 {{ kanji.front }}
             </div>
+            <!-- Wildcard (I don't know button) -->
+            <div class="kanji" ng-click="skipQuestion(kanji)">?</div>
+
+            <!-- Active question -->
+            <div class="kanji-quiz">
+                <!-- TODO: katakana and hirogana in different styles -->
+                <p class="reading"> {{ quiz.readings }} </p>
+                <p class="meaning"> {{ quiz.meanings }} </p>
+                <!-- TODO: show kanji in example but hide(transliterate) the word -->
+                <!-- TODO: highlight example -->
+                <p class="example"> {{ quiz.examples }} </p>
+            </div>
+
         </div>
-        <button ng-click="getRandomGroup()">Next group</button>
+        <!-- Kanji group END -->
+        <button class="btn-dark" ng-click="getRandomGroup()">Next group</button>
     </div>
     {% endverbatim %}
 

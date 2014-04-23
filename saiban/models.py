@@ -52,6 +52,7 @@ class Kanji(models.Model):
     def as_json(self):
         return dict(
             # main
+            id=self.id,
             front=self.front,
             group=str(self.group),
             # radicals=[radical.as_json() for radical in self.radicals.all()],

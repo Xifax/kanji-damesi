@@ -1,12 +1,51 @@
 /* Quiz page */
 
+@import "compass/css3/user-interface";
+
 @import "main/fonts";
 @import "main/colors";
 @import "mixins/main";
+
+.quiz {
+    padding-top: 80px;
+    text-align: center;
+}
+
+.active-kanji-group {
+    display: inline-block;
+}
 
 .kanji {
     font-family: $jpFont;
     float: left;
     padding: 20px;
-    font-size: 60px;
+    font-size: 70px;
+    @include user-select(none);
+}
+
+.kanji:hover {
+    cursor: pointer;
+    color: $yellow_light;
+}
+
+.kanji:active {
+    color: $yellow_main;
+    position: relative;
+    top: 1px;
+}
+
+.kanji-quiz {
+    font-family: $jpFont;
+    font-size: 20px;
+
+    .meaing {
+        font-family: $serifFont;
+    }
+}
+
+.kanji-zoom {
+    font-family: $jpFont;
+    font-size: 180px;
+    cursor: default;
+    @include user-select(none);
 }
