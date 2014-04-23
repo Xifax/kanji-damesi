@@ -16,22 +16,22 @@ class Kanji(models.Model):
     # Kanji and its relations
     front = models.CharField(max_length=10, unique=True)
     group = models.ForeignKey(  # kanji is unique to group
-            'KanjiGroup',
-            related_name='kanji',
-            null=True,
-            blank=True
+        'KanjiGroup',
+        related_name='kanji',
+        null=True,
+        blank=True
     )
     radicals = models.ManyToManyField(
-            'Radical',
-            related_name='kanji',
-            null=True,
-            blank=True
+        'Radical',
+        related_name='kanji',
+        null=True,
+        blank=True
     )
     compounds = models.ManyToManyField(
-            'Compound',
-            related_name='kanji',
-            null=True,
-            blank=True
+        'Compound',
+        related_name='kanji',
+        null=True,
+        blank=True
     )
 
     # Readings and translations
@@ -55,9 +55,9 @@ class Kanji(models.Model):
             id=self.id,
             front=self.front,
             group=str(self.group),
-            # radicals=[radical.as_json() for radical in self.radicals.all()],
-            # compounds=[compound.as_json() for compound in self.compounds.all()],
-            # NB:SRS is not included
+            radicals=[radical.as_json() for radical in self.radicals.all()],
+            compounds=[compound.as_json() for compound in self.compounds.all()],
+            # NB: SRS is not included
             # kanji info
             on=self.on,
             kun=self.kun,
@@ -76,14 +76,22 @@ class Compound(models.Model):
     reading = models.CharField(max_length=100, null=True, blank=True)
     gloss = models.CharField(max_length=1000, null=True, blank=True)
     examples = models.ManyToManyField(
-            'Example',
-            related_name='compounds',
-            null=True,
-            blank=True
+        'Example',
+        related_name='compounds',
+        null=True,
+        blank=True
     )
 
     def __unicode__(self):
         return self.front
+
+    def as_json(self):
+        return dict(
+            font=self.front,
+            reading=self.front,
+            gloss=self.front,
+            examples=[example.as_json for example in self.examples.all()]
+        )
 
 class Example(models.Model):
     """Example for kanji or compounds"""
@@ -94,6 +102,13 @@ class Example(models.Model):
     def __unicode__(self):
         return self.front
 
+    def as_json(self):
+        return dict(
+            font=self.front,
+            reading=self.front,
+            gloss=self.front
+        )
+
 class Radical(models.Model):
     """Kanji components, may be identical to kanji for simple ones"""
     front = models.CharField(max_length=10, unique=True)
@@ -102,6 +117,13 @@ class Radical(models.Model):
 
     def __unicode__(self):
         return self.front
+
+    def as_json(self):
+        return dict(
+            front=self.front,
+            info=self.info,
+            alternative=self.alternative
+        )
 
 class KanjiGroup(models.Model):
     """Kanji group, associated by radicals, concept or mnemonics"""
@@ -137,9 +159,9 @@ class Profile(models.Model):
     vanity_level = models.PositiveIntegerField(default=0)
     streak = models.PositiveIntegerField(default=0)
     avatar = models.ImageField(
-            upload_to=settings.MEDIA_ROOT,
-            null=True,
-            blank=True
+        upload_to=settings.MEDIA_ROOT,
+        null=True,
+        blank=True
     )
     achievements = models.ManyToManyField(
         'Achievement',
@@ -156,19 +178,19 @@ class KanjiStatus(models.Model):
     # Associated entities: kanji and user
     user = models.ForeignKey(User)
     kanji = models.ForeignKey( # many (user) statuses for each kanji
-            'Kanji',
-            related_name='status',
-            null=True,
-            blank=True
+        'Kanji',
+        related_name='status',
+        null=True,
+        blank=True
     )
 
     # SRS details
     level = models.DecimalField(
-            default=0,
-            null=True,
-            blank=True,
-            max_digits=3,
-            decimal_places=2
+        default=0,
+        null=True,
+        blank=True,
+        max_digits=3,
+        decimal_places=2
     )
     seen = models.PositiveIntegerField(default=0, null=True, blank=True)
     next_practice = models.DateField(auto_now_add=True)
@@ -192,6 +214,15 @@ class KanjiStatus(models.Model):
     def __unicode__(self):
         return self.level
 
+    def as_json(self):
+        return dict(
+            kanji=self.kanji.as_json(),
+            level=self.level,
+            seen=self.seen,
+            next_practice=self.next_practice,
+            easy_factor=self.easy_factor
+        )
+
     class Meta:
         ordering = ['next_practice']
 
@@ -200,9 +231,9 @@ class Achievement(models.Model):
     description = models.CharField(max_length=1000, unique=True)
     points = models.PositiveIntegerField(default=1, null=True, blank=True)
     icon = models.ImageField(
-            upload_to=settings.MEDIA_ROOT,
-            null=True,
-            blank=True
+        upload_to=settings.MEDIA_ROOT,
+        null=True,
+        blank=True
     )
 
     def __unicode__(self):

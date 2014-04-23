@@ -13,7 +13,7 @@
             <a class="navbar-brand" href="{% url 'index' %}">漢字験 -kanji damesi-</a>
         </div>
 
-        <div class="collapse navbar-collapse">
+        <div class="collapse navbar-collapse" style="float:right">
             {% url 'profile' as url %}
             <ul class="nav navbar-nav">
                 <li {% if request.path == url %} class="active" {% endif %}%>
@@ -24,20 +24,20 @@
                 <li {% if request.path == url %} class="active" {% endif %}%>
                 <a href="{% url 'quiz' %}">Quiz</a>
                 </li>
-            <li><a href="{% url 'logout' %}">Logout</a></li>
+            <!-- <li><a href="{% url 'logout' %}">Logout</a></li> -->
 
-            <!-- <li class="dropdown"> -->
-            <!--     <a href="#" class="dropdown&#45;toggle" data&#45;toggle="dropdown">Dropdown <b class="caret"></b></a> -->
-            <!--     <ul class="dropdown&#45;menu"> -->
-            <!--     <li><a href="#">Action</a></li> -->
-            <!--     <li><a href="#">Another action</a></li> -->
-            <!--     <li><a href="#">Something else here</a></li> -->
-            <!--     <li class="divider"></li> -->
-            <!--     <li class="dropdown&#45;header">Nav header</li> -->
-            <!--     <li><a href="#">Separated link</a></li> -->
-            <!--     <li><a href="#">One more separated link</a></li> -->
-            <!--     </ul> -->
-            <!-- </li> -->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                <li><a href="#">Change level</a></li>
+                <li><a href="#">Achievements</a></li>
+                <li><a href="#">Kanji stats</a></li>
+                <li><a href="#">Study log</a></li>
+                <li class="divider"></li>
+                <!-- <li class="dropdown&#45;header">Nav header</li> -->
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </li>
 
             </ul>
         </div><!--/.nav-collapse -->
