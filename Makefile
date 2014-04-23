@@ -26,4 +26,6 @@ new-migration:
 	python manage.py sql saiban && \
 		python manage.py schemamigration saiban --auto
 
+docs:
+	pycco saiban/*.py -d docs
 
