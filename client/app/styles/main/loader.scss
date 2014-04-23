@@ -1,0 +1,114 @@
+@import "compass/css3";
+
+/* Author: http://codepen.io/Fahrenheit/ */
+
+$vendor: '', '-webkit-', '-moz-', '-ms-', '-o-';
+
+@mixin animation-timing-function($name) {
+    @each $prefix in $vendor {
+        #{$prefix}animation-timing-function: $name;
+    }
+}
+
+@mixin animation-name($name) {
+    @each $prefix in $vendor {
+        #{$prefix}animation-name: $name;
+    }
+}
+
+@mixin animation-fill-mode($mode) {
+    @each $prefix in $vendor {
+        #{$prefix}animation-fill-mode: $mode;
+    }
+}
+
+@mixin animation-duration($duration) {
+    @each $prefix in $vendor {
+        #{$prefix}animation-duration: $duration;
+    }
+}
+
+@mixin animation-iteration-count($value) {
+  @each $prefix in $vendor {
+    #{$prefix}animation-iteration-count: $value;
+  }
+}
+
+@mixin animation-delay($value) {
+    @each $prefix in $vendor {
+        #{$prefix}animation-delay: $value;
+    }
+}
+
+@mixin keyframes($name) {
+    @-webkit-keyframes #{$name} {
+        @content;
+    }
+    @-moz-keyframes #{$name} {
+        @content;
+    }
+    @-ms-keyframes #{$name} {
+        @content;
+    }
+    @keyframes #{$name} {
+        @content;
+    }
+}
+
+$delay: -1s;
+
+@mixin delay {
+  @include animation-delay($delay);
+  $delay: $delay + 0.1;
+}
+
+$paint-color:
+  #2ecc71,
+  #3498db,
+  #9b59b6,
+  #e67e22,
+  #c0392b,
+  #e74c3c,
+  #e74c8c;
+
+$items: item-1 item-2 item-3 item-4 item-5 item-6 item-7;
+
+.loader-bar {
+
+  margin: auto;
+  padding-top: 20px;
+  text-align: center;
+
+  span {
+    display: inline-block;
+    width: 10px;
+    height: 40px;
+
+    @for $i from 1 through 7 {
+        &.item-#{$i} {
+        background: nth($paint-color, $i);
+        }
+    }
+
+    @include animation-name(scale);
+    @include animation-duration(1.2s);
+    @include animation-iteration-count(infinite);
+  }
+
+}
+
+@each $i in $items {
+  .#{$i} {
+    @include delay;
+  }
+}
+
+@include keyframes (scale){
+  0%, 40%, 100%{
+    @include transform(scaleY(0.2));
+  }
+  20%, 60%{
+    @include transform(scaleY(1));
+  }
+
+}

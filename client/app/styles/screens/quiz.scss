@@ -4,10 +4,11 @@
 
 @import "main/fonts";
 @import "main/colors";
+@import "main/loader";
 @import "mixins/main";
 
 .quiz {
-    padding-top: 80px;
+    padding-top: 20px;
     text-align: center;
 }
 

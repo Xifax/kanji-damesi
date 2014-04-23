@@ -33,6 +33,7 @@ angular.module('clientApp')
             {front: '醍'}
         ]
     }
+    $scope.loading = false
 
     #######
     # API #
@@ -40,6 +41,7 @@ angular.module('clientApp')
 
     # Get random group
     $scope.getRandomGroup = ->
+        $scope.loading = true
         promise = $http.get(api + 'random-group')
 
         promise.success (data)->
@@ -47,9 +49,11 @@ angular.module('clientApp')
             $scope.groupsSeen.push($scope.activeGroup)
             $scope.activeGroup = data
             $scope.currentKanji = '?'
+            $scope.loading = false
 
         promise.error (data)->
             fail(data)
+            $scope.loading = false
 
     # Get scheduled group
     $scope.getNextGroup = ->

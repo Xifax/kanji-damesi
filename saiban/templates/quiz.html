@@ -8,6 +8,7 @@
 
 <div ng-controller="QuizCtrl">
 
+
     <!-- Quiz active group-->
     {% verbatim %}
     <div class="container quiz" ng-cloak>
@@ -40,6 +41,11 @@
         <button class="btn-dark" ng-click="getRandomGroup()">Next group</button>
     </div>
     {% endverbatim %}
+
+    <!-- Loader -->
+    <div ng-show="loading">
+        {% include "partials/loader.html" %}
+    </div>
 
 </div>
 
