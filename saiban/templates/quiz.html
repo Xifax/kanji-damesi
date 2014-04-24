@@ -16,7 +16,12 @@
         <div class="active-kanji-group">
 
             <!-- TODO: also show radicals on hover -->
-            <p class="kanji-zoom">{{ currentKanji }}</p>
+            <p class="kanji-zoom">{{ currentKanji.front }}</p>
+            <div class="kanji-radicals">
+                <span class="kanji-radical" ng-repeat="rad in currentKanji.radicals">
+                    {{ rad.front }}
+                </span>
+            </div>
             <div id="{{kanji.id}}" class="kanji"
                 ng-mouseover="zoomKanji(kanji)"
                 ng-click="answerWith(kanji)"

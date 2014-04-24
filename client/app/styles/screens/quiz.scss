@@ -42,6 +42,23 @@
     @include user-select(none);
 }
 
+.kanji-radicals {
+    font-family: $jpFont;
+    font-size: 25px;
+    @include user-select(none);
+
+    .kanji-radical {
+        padding: 10px;
+    }
+
+    .kanji-radical:hover {
+        color: $yellow_main;
+        cursor: pointer;
+        @include user-select(none);
+    }
+
+}
+
 /* Question elements */
 
 .kanji-quiz {

@@ -12,7 +12,7 @@ angular.module('clientApp')
 
     # Init models and data
     # TODO: also include radical decomposition
-    $scope.currentKanji = '?'
+    $scope.currentKanji = {front: '?', radicals: [front: '?']}
     $scope.quiz = {
         # TODO: ponder, if shoud use 'meaning' or array of 'meanings' and so on
         readings: 'さかん, うつくし.い, かがや.き, ゴウ, キョウ, オウ',
@@ -38,7 +38,7 @@ angular.module('clientApp')
     newKanjiGroup = (data) ->
         $scope.groupsSeen.push($scope.activeGroup)
         $scope.activeGroup = data
-        $scope.currentKanji = '?'
+        $scope.currentKanji = {front: '?', radicals: [front: '?']}
 
     # Start some time-consuming action
     start = ->
@@ -100,7 +100,7 @@ angular.module('clientApp')
 
     # Zoom kanji (and components) on hover
     $scope.zoomKanji = (kanji) ->
-        $scope.currentKanji = kanji.front
+        $scope.currentKanji = kanji
 
     ###########
     # On load #

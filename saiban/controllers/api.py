@@ -44,7 +44,7 @@ def next_group(request):
             # TODO: ponder what to do
             # 'examples': kanji.compounds.all().examples.all().as_json(),
             'answer': kanji.front,
-            'radicals': [],
+            # 'radicals': [radical.as_json() for radical in kanji.radicals.all()],
         },
     }
     return json_response(response)
