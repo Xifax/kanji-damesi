@@ -13,7 +13,7 @@ class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option('--update',
                     action='store_true',
-                    dest='kanji',
+                    dest='update',
                     default=True,
                     help='Update radicals with info and alternative reading'),
     )
@@ -29,12 +29,13 @@ class Command(BaseCommand):
         if options['update']:
             results = self.prepare()
             for radical in Radical.objects.all():
+                rad = None
                 # Try to find by alt
                 if radical.front not in results:
                     for item in results:
-                        if item['alt'] == radical.front:
-                            item['alt'] = radical.front
-                            rad = item
+                        if results[item]['alt'] == radical.front:
+                            results[item]['alt'] = item
+                            rad = results[item]
                 # Or simply use key
                 else:
                     rad = results.get(radical.front)
