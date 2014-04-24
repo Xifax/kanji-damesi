@@ -10,6 +10,7 @@ from services.srs import interval
 # Kanji and related didactical entities #
 #########################################
 
+
 class Kanji(models.Model):
     """Kanji info and associated compounds and components"""
 
@@ -56,7 +57,9 @@ class Kanji(models.Model):
             front=self.front,
             group=str(self.group),
             radicals=[radical.as_json() for radical in self.radicals.all()],
-            compounds=[compound.as_json() for compound in self.compounds.all()],
+            compounds=[
+                compound.as_json() for compound in self.compounds.all()
+            ],
             # NB: SRS is not included
             # kanji info
             on=self.on,
@@ -97,6 +100,7 @@ class Compound(models.Model):
             examples=[example.as_json for example in self.examples.all()]
         )
 
+
 class Example(models.Model):
     """Example for kanji or compounds"""
     front = models.CharField(max_length=1000, unique=True)
@@ -113,11 +117,17 @@ class Example(models.Model):
             gloss=self.front
         )
 
+
 class Radical(models.Model):
     """Kanji components, may be identical to kanji for simple ones"""
     front = models.CharField(max_length=10, unique=True)
     info = models.CharField(max_length=100, null=True, blank=True)
+    name = models.CharField(max_length=100, null=True, blank=True)
+
+    # Additional info
     alternative = models.CharField(max_length=10, null=True, blank=True)
+    strokes = models.PositiveIntegerField(null=True, blank=True)
+    position = models.CharField(max_length=50, null=True, blank=True)
 
     def __unicode__(self):
         return self.front
@@ -126,8 +136,13 @@ class Radical(models.Model):
         return dict(
             front=self.front,
             info=self.info,
-            alternative=self.alternative
+            name=self.name,
+            # Additional info
+            alternative=self.alternative,
+            strokes=self.strokes,
+            position=self.position
         )
+
 
 class KanjiGroup(models.Model):
     """Kanji group, associated by radicals, concept or mnemonics"""
@@ -136,10 +151,10 @@ class KanjiGroup(models.Model):
 
     def __unicode__(self):
         return '%s: %s' % (
-                self.level,
-                ' '.join([
-                    kanji.front for kanji in self.kanji.all()
-                ])
+            self.level,
+            ' '.join([
+                kanji.front for kanji in self.kanji.all()
+            ])
         )
 
     def as_json(self):
@@ -153,6 +168,7 @@ class KanjiGroup(models.Model):
 #################################
 # Profile and SRS related stuff #
 #################################
+
 
 class Profile(models.Model):
     """Contains profile studies achivements"""
@@ -177,11 +193,12 @@ class Profile(models.Model):
     def __unicode__(self):
         return '%s [streak: %d days]' % (self.user.username, self.streak)
 
+
 class KanjiStatus(models.Model):
     """Kanji SRS for specific user"""
     # Associated entities: kanji and user
     user = models.ForeignKey(User)
-    kanji = models.ForeignKey( # many (user) statuses for each kanji
+    kanji = models.ForeignKey(  # many (user) statuses for each kanji
         'Kanji',
         related_name='status',
         null=True,
@@ -232,6 +249,7 @@ class KanjiStatus(models.Model):
 
     class Meta:
         ordering = ['next_practice']
+
 
 class Achievement(models.Model):
     """Study achievements"""
