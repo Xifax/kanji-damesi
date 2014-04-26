@@ -36,6 +36,13 @@ angular.module('clientApp')
     # Show notification
     fail = (message)-> console.log(message)
 
+    # Show answer status
+    got_it = (correct)->
+      if correct
+        console.log('Correct!')
+      else
+        console.log('Wrong!')
+
     # Set new kanji group
     newKanjiGroup = (data) ->
       $scope.groupsSeen.push($scope.activeGroup)
@@ -81,14 +88,33 @@ angular.module('clientApp')
         fin()
 
     # Answer with kanji
-    # TODO: implement
     $scope.answerWith = (kanji) ->
-      promise = $http.put(api + 'answer/')
+      start()
+      # Check answer
+      correct = kanji.front == $scope.quiz.answer
+      got_it(correct)
+
+      promise = $http.post(api + 'answer/',
+        {'correct': correct,
+        # TODO: measure time for an answer
+        'delay': 10,
+        'kanji': $scope.quiz.answer}
+      )
+
+      promise.success (data)->
+        # TODO: notify on success/failure
+        newKanjiGroup(data.group)
+        $scope.quiz = data.quiz
+        fin()
+
+      promise.error (data)->
+        fail(data)
+        fin()
 
     # Skip this kanji
     $scope.skipQuestion = (kanji) ->
       start()
-      promise = $http.put(api + 'skip/', {'kanji': kanji.id})
+      promise = $http.post(api + 'skip/', {'kanji': kanji.id})
 
       promise.success (data)->
         newKanjiGroup(data)
@@ -106,5 +132,6 @@ angular.module('clientApp')
     ###########
 
     # Get new group on load
-    $scope.getRandomGroup()
+    # $scope.getRandomGroup()
+    $scope.getNextGroup()
 

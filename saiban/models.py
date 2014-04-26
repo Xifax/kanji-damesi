@@ -75,7 +75,16 @@ class Kanji(models.Model):
         )
 
     def get_reading(self):
-        return u'%s; %s; %s' % (self.kun, self.on, self.nanori)
+        reading = u''
+        separator = u' | '
+        if self.kun:
+            reading += self.kun + separator
+        if self.on:
+            reading += self.on
+        if self.nanori:
+            reading += separator + self.nanori
+
+        return reading
 
 
 class Compound(models.Model):
@@ -225,9 +234,9 @@ class KanjiStatus(models.Model):
         Rating may vary from 0 (wtf is this) to 4 (known by heart)
         """
         self.level = rating
-        days, ef = interval(self.times_practiced, rating, self.easy_factor)
+        days, ef = interval(self.seen, rating, self.easy_factor)
         self.next_practice = date.today() + timedelta(days=days)
-        self.times_practiced += 1
+        self.seen += 1
         self.easy_factor = ef
 
     def delay(self, days=1):

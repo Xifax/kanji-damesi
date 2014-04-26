@@ -3,11 +3,12 @@ import random
 from saiban.models import(
     Kanji,
     KanjiGroup,
-    Profile,
+    # Profile,
     KanjiStatus
 )
 
 # Working with kanji and groups
+
 
 def get_random_kanji_group(level=1):
     """Get random kanji group by level"""
@@ -17,12 +18,40 @@ def get_random_kanji_group(level=1):
     except IndexError:
         return None
 
+
+def get_new_random_kanji(user):
+    """Get random kanji to study"""
+    # TODO: do not include those already in study list?
+    level = user.profile.get().group_level
+
+    # Get rangom group for this level
+    random_group = get_random_kanji_group(level)
+    if random_group is None:
+        return None
+
+    # Select random kanji to study
+    kanji = random.choice(random_group.kanji.all())
+
+    # Associate new status with it
+    status = KanjiStatus()
+    status.user = user
+    status.level = level
+    status.kanji = kanji
+    status.seen += 1
+    status.save()
+
+    return kanji
+
+
 def get_scheduled_kanji(user):
     """Get next scheduled kanji group or random one"""
     level = user.profile.get().group_level
 
-    # TODO: ponder how to not always get the same scheduled kanji (after update)
-    # TODO: either get scheduled OR new! (if there are unseen kanji left in the level)
+    # Either get scheduled or get new/random kanji to study
+    should_get_random = random.choice([True, False])
+    if should_get_random:
+        return get_new_random_kanji(user)
+
     try:
         next_kanji = KanjiStatus.objects.filter(
             user=user, group_level=level
@@ -30,29 +59,25 @@ def get_scheduled_kanji(user):
 
     # No kanji scheduled at all!
     except KanjiStatus.DoesNotExist:
-        # Get rangom group for this level
-        random_group = get_random_kanji_group(level)
-        if random_group is None:
-            return None
-
-        # Select random kanji to study
-        kanji = random.choice(random_group.kanji.all())
-
-        # Associate new status with it
-        status = KanjiStatus()
-        status.user = user
-        status.level = level
-        status.kanji = kanji
-        status.seen += 1
-        status.save()
-
-        return kanji
+        return get_new_random_kanji(user)
 
     # Otherwise, simply returned scheduled kanji
     return next_kanji.kanji
 
+
 def delay_kanji(kanji_id):
     # TODO: get kanji by id
     # TODO: get kanji status (if any)
-    # TODO: delay
-    pass
+    kanji = Kanji.objects.get(pid=kanji_id)
+    status = kanji.status.get()
+    status.delay()
+    kanji.status.save()
+
+
+def rate_answer(kanji, is_correct):
+    kanji = Kanji.objects.get(front=kanji)
+    status = kanji.status.get()
+    # TODO: base rating also upon time it took user to answer
+    rating = 0 if not is_correct else 4
+    status.set_next_practice(rating)
+    status.save()
