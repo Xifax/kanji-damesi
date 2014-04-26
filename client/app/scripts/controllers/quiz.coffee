@@ -23,6 +23,10 @@ angular.module('clientApp')
       examples: 'にっぽんではえいごきょういくがさかんである',
       answer: 'kanji'
 
+    $scope.timer =
+      began: 0,
+      answered: 0
+
     $scope.groupsSeen = []
     $scope.activeGroup = { kanji: [] }
     $scope.loading = false
@@ -45,9 +49,12 @@ angular.module('clientApp')
 
     # Set new kanji group
     newKanjiGroup = (data) ->
-      $scope.groupsSeen.push($scope.activeGroup)
-      $scope.activeGroup = data
+      if $scope.activeGroup.kanji[0].front != '?'
+        $scope.groupsSeen.push($scope.activeGroup)
+
+      $scope.activeGroup = data.group
       $scope.currentKanji = {front: '?', radicals: [front: '?']}
+      $scope.quiz = data.quiz
 
     # Start some time-consuming action
     start = -> $scope.loading = true
@@ -79,8 +86,7 @@ angular.module('clientApp')
       promise = $http.get(api + 'next-group/')
 
       promise.success (data)->
-        newKanjiGroup(data.group)
-        $scope.quiz = data.quiz
+        newKanjiGroup(data)
         fin()
 
       promise.error (data)->
@@ -103,8 +109,7 @@ angular.module('clientApp')
 
       promise.success (data)->
         # TODO: notify on success/failure
-        newKanjiGroup(data.group)
-        $scope.quiz = data.quiz
+        newKanjiGroup(data)
         fin()
 
       promise.error (data)->
@@ -114,7 +119,7 @@ angular.module('clientApp')
     # Skip this kanji
     $scope.skipQuestion = (kanji) ->
       start()
-      promise = $http.post(api + 'skip/', {'kanji': kanji.id})
+      promise = $http.post(api + 'skip/', {'kanji': kanji})
 
       promise.success (data)->
         newKanjiGroup(data)
@@ -126,6 +131,7 @@ angular.module('clientApp')
 
     # Zoom kanji (and components) on hover
     $scope.zoomKanji = (kanji) -> $scope.currentKanji = kanji
+    # TODO: Zoom radical
 
     ###########
     # On load #

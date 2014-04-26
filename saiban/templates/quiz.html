@@ -34,11 +34,11 @@
 
             <!-- Active question -->
             <div class="kanji-quiz">
-                <!-- TODO: katakana and hirogana in different styles -->
+                <!-- TODO: katakana and hiragana in different styles -->
                 <p class="reading"> {{ quiz.readings }} </p>
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
-                <!-- TODO: highlight example -->
+                <!-- TODO: highlight example compound/word -->
                 <p class="example"> {{ quiz.examples }} </p>
             </div>
 
@@ -58,10 +58,25 @@
     </div>
     {% endverbatim %}
 
+    {% verbatim %}
+      <div class="groups-seen">
+        <span ng-repeat="group in groupsSeen">
+          {{ group.info }}
+          <div class="kanji-in-group">
+            <span ng-repeat="kanji in group.kanji">
+              {{ kanji.front }}
+            </span>
+          </div>
+        </span>
+      </div>
+    {% endverbatim %}
+
 </div>
 
 {% endblock %}
 
 {% block footer %}
+
+
     {% include "layout/footer.html" %}
 {% endblock %}

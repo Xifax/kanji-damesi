@@ -65,18 +65,21 @@ def get_scheduled_kanji(user):
     return next_kanji.kanji
 
 
-def delay_kanji(kanji_id):
-    # TODO: get kanji by id
-    # TODO: get kanji status (if any)
-    kanji = Kanji.objects.get(pid=kanji_id)
+def delay_kanji(kanji):
+    # Get kanji by its front
+    kanji = Kanji.objects.get(front=kanji)
+
+    # Get kanji status (if any)
     status = kanji.status.get()
-    status.delay()
-    kanji.status.save()
+    if status:
+        status.delay()
+        kanji.status.save()
 
 
 def rate_answer(kanji, is_correct):
     kanji = Kanji.objects.get(front=kanji)
     status = kanji.status.get()
+
     # TODO: base rating also upon time it took user to answer
     rating = 0 if not is_correct else 4
     status.set_next_practice(rating)

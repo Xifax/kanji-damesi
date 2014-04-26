@@ -75,4 +75,21 @@
   }
 }
 
+/* Kanji groups log */
 
+.groups-seen {
+  position: absolute;
+  bottom: 8%;
+
+  span {
+    width: 100px;
+  }
+
+  .kanji-in-group {
+    display: block;
+
+    span {
+      float: left;
+    }
+  }
+}

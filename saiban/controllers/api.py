@@ -61,7 +61,7 @@ def process_answer(request):
     # NB: this check is performed on the client
     is_correct = post['correct']
     kanji = post['kanji']
-    delay = post['delay']
+    # delay = post['delay']
 
     rate_answer(kanji, is_correct)
     # get next group
@@ -71,6 +71,9 @@ def process_answer(request):
 @csrf_exempt
 def skip_kanji(request):
     """Skip current kanji"""
+    check_request(request)
+    post = process_post(request)
+
     # Delay kanji by its id
-    delay_kanji(request.PUT['kanji'])
+    delay_kanji(post['kanji'])
     return next_group(request)
