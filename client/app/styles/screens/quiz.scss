@@ -8,71 +8,71 @@
 @import "mixins/main";
 
 .quiz {
-    padding-top: 20px;
-    text-align: center;
+  padding-top: 20px;
+  text-align: center;
 }
 
 .active-kanji-group {
-    display: inline-block;
+  display: inline-block;
 }
 
 .kanji {
-    font-family: $jpFont;
-    float: left;
-    padding: 20px;
-    font-size: 70px;
-    @include user-select(none);
+  font-family: $jpFont;
+  float: left;
+  padding: 20px;
+  font-size: 70px;
+  @include user-select(none);
 }
 
 .kanji:hover {
-    cursor: pointer;
-    color: $yellow_light;
+  cursor: pointer;
+  color: $yellow_light;
 }
 
 .kanji:active {
-    color: $yellow_main;
-    position: relative;
-    top: 1px;
+  color: $yellow_main;
+  position: relative;
+  top: 1px;
 }
 
 .kanji-zoom {
-    font-family: $jpFont;
-    font-size: 180px;
-    cursor: default;
-    @include user-select(none);
+  font-family: $jpFont;
+  font-size: 180px;
+  cursor: default;
+  @include user-select(none);
 }
 
 .kanji-radicals {
-    font-family: $jpFont;
-    font-size: 25px;
+  font-family: $jpFont;
+  font-size: 25px;
+  @include user-select(none);
+
+  .kanji-radical {
+    padding: 10px;
+  }
+
+  .kanji-radical:hover {
+    color: $yellow_main;
+    cursor: pointer;
     @include user-select(none);
-
-    .kanji-radical {
-        padding: 10px;
-    }
-
-    .kanji-radical:hover {
-        color: $yellow_main;
-        cursor: pointer;
-        @include user-select(none);
-    }
+  }
 
 }
 
 /* Question elements */
 
 .kanji-quiz {
-    font-family: $jpFont;
-    font-size: 20px;
+  font-family: $jpFont;
+  font-size: 20px;
 
-    .meaning {
-        font-family: $sansFont;
-        color: tint($foreground_light, 50%)
-    }
+  .meaning {
+    font-family: $sansFont;
+    color: tint($foreground_light, 50%)
+  }
 
-    .example {
-        color: shade($foreground_light, 30%)
-    }
+  .example {
+    color: shade($foreground_light, 30%)
+  }
 }
 
 

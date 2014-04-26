@@ -43,9 +43,10 @@ class Kanji(models.Model):
 
     # Additional info
     processed = models.NullBooleanField(default=False, blank=True)
-    jlpt = models.IntegerField(null=True, blank=True)
-    grade = models.IntegerField(null=True, blank=True)
-    strokes = models.IntegerField(null=True, blank=True)
+    jlpt = models.PositiveIntegerField(null=True, blank=True)
+    grade = models.PositiveIntegerField(null=True, blank=True)
+    strokes = models.PositiveIntegerField(null=True, blank=True)
+    frequency = models.PositiveIntegerField(null=True, blank=True)
 
     def __unicode__(self):
         return self.front

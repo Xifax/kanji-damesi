@@ -2,12 +2,41 @@
 // http://karma-runner.github.io/0.10/config/configuration-file.html
 
 module.exports = function(config) {
+  'use strict';
+
   config.set({
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
+
+    // additonal plugins to load
+    plugins:[
+      'karma-jasmine',
+      'karma-coverage',
+      'karma-junit-reporter',
+      'karma-phantomjs-launcher',
+      'karma-chrome-launcher',
+      'karma-firefox-launcher',
+      'karma-coffee-preprocessor',
+    ],
+
+    preprocessors: {
+      '**/*.coffee': ['coffee']
+    },
+
+    coffeePreprocessor: {
+      // options passed to the coffee compiler
+      options: {
+        bare: true,
+        sourceMap: false
+      },
+      // transforming the filenames
+      transformPath: function(path) {
+        return path.replace(/\.coffee$/, '.js');
+      }
+    },
 
     // list of files / patterns to load in the browser
     files: [
@@ -46,7 +75,7 @@ module.exports = function(config) {
     // - Safari (only Mac)
     // - PhantomJS
     // - IE (only Windows)
-    browsers: ['Chrome'],
+    browsers: ['PhantomJS'],
 
 
     // Continuous Integration mode

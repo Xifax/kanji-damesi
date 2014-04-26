@@ -65,28 +65,28 @@
 /* Title, subtitle and info */
 
 .title-box {
-    font-family: $jpFont;
-    position: relative;
-    width: 100%;
-    padding: 20px;
-    padding-top: 5%;
-    font-size: 90px;
-    text-align: center;
-    letter-spacing: 3px;
+  font-family: $jpFont;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  padding-top: 5%;
+  font-size: 90px;
+  text-align: center;
+  letter-spacing: 3px;
 
-    p {
-        font-size: 18px;
-        text-transform: uppercase;
-    }
+  p {
+    font-size: 18px;
+    text-transform: uppercase;
+  }
 }
 
 .info-box {
-    display: block;
-    margin-top: 30px;
-    text-align: center;
+  display: block;
+  margin-top: 30px;
+  text-align: center;
 }
 
 .error {
-    color: $red_light;
+  color: $red_light;
 }
 

@@ -16,6 +16,10 @@ migrate:
 	python manage.py migrate
 
 # Misc tasks
+test:
+	python manage.py test saiban
+	grunt --gruntfile=client/Gruntfile.coffee test
+
 run:
 	foreman start -p 8080
 
