@@ -7,7 +7,7 @@ import random
 from optparse import make_option
 
 from jpnetkit.kradfile import Kradfile
-# from jpnetkit.weblio import Weblio
+from jpnetkit.weblio import Weblio
 # from jpnetkit.wordnet import Wordnet
 # from jpnetkit.mecab import Mecab
 
@@ -162,9 +162,6 @@ class Command(BaseCommand):
         jmdict = sqlite3.connect(jmdict)
         cursor = jmdict.cursor()
 
-        # wordnet = Wordnet()
-        # weblio = Weblio()
-
         for kanji in Kanji.objects.filter(processed=False).all():
             if len(kanji.compounds.all()) == 0:
                 # Query jmdict with like %front% to get some of the examples
@@ -253,13 +250,20 @@ class Command(BaseCommand):
                         (compound, readings, glosses, pos)
                     )
 
-                # # compounds = wordnet.complete(kanji.front)
-                # examples = weblio.examples(kanji.front)
-                # # Try to exclude items with digits and kana and longer than 3
-                # for example, gloss in examples.iteritems():
-                #     print example, gloss
-                # print '***'
+                self.stdout.write('***')
 
+    def update_examples(self):
+        """Find examples for some|each of the compounds"""
+
+        weblio = Weblio()
+
+        for compound in Compound.objects.all():
+            if not compound.is_processed():
+                print '[%s]' % compound.front
+                examples = weblio.examples(compound.front)
+                # Try to exclude items with digits and kana and longer than 3
+                for example, gloss in examples.iteritems():
+                    print example, gloss
                 print '***'
 
     def update_radicals(self):
@@ -310,7 +314,9 @@ class Command(BaseCommand):
         if options['compounds']:
             self.update_compounds()
 
-        # TODO: tatoeba for examples
+        # Tatoeba and|or weblio for examples
+        if options['examples']:
+            self.update_examples()
 
         # Use kradfile to associate kanji with radicals
         if options['radicals']:

@@ -117,6 +117,13 @@ class Compound(models.Model):
             similar=[similar.as_json() for similar in self.similar.all()]
         )
 
+    def is_processed(self):
+        processed = False
+        for kanji in self.kanji.all():
+            processed = kanji.processed
+
+        return processed
+
 
 class Example(models.Model):
     """Example for kanji or compounds"""
