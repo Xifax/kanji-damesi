@@ -97,7 +97,7 @@ MEDIA_ROOT = 'uploads'
 STATICFILES_DIRS = (
     # watch task: grunt uses this folder to compile scripts/styles
     # TODO: move to local_settings?
-    'client/.tmp',
+    # 'client/.tmp',
     # build task: grunt compiles everything (including bower_components) here
     'client/static',
 )
