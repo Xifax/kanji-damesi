@@ -16,3 +16,4 @@ simplejson==3.4.0
 
 # Random libs
 psycopg2==2.5.2
+Pillow==2.4.0
