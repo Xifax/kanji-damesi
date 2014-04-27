@@ -1,0 +1,13 @@
+#############################################
+# Those requirements are filled in manually #
+#############################################
+
+# Django and its modules
+Django==1.6.2
+django-suit==0.2.7
+South==0.8.4
+waitress==0.8.8
+
+# Additional utils
+requests==2.2.1
+simplejson==3.4.0
