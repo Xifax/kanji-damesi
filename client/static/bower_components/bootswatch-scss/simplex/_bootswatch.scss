@@ -1,0 +1,127 @@
+// Simplex 3.0.0
+// Bootswatch
+// -----------------------------------------------------
+
+$font-family-alt: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+@import url($web-font);
+
+@mixin btn-shadow($color) {
+
+	@include gradient-vertical-three-colors(lighten($color, 15%), $color, 6%, darken($color, 4%));
+	border: 1px solid darken($color, 10%);
+}
+
+// Navbar =====================================================================
+
+.navbar {
+	border-bottom: 1px solid #dfdfdf;
+	font-family: $font-family-alt;
+}
+
+.navbar-nav > li > a {
+        padding-top: $navbar-padding-vertical + 2px;
+        padding-bottom: $navbar-padding-vertical - 2px;
+}
+
+.navbar-brand {
+        padding: 14px 15px 8px;
+}
+
+// Buttons ====================================================================
+
+.btn {
+	font-family: $font-family-alt;
+}
+
+.btn-default,
+.btn-default:hover {
+	@include btn-shadow($btn-default-bg);
+}
+
+.btn-primary,
+.btn-primary:hover {
+	@include btn-shadow($btn-primary-bg);
+}
+
+.btn-success,
+.btn-success:hover {
+	@include btn-shadow($btn-success-bg);
+}
+
+.btn-info,
+.btn-info:hover {
+	@include btn-shadow($btn-info-bg);
+}
+
+.btn-warning,
+.btn-warning:hover {
+	@include btn-shadow($btn-warning-bg);
+}
+
+.btn-danger,
+.btn-danger:hover {
+	@include btn-shadow($btn-danger-bg);
+}
+
+// Typography =================================================================
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: $font-family-alt;
+}
+
+// Tables =====================================================================
+
+// Forms ======================================================================
+
+.has-warning {
+	.help-block,
+	.control-label {
+		color: $brand-danger;
+	}
+
+	.form-control,
+	.form-control:focus {
+		border-color: $brand-danger;
+	}
+}
+
+.has-error {
+	.help-block,
+	.control-label {
+		color: $brand-primary;
+	}
+
+	.form-control,
+	.form-control:focus {
+		border-color: $brand-primary;
+	}
+}
+
+.has-success {
+	.help-block,
+	.control-label {
+		color: $brand-success;
+	}
+
+	.form-control,
+	.form-control:focus {
+		border-color: $brand-success;
+	}
+}
+
+// Navs =======================================================================
+
+.pagination {
+
+	.active > a,
+	.active > a:hover {
+		border-color: #ddd;
+	}
+}
+
+// Indicators =================================================================
+
+// Progress bars ==============================================================
+
+// Containers =================================================================

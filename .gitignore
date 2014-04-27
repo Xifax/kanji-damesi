@@ -1,7 +1,6 @@
 venv
 *.pyc
 local_*
-client/static/
 secret_key
 __pycache__
 node_modules
