@@ -22,11 +22,12 @@
   padding: 20px;
   font-size: 70px;
   @include user-select(none);
-}
 
-.kanji:hover {
-  cursor: pointer;
-  color: $yellow_light;
+  &:hover {
+    cursor: pointer;
+    color: $yellow_light;
+  }
+
 }
 
 .kanji:active {
@@ -49,13 +50,15 @@
 
   .kanji-radical {
     padding: 10px;
+
+    &:hover {
+      color: $yellow_main;
+      cursor: pointer;
+      @include user-select(none);
+    }
+
   }
 
-  .kanji-radical:hover {
-    color: $yellow_main;
-    cursor: pointer;
-    @include user-select(none);
-  }
 
 }
 

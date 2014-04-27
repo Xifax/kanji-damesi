@@ -32,14 +32,14 @@
   margin:0 auto;
   padding:30px 0px;
   text-align:center;
-}
 
-.content h1{
-  font-size: 24px;
-  font-weight:400;
-  color:$yellow_main;
-  letter-spacing:0.125em;
-  text-align:center;
+  h1 {
+    font-size: 24px;
+    font-weight:400;
+    color:$yellow_main;
+    letter-spacing:0.125em;
+    text-align:center;
+  }
 }
 
 .field{
