@@ -1,0 +1,258 @@
+@charset "UTF-8";
+
+/* Landing page */
+
+/* Import Google fonts */
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
+
+/* Fonts settings */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/fonts\.scss;
+  }
+
+  line {
+    font-family: \0000315;
+  }
+}
+
+body {
+  font-smooth: always;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Main colors */
+
+/* Login screen */
+
+/* Mixins */
+
+/* Login/register form */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \000039;
+  }
+}
+
+.landing {
+  height: 100%;
+  background-image: url("../images/patterns/stardust.png");
+  color: #cbcbcf;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000315;
+  }
+}
+
+.auth-box {
+  text-transform: uppercase;
+  font-family: "Ubuntu Mono", Monaco, Menlo, Consolas, "Courier New", monospace;
+  position: relative;
+  width: 90%;
+  max-width: 450px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 50px;
+  background: #222;
+  border-radius: 7px;
+  box-shadow: 0px 3px 10px 1px rgba(0, 0, 0, 0.9);
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000329;
+  }
+}
+
+.content {
+  width: 85%;
+  height: auto;
+  margin: 0 auto;
+  padding: 30px 0px;
+  text-align: center;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000336;
+  }
+}
+
+.content h1 {
+  font-size: 24px;
+  font-weight: 400;
+  color: #ffbf00;
+  letter-spacing: 0.125em;
+  text-align: center;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000345;
+  }
+}
+
+.field {
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px;
+  background: #2c2c2c;
+  border: none;
+  box-shadow: 0px 1px 0px 0px #111;
+  border-radius: 3px;
+  outline: none;
+  color: #ffbf00;
+  font-weight: 700;
+  letter-spacing: 0.125em;
+  text-align: center;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/mixins\/main\.scss;
+  }
+
+  line {
+    font-family: \000034;
+  }
+}
+
+::-webkit-input-placeholder {
+  color: #5A5A5A;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/mixins\/main\.scss;
+  }
+
+  line {
+    font-family: \000035;
+  }
+}
+
+:-moz-placeholder {
+  color: #5A5A5A;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/mixins\/main\.scss;
+  }
+
+  line {
+    font-family: \000036;
+  }
+}
+
+::-moz-placeholder {
+  color: #5A5A5A;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/mixins\/main\.scss;
+  }
+
+  line {
+    font-family: \000037;
+  }
+}
+
+:-ms-input-placeholder {
+  color: #5A5A5A;
+}
+
+/* Title, subtitle and info */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000367;
+  }
+}
+
+.title-box {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  position: relative;
+  width: 100%;
+  padding: 20px;
+  padding-top: 5%;
+  font-size: 90px;
+  text-align: center;
+  letter-spacing: 3px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000377;
+  }
+}
+
+.title-box p {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000383;
+  }
+}
+
+.info-box {
+  display: block;
+  margin-top: 30px;
+  text-align: center;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/home\.scss;
+  }
+
+  line {
+    font-family: \0000389;
+  }
+}
+
+.error {
+  color: #e16060;
+}

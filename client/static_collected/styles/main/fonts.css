@@ -1,0 +1,21 @@
+/* Import Google fonts */
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
+
+/* Fonts settings */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/fonts\.scss;
+  }
+
+  line {
+    font-family: \0000315;
+  }
+}
+
+body {
+  font-smooth: always;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing: antialiased;
+}

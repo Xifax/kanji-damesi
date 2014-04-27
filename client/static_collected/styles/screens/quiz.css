@@ -1,0 +1,584 @@
+@charset "UTF-8";
+
+/* Quiz page */
+
+/* Import Google fonts */
+
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
+
+/* Fonts settings */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/fonts\.scss;
+  }
+
+  line {
+    font-family: \0000315;
+  }
+}
+
+body {
+  font-smooth: always;
+  -webkit-font-smoothing: subpixel-antialiased;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Main colors */
+
+/* Login screen */
+
+/* Author: http://codepen.io/Fahrenheit/ */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000376;
+  }
+}
+
+.loader-bar {
+  margin: auto;
+  padding-top: 20px;
+  text-align: center;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000382;
+  }
+}
+
+.loader-bar span {
+  display: inline-block;
+  width: 10px;
+  height: 40px;
+  animation-name: scale;
+  -webkit-animation-name: scale;
+  -ms-animation-name: scale;
+  animation-duration: 1.2s;
+  -webkit-animation-duration: 1.2s;
+  -ms-animation-duration: 1.2s;
+  animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  -ms-animation-iteration-count: infinite;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-1 {
+  background: #2ecc71;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-2 {
+  background: #3498db;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-3 {
+  background: #9b59b6;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-4 {
+  background: #e67e22;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-5 {
+  background: #c0392b;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-6 {
+  background: #e74c3c;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \0000388;
+  }
+}
+
+.loader-bar span.item-7 {
+  background: #e74c8c;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-1 {
+  animation-delay: -1s;
+  -webkit-animation-delay: -1s;
+  -ms-animation-delay: -1s;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-2 {
+  animation-delay: -0.9s;
+  -webkit-animation-delay: -0.9s;
+  -ms-animation-delay: -0.9s;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-3 {
+  animation-delay: -0.8s;
+  -webkit-animation-delay: -0.8s;
+  -ms-animation-delay: -0.8s;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-4 {
+  animation-delay: -0.7s;
+  -webkit-animation-delay: -0.7s;
+  -ms-animation-delay: -0.7s;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-5 {
+  animation-delay: -0.6s;
+  -webkit-animation-delay: -0.6s;
+  -ms-animation-delay: -0.6s;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-6 {
+  animation-delay: -0.5s;
+  -webkit-animation-delay: -0.5s;
+  -ms-animation-delay: -0.5s;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/main\/loader\.scss;
+  }
+
+  line {
+    font-family: \00003101;
+  }
+}
+
+.item-7 {
+  animation-delay: -0.4s;
+  -webkit-animation-delay: -0.4s;
+  -ms-animation-delay: -0.4s;
+}
+
+@-webkit-keyframes scale {
+  /* line 107, ../../../app/styles/main/loader.scss */
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.2);
+    transform: scaleY(0.2);
+  }
+
+  /* line 110, ../../../app/styles/main/loader.scss */
+  20%, 60% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@-ms-keyframes scale {
+  /* line 107, ../../../app/styles/main/loader.scss */
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.2);
+    transform: scaleY(0.2);
+  }
+
+  /* line 110, ../../../app/styles/main/loader.scss */
+  20%, 60% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+@keyframes scale {
+  /* line 107, ../../../app/styles/main/loader.scss */
+  0%, 40%, 100% {
+    -webkit-transform: scaleY(0.2);
+    transform: scaleY(0.2);
+  }
+
+  /* line 110, ../../../app/styles/main/loader.scss */
+  20%, 60% {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+  }
+}
+
+/* Mixins */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000310;
+  }
+}
+
+.quiz {
+  padding-top: 20px;
+  text-align: center;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000315;
+  }
+}
+
+.active-kanji-group {
+  display: inline-block;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000319;
+  }
+}
+
+.kanji {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  float: left;
+  padding: 20px;
+  font-size: 70px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000326;
+  }
+}
+
+.kanji:hover {
+  cursor: pointer;
+  color: #facc2e;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000333;
+  }
+}
+
+.kanji:active {
+  color: #ffbf00;
+  position: relative;
+  top: 1px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000339;
+  }
+}
+
+.kanji-zoom {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 180px;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000346;
+  }
+}
+
+.kanji-radicals {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 25px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000351;
+  }
+}
+
+.kanji-radicals .kanji-radical {
+  padding: 10px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000354;
+  }
+}
+
+.kanji-radicals .kanji-radical:hover {
+  color: #ffbf00;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Question elements */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000367;
+  }
+}
+
+.kanji-quiz {
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+  font-size: 20px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000371;
+  }
+}
+
+.kanji-quiz .meaning {
+  font-family: "Segoe UI", "Frutiger", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  color: #e5e5e7;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000376;
+  }
+}
+
+.kanji-quiz .example {
+  color: #8e8e90;
+}
+
+/* Kanji groups log */
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000383;
+  }
+}
+
+.groups-seen {
+  position: absolute;
+  bottom: 8%;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000387;
+  }
+}
+
+.groups-seen span {
+  width: 100px;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000391;
+  }
+}
+
+.groups-seen .kanji-in-group {
+  display: block;
+}
+
+@media -sass-debug-info {
+  filename {
+    font-family: file\:\/\/\/home\/xifax\/Repos\/kanji-tamesi\/client\/app\/styles\/screens\/quiz\.scss;
+  }
+
+  line {
+    font-family: \0000394;
+  }
+}
+
+.groups-seen .kanji-in-group span {
+  float: left;
+}

@@ -25,7 +25,7 @@ except:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = TEMPLATE_DEBUG = False
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'tamesi.herokuapp.com']
 
 
 # Application definition
@@ -110,8 +110,8 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 1
 
-# Try to import local settings (if any)
-try:
-  from local_settings import *
-except ImportError:
-  pass
+# # Try to import local settings (if any)
+# try:
+#   from local_settings import *
+# except ImportError:
+#   pass
