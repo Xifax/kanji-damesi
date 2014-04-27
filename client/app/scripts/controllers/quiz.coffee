@@ -3,9 +3,9 @@
 angular.module('clientApp')
   .controller 'QuizCtrl', ($scope, $http) ->
 
-    ########
-    # Init #
-    ########
+                                    ########
+                                    # Init #
+                                    ########
 
     # Basic settings and utils
     api = '/saiban/api/'
@@ -33,9 +33,9 @@ angular.module('clientApp')
     # Pre-fill active group with '?'
     $scope.activeGroup.kanji.push({front: '?'}) for [1..5]
 
-    #########
-    # Utils #
-    #########
+                                   #########
+                                   # Utils #
+                                   #########
 
     # Show notification
     fail = (message)-> console.log(message)
@@ -62,9 +62,9 @@ angular.module('clientApp')
     # Finish time-consuming action
     fin = -> $scope.loading = false
 
-    #######
-    # API #
-    #######
+                                    #######
+                                    # API #
+                                    #######
 
     # Get random group
     $scope.getRandomGroup = ->
@@ -133,9 +133,9 @@ angular.module('clientApp')
     $scope.zoomKanji = (kanji) -> $scope.currentKanji = kanji
     # TODO: Zoom radical
 
-    ###########
-    # On load #
-    ###########
+                                  ###########
+                                  # On load #
+                                  ###########
 
     # Get new group on load
     # $scope.getRandomGroup()

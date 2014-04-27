@@ -6,9 +6,9 @@ from django.conf import settings
 
 from services.srs import interval
 
-#########################################
-# Kanji and related didactical entities #
-#########################################
+                   #########################################
+                   # Kanji and related didactical entities #
+                   #########################################
 
 
 class Kanji(models.Model):
@@ -89,15 +89,20 @@ class Kanji(models.Model):
 
 class Compound(models.Model):
     """Kanji compound, usually word or expression, may include kana"""
-    front = models.CharField(max_length=10, unique=True)
-    reading = models.CharField(max_length=100, null=True, blank=True)
-    gloss = models.CharField(max_length=1000, null=True, blank=True)
+    front = models.CharField(max_length=50, unique=True)
+    reading = models.CharField(max_length=500, null=True, blank=True)
+    gloss = models.CharField(max_length=5000, null=True, blank=True)
+    # Part of Speech
+    pos = models.CharField(max_length=500, null=True, blank=True)
+
     examples = models.ManyToManyField(
         'Example',
         related_name='compounds',
         null=True,
         blank=True
     )
+    antonyms = models.ManyToManyField('self', null=True, blank=True)
+    similar = models.ManyToManyField('self', null=True, blank=True)
 
     def __unicode__(self):
         return self.front
@@ -107,7 +112,9 @@ class Compound(models.Model):
             font=self.front,
             reading=self.front,
             gloss=self.front,
-            examples=[example.as_json for example in self.examples.all()]
+            examples=[example.as_json() for example in self.examples.all()],
+            antonyms=[antonym.as_json() for antonym in self.antonyms.all()],
+            similar=[similar.as_json() for similar in self.similar.all()]
         )
 
 
@@ -175,9 +182,9 @@ class KanjiGroup(models.Model):
             kanji=[kanji.as_json() for kanji in self.kanji.all()]
         )
 
-#################################
-# Profile and SRS related stuff #
-#################################
+                       #################################
+                       # Profile and SRS related stuff #
+                       #################################
 
 
 class Profile(models.Model):

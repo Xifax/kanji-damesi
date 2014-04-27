@@ -1,8 +1,6 @@
 # coding: utf-8
 from django.test import TestCase
 
-# Create your tests here.
-
 from saiban.models import (
     Kanji,
     # Radical,
@@ -10,6 +8,7 @@ from saiban.models import (
     # KanjiGroup
 )
 
+# Model tests go here
 
 class ModelTests(TestCase):
 
