@@ -17,11 +17,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-try:
-    with open ('secret_key', 'r') as key:
-        SECRET_KEY = key.read().strip()
-except:
-    pass
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
+
+if not SECRET_KEY:
+    try:
+        with open ('secret_key', 'r') as key:
+            SECRET_KEY = key.read().strip()
+    except:
+        pass
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = TEMPLATE_DEBUG = False
@@ -110,8 +113,8 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 1
 
-# # Try to import local settings (if any)
-# try:
-#   from local_settings import *
-# except ImportError:
-#   pass
+# Try to import local settings (if any)
+try:
+  from local_settings import *
+except ImportError:
+  pass
