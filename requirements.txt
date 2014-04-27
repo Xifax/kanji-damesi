@@ -5,8 +5,8 @@
 # Django and its modules
 Django==1.6.2
 django-suit==0.2.7
-django-database-url==0.3.0
-django-static==0.0.5
+dj-database-url==0.3.0
+dj-static==0.0.5
 South==0.8.4
 waitress==0.8.8
 
