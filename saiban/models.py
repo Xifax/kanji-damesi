@@ -74,7 +74,7 @@ class Kanji(models.Model):
             strokes=self.strokes,
         )
 
-    def get_reading(self):
+    def get_readings_as_string(self):
         reading = u''
         separator = u' | '
         if self.kun:
@@ -86,6 +86,16 @@ class Kanji(models.Model):
 
         return reading
 
+    def get_readings_as_json(self):
+        readings = {}
+        if self.kun:
+            readings['kun'] = self.kun
+        if self.on:
+            readings['on'] = self.on
+        if self.nanori:
+            readings['nanori'] = self.nanori
+
+        return readings
 
 class Compound(models.Model):
     """Kanji compound, usually word or expression, may include kana"""

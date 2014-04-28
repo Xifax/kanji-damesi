@@ -35,7 +35,17 @@
             <!-- Active question -->
             <div class="kanji-quiz">
                 <!-- TODO: katakana and hiragana in different styles -->
-                <p class="reading"> {{ quiz.readings }} </p>
+                <div class="reading">
+                  <span class="kun">
+                    {{ quiz.readings.kun }}
+                  </span>
+                  <span class="on">
+                    {{ quiz.readings.on }}
+                  </span>
+                  <span>
+                    {{ quiz.readings.nanori }}
+                  </span>
+                </div>
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
                 <!-- TODO: highlight example compound/word -->

@@ -14,6 +14,7 @@ def get_random_kanji_group(level=1):
     """Get random kanji group by level"""
     # NB: could be slow (yet, lazy querysets should be fast!)
     try:
+        # TODO: profile and optimize!
         return random.choice(KanjiGroup.objects.filter(level=level))
     except IndexError:
         return None
@@ -65,20 +66,20 @@ def get_scheduled_kanji(user):
     return next_kanji.kanji
 
 
-def delay_kanji(kanji):
+def delay_kanji(kanji, user):
     # Get kanji by its front
     kanji = Kanji.objects.get(front=kanji)
 
     # Get kanji status (if any)
-    status = kanji.status.get()
+    status = kanji.status.filter(user=user).get()
     if status:
         status.delay()
         kanji.status.save()
 
 
-def rate_answer(kanji, is_correct):
+def rate_answer(kanji, is_correct, user):
     kanji = Kanji.objects.get(front=kanji)
-    status = kanji.status.get()
+    status = kanji.status.filter(user=user).get()
 
     # TODO: base rating also upon time it took user to answer
     rating = 0 if not is_correct else 4

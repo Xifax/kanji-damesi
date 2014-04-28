@@ -65,8 +65,28 @@
 /* Question elements */
 
 .kanji-quiz {
+  display: block;
   font-family: $jpFont;
   font-size: 20px;
+
+  .reading {
+    display: inline-block;
+    font-size: 24px;
+    padding: 5px;
+
+    .kun {
+      padding-right: 20px;
+      color: tint($foreground_light, 30%)
+    }
+    .on {
+      padding-right: 20px;
+      color: tint($foreground_light, 10%)
+    }
+    .nanori {
+      color: shade($foreground_light, 30%)
+    }
+
+  }
 
   .meaning {
     font-family: $sansFont;

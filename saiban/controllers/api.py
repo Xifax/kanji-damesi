@@ -36,14 +36,12 @@ def next_group(request):
         'group': kanji.group.as_json(),
         'quiz': {
             'meanings': kanji.gloss,
-            # TODO: separate kun|on|nanori fields?
-            'readings': kanji.get_reading(),
+            'readings': kanji.get_readings_as_json(),
             'compounds': [
                 compound.as_json() for compound in kanji.compounds.all()
             ],
-            # TODO: ponder what to do
-            # 'examples': kanji.compounds.all().examples.all().as_json(),
             'answer': kanji.front,
+            # 'examples': kanji.compounds.all().examples.all().as_json(),
             # 'radicals': [
             #   radical.as_json() for radical in kanji.radicals.all()
             # ],
@@ -63,7 +61,7 @@ def process_answer(request):
     kanji = post['kanji']
     # delay = post['delay']
 
-    rate_answer(kanji, is_correct)
+    rate_answer(kanji, is_correct, request.user)
     # get next group
     return next_group(request)
 
@@ -75,5 +73,5 @@ def skip_kanji(request):
     post = process_post(request)
 
     # Delay kanji by its id
-    delay_kanji(post['kanji'])
+    delay_kanji(post['kanji'], request.user)
     return next_group(request)

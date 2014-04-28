@@ -18,15 +18,24 @@ angular.module('clientApp')
 
     $scope.quiz =
       # TODO: ponder, if shoud use 'meaning' or array of 'meanings' and so on
-      readings: 'さかん, うつくし.い, かがや.き, ゴウ, キョウ, オウ',
-      meanings: 'flourishing, successful, beautiful, vigorous',
-      examples: 'にっぽんではえいごきょういくがさかんである',
-      answer: 'kanji'
+      readings: '?',
+      # readings:
+      #   kun: '',
+      #   on: '',
+      #   namae: '',
+      meanings: '?',
+      examples: '?',
+      answer: '?'
+      # readings: 'さかん, うつくし.い, かがや.き, ゴウ, キョウ, オウ',
+      # meanings: 'flourishing, successful, beautiful, vigorous',
+      # examples: 'にっぽんではえいごきょういくがさかんである',
+      # answer: 'kanji'
 
     $scope.timer =
       began: 0,
       answered: 0
 
+    $scope.kanjiLog = []
     $scope.groupsSeen = []
     $scope.activeGroup = { kanji: [] }
     $scope.loading = false
