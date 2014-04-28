@@ -6,7 +6,7 @@ update:
 release:
 	pip install -r requirements/master.txt
 	cd client && npm install && bower update && grunt build
-	python manage.py collectstatic
+	python manage.py collectstatic --noinput
 
 live:
 	python manage.py gruntserver 8080
@@ -33,3 +33,6 @@ new-migration:
 docs:
 	pycco saiban/*.py -d docs
 
+build:
+	grunt --gruntfile=client/Gruntfile.coffee build
+	python manage.py collectstatic --noinput
