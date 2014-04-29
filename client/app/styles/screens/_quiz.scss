@@ -1,6 +1,7 @@
 /* Quiz page */
 
 @import "compass/css3/user-interface";
+@import "compass/css3/transition";
 
 @import "main/fonts";
 @import "main/colors";
@@ -23,6 +24,8 @@
   font-size: 70px;
   @include user-select(none);
 
+  @include transition(color 0.5s ease 0s);
+
   &:hover {
     cursor: pointer;
     color: $yellow_light;
@@ -38,7 +41,7 @@
 
 .kanji-zoom {
   font-family: $jpFont;
-  font-size: 180px;
+  font-size: 140px;
   cursor: default;
   @include user-select(none);
 }
@@ -95,6 +98,41 @@
   .example {
     color: shade($foreground_light, 30%)
   }
+}
+
+/* Answers log */
+
+.answers {
+
+  .log-item {
+    font-family: $sansFont;
+  }
+
+  .item-header {
+    text-align: center;
+
+    h4 {
+      font-family: $jpFont;
+      font-size: 22px;
+
+      // .correct {
+      //   color: tint($foreground_light, 50%);
+      // }
+
+    }
+
+  }
+
+  // .correct {
+  //   background-color: rgb(98,196,98);
+  //   color: tint($foreground_light, 30%);
+  // }
+
+  // .wrong {
+  //   background-color: rgb(238,95,91);
+  //   color: tint($foreground_light, 60%);
+  // }
+
 }
 
 /* Kanji groups log */

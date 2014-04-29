@@ -33,11 +33,16 @@ def get_new_random_kanji(user):
     # Select random kanji to study
     kanji = random.choice(random_group.kanji.all())
 
-    # Associate new status with it
-    status = KanjiStatus()
-    status.user = user
-    status.level = level
-    status.kanji = kanji
+    # Get existing status
+    try:
+        status = KanjiStatus.objects.filter(user=user, kanji=kanji).get()
+    # Or associate new status with it
+    except KanjiStatus.DoesNotExist:
+        status = KanjiStatus()
+        status.user = user
+        status.level = level
+        status.kanji = kanji
+
     status.seen += 1
     status.save()
 

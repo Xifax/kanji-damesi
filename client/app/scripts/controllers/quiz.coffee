@@ -11,7 +11,6 @@ angular.module('clientApp')
     api = '/saiban/api/'
 
     # Init models and data
-    # TODO: also include radical decomposition
     $scope.currentKanji =
       front: '?',
       radicals: [front: '?']
@@ -21,7 +20,7 @@ angular.module('clientApp')
       readings:
         kun: '?',
         on: '?',
-        namae: '?',
+        nanori: '?',
       meanings: '?',
       examples: '?',
       answer: '?'
@@ -32,11 +31,29 @@ angular.module('clientApp')
       answered: 0
 
     $scope.kanjiLog = []
+    # Fill with test data
+    $scope.kanjiLog.push({
+      'answered': {'front': '明', 'compounds': [{'front': '明日'}]}
+      'answer': {'front': '日', 'compounds': [{'front': '明日'}]}
+      'correct': true
+    })
+    $scope.kanjiLog.push({
+      'answered': {'front': '数', 'compounds': [{'front': '数学'}]}
+      'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
+      'correct': false
+    })
+    $scope.kanjiLog.push({
+      'answered': {'gloss': 'Number', 'front': '数', 'compounds': [{'front': '数学'}]}
+      'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
+      'correct': true
+      'toggled': true
+    })
+
     $scope.groupsSeen = []
     $scope.activeGroup = { kanji: [] }
-    $scope.loading = false
     # Pre-fill active group with '?'
     $scope.activeGroup.kanji.push({front: '?'}) for [1..5]
+    $scope.loading = false
 
                                    #########
                                    # Utils #
@@ -101,19 +118,27 @@ angular.module('clientApp')
     # Answer with kanji
     $scope.answerWith = (kanji) ->
       start()
+
       # Check answer
-      correct = kanji.front == $scope.quiz.answer
+      correct = kanji.front == $scope.quiz.answer.front
+      # Update kanji log
+      $scope.kanjiLog.push({
+        'answered': kanji,
+        'answer': $scope.quiz.answer,
+        'correct': correct,
+        'toggled': false
+      })
+      # Display notification
       got_it(correct)
 
       promise = $http.post(api + 'answer/',
         {'correct': correct,
         # TODO: measure time for an answer
         'delay': 10,
-        'kanji': $scope.quiz.answer}
+        'kanji': $scope.quiz.answer.front}
       )
 
       promise.success (data)->
-        # TODO: notify on success/failure
         newKanjiGroup(data)
         fin()
 
@@ -138,11 +163,24 @@ angular.module('clientApp')
     $scope.zoomKanji = (kanji) -> $scope.currentKanji = kanji
     # TODO: Zoom radical
 
+    # Show/hide kanji info from log
+    $scope.toggleLogItemInfo = (item) -> item.toggled  = !item.toggled
+
                                   ###########
                                   # On load #
                                   ###########
 
     # Get new group on load
     # $scope.getRandomGroup()
-    $scope.getNextGroup()
+    # $scope.getNextGroup()
+
+                             ######################
+                             # Additional filters #
+                             ######################
+
+# Reverse array filter
+angular.module('clientApp')
+  .filter 'reverse', ->
+    (items) ->
+      items.slice().reverse()
 

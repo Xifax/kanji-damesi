@@ -97,6 +97,7 @@ class Kanji(models.Model):
 
         return readings
 
+
 class Compound(models.Model):
     """Kanji compound, usually word or expression, may include kana"""
     front = models.CharField(max_length=50, unique=True)
@@ -258,7 +259,7 @@ class KanjiStatus(models.Model):
         Rating may vary from 0 (wtf is this) to 4 (known by heart)
         """
         self.level = rating
-        days, ef = interval(self.seen, rating, self.easy_factor)
+        days, ef = interval(self.seen, self.level, self.easy_factor)
         self.next_practice = date.today() + timedelta(days=days)
         self.seen += 1
         self.easy_factor = ef
@@ -268,8 +269,11 @@ class KanjiStatus(models.Model):
         self.next_practice = date.today() + timedelta(days=days)
 
     def __unicode__(self):
-        return u'%s: %s [%s]' % (
-            self.kanji, str(self.level), self.user.username
+        return u'%s: %s, %s [%s]' % (
+            self.kanji,
+            str(self.level),
+            str(self.easy_factor),
+            self.user.username
         )
 
     def as_json(self):

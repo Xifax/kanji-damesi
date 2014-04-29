@@ -40,7 +40,8 @@ def next_group(request):
             'compounds': [
                 compound.as_json() for compound in kanji.compounds.all()
             ],
-            'answer': kanji.front,
+            'answer': kanji.as_json(),
+            # 'answer': kanji.front,
             # 'examples': kanji.compounds.all().examples.all().as_json(),
             # 'radicals': [
             #   radical.as_json() for radical in kanji.radicals.all()

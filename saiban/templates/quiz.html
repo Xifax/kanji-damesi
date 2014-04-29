@@ -42,9 +42,9 @@
                   <span class="on">
                     {{ quiz.readings.on }}
                   </span>
-                  <!--span class="nanori">
+                  <span class="nanori">
                     {{ quiz.readings.nanori }}
-                  </span-->
+                  </span>
                 </div>
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
@@ -64,8 +64,58 @@
     </div>
 
     {% verbatim %}
-    <div class="answers">
+    <div class="container answers">
+      <div class="list-group">
+
+        <!-- Previous answer -->
+        <a href="" class="log-item list-group-item"
+          ng-repeat="item in kanjiLog | reverse | limitTo: 5"
+          ng-click="toggleLogItemInfo(item)"
+          ng-class="{
+            'list-group-item-success': item.correct && !item.toggled,
+            'list-group-item-danger': !item.correct && !item.toggled,
+            'active': item.toggled,
+          }">
+
+            <div class="list-group-item-heading item-header">
+              <h4>
+                {{ item.answered.front }}
+                <span class="correct" ng-show="!item.correct">
+                  <span class="glyphicon glyphicon-chevron-right"></span>
+                  {{ item.answer.front }}
+                </span>
+              </h4>
+            </div>
+
+            <!-- Answer details -->
+            <div ng-show="item.toggled" class="list-group-item-text">
+
+              <div>
+                {{ item.answer.front }}
+                {{ item.answer.on }} {{ item.answer.kun }}
+                {{ item.answer.gloss }}
+                <p ng-repeat="compound in item.answer.compounds">
+                  {{compound.front}} [{{compound.reading}}]: {{compound.gloss}}
+                </p>
+              </div>
+
+              <div ng-show="!item.correct">
+                <hr>
+                {{ item.answered.front }}
+                {{ item.answered.on }} {{ item.answered.kun }}
+                {{ item.answered.gloss }}
+              <p ng-repeat="compound in item.answered.compounds">
+                {{compound.front}} [{{compound.reading}}]: {{compound.gloss}}
+              </p>
+              </div>
+
+            </div>
+
+        </a>
+
+      </div>
     </div>
+
     {% endverbatim %}
 
     {% verbatim %}
@@ -83,10 +133,14 @@
 
 </div>
 
+<!--div class="container">
+  <div class="alert alert-danger">Yaay, you did it!</div>
+</div-->
+
 {% endblock %}
 
 {% block footer %}
 
+    {# {% include "layout/footer.html" %} #}
 
-    {% include "layout/footer.html" %}
 {% endblock %}
