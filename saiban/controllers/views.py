@@ -1,5 +1,4 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404
 from django.contrib.auth import(
     logout as logout_user,
     authenticate,
@@ -7,22 +6,26 @@ from django.contrib.auth import(
 )
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
-import logging
 
 from saiban.services.user import new_user_with_profile
 
-###############
-# Controllers #
-###############
+                               ################
+                               # Landing page #
+                               ################
 
-# Landing page
+
 def index(request):
     """Show Saiban home page with login/register"""
     if request.user.is_authenticated():
         redirect('profile')
+
     return render(request, 'index.html')
 
-# Profile pages
+
+                               #################
+                               # Profile pages #
+                               #################
+
 def profile(request):
     """Display main profile page"""
     if not request.user.is_authenticated():
@@ -30,7 +33,11 @@ def profile(request):
 
     return render(request, 'profile.html', {'user': request.user})
 
-# Authorization, registration
+
+                               #################
+                               # Authorization #
+                               #################
+
 def register(request):
     """Register new user and associate profile"""
     if request.user.is_authenticated():
@@ -40,10 +47,10 @@ def register(request):
         form = UserCreationForm(data=request.POST)
         if not form.is_valid():
             return render(
-                    request,
-                    'index.html',
-                    {'error_message': 'Could not create user', 'register': True}
-                    # {'error_message': form.errors.values()}
+                request,
+                'index.html',
+                {'error_message': 'Could not create user', 'register': True}
+                # {'error_message': form.errors.values()}
             )
         else:
             # If valid form -> create user
@@ -59,6 +66,7 @@ def register(request):
     # Otherwise, display register page
     return render(request, 'index.html', {'register': True})
 
+
 def login(request):
     """Try to login existing user"""
     if request.user.is_authenticated():
@@ -68,16 +76,17 @@ def login(request):
         form = AuthenticationForm(data=request.POST)
         if not form.is_valid():
             return render(
-                    request,
-                    'index.html',
-                    {'error_message': 'Sorry, could not login', 'login': True}
-                    # {'error_message': ' '.join([e.as_text() for e in form.errors.values()])}
+                request,
+                'index.html',
+                {'error_message': 'Sorry, could not login', 'login': True}
+                # {'error_message':
+                #' '.join([e.as_text() for e in form.errors.values()])}
             )
 
         # If form is valid, try to authenticate user
         user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password']
+            username=form.cleaned_data['username'],
+            password=form.cleaned_data['password']
         )
         if user is not None:
             # Log in and  redirect to profile
@@ -85,13 +94,14 @@ def login(request):
             return redirect('profile')
         else:
             return render(
-                    request,
-                    'index.html',
-                    {'error_message': 'Sorry, could not login', 'login': True}
+                request,
+                'index.html',
+                {'error_message': 'Sorry, could not login', 'login': True}
             )
 
     # Otherwise, display login page
     return render(request, 'index.html', {'login': True})
+
 
 def logout(request):
     """Try to logout existing user"""
@@ -99,8 +109,23 @@ def logout(request):
         logout_user(request)
         return redirect('index')
 
-# Kanji quiz
+
+                                ##############
+                                # Kanji quiz #
+                                ##############
+
 def quiz(request):
     """Show quiz page"""
     return render(request, 'quiz.html')
 
+
+def try_quiz(request):
+    """Try kanji quiz as anonymous user"""
+    # Auth as anonymous user
+    # TODO: create such user and associate profile
+    if not request.user.is_authenticated():
+        user = User.objects.get(username='Anonymous')
+        user.backend = 'django.contrib.auth.backends.ModelBackend'
+        login_user(request, user)
+
+    return render(request, 'quiz.html')

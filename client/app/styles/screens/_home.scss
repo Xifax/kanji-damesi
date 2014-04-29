@@ -64,6 +64,10 @@
 .button-box {
   @extend .auth-box;
 
+  .content h1 {
+    margin: 0;
+  }
+
   a {
     text-decoration: none;
   }
@@ -101,6 +105,7 @@
   font-size: 90px;
   text-align: center;
   letter-spacing: 3px;
+  color: tint($foreground_light, 50%);
 
   p {
     font-size: 20px;
@@ -110,8 +115,12 @@
 
 .info-box {
   display: block;
-  margin-top: 30px;
+  font-family: $sansFont;
+  font-size: 18px;
   text-align: center;
+  margin: 40px auto;
+  width: 400px;
+  color: shade($foreground_light, 20%);
 }
 
 .error {

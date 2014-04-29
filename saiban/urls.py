@@ -8,6 +8,7 @@ urlpatterns = patterns('',
     # Auth
     url(r'^login/', views.login, name='login'),
     url(r'^register/', views.register, name='register'),
+    url(r'^try/', views.try_quiz, name='try'),
     # Profile
     url(r'^profile/', views.profile, name='profile'),
     url(r'^logout/', views.logout, name='logout'),

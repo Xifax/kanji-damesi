@@ -18,18 +18,14 @@ angular.module('clientApp')
 
     $scope.quiz =
       # TODO: ponder, if shoud use 'meaning' or array of 'meanings' and so on
-      readings: '?',
-      # readings:
-      #   kun: '',
-      #   on: '',
-      #   namae: '',
+      readings:
+        kun: '?',
+        on: '?',
+        namae: '?',
       meanings: '?',
       examples: '?',
       answer: '?'
-      # readings: 'さかん, うつくし.い, かがや.き, ゴウ, キョウ, オウ',
-      # meanings: 'flourishing, successful, beautiful, vigorous',
       # examples: 'にっぽんではえいごきょういくがさかんである',
-      # answer: 'kanji'
 
     $scope.timer =
       began: 0,
