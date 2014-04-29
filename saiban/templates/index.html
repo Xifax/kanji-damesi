@@ -12,19 +12,19 @@
 
     {% if not login and not register %}
 
-        <div class="auth-box">
+        <div class="button-box">
+          <a href="{% url 'login' %}">
             <div class="content">
-                <a href="{% url 'login' %}"><h1>
-                    Login
-                </h1>
+                <h1> Login </h1>
             </div>
+          </a>
         </div>
-        <div class="auth-box">
+        <div class="button-box">
+          <a href="{% url 'register' %}">
             <div class="content">
-                <a href="{% url 'register' %}"><h1>
-                    Register
-                </h1></a>
+               <h1> Register </h1>
             </div>
+          </a>
         </div>
 
     {% endif %}
