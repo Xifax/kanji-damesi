@@ -31,23 +31,24 @@ angular.module('clientApp')
       answered: 0
 
     $scope.kanjiLog = []
+
     # Fill with test data
-    $scope.kanjiLog.push({
-      'answered': {'front': '明', 'compounds': [{'front': '明日'}]}
-      'answer': {'front': '日', 'compounds': [{'front': '明日'}]}
-      'correct': true
-    })
-    $scope.kanjiLog.push({
-      'answered': {'front': '数', 'compounds': [{'front': '数学'}]}
-      'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
-      'correct': false
-    })
-    $scope.kanjiLog.push({
-      'answered': {'gloss': 'Number', 'front': '数', 'compounds': [{'front': '数学'}]}
-      'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
-      'correct': true
-      'toggled': true
-    })
+    # $scope.kanjiLog.push({
+    #   'answered': {'front': '明', 'compounds': [{'front': '明日'}]}
+    #   'answer': {'front': '日', 'compounds': [{'front': '明日'}]}
+    #   'correct': true
+    # })
+    # $scope.kanjiLog.push({
+    #   'answered': {'front': '数', 'compounds': [{'front': '数学'}]}
+    #   'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
+    #   'correct': false
+    # })
+    # $scope.kanjiLog.push({
+    #   'answered': {'gloss': 'Number', 'front': '数', 'compounds': [{'front': '数学'}]}
+    #   'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
+    #   'correct': true
+    #   'toggled': true
+    # })
 
     $scope.groupsSeen = []
     $scope.activeGroup = { kanji: [] }
@@ -116,18 +117,13 @@ angular.module('clientApp')
         fin()
 
     # Answer with kanji
+    # TODO: allow to select by numbers
     $scope.answerWith = (kanji) ->
       start()
 
       # Check answer
       correct = kanji.front == $scope.quiz.answer.front
-      # Update kanji log
-      $scope.kanjiLog.push({
-        'answered': kanji,
-        'answer': $scope.quiz.answer,
-        'correct': correct,
-        'toggled': false
-      })
+
       # Display notification
       got_it(correct)
 
@@ -139,6 +135,15 @@ angular.module('clientApp')
       )
 
       promise.success (data)->
+        # Update kanji log
+        $scope.kanjiLog.push({
+          'answered': kanji,
+          'answer': $scope.quiz.answer,
+          'correct': correct,
+          'toggled': false
+        })
+
+        # Update current group
         newKanjiGroup(data)
         fin()
 
@@ -172,7 +177,7 @@ angular.module('clientApp')
 
     # Get new group on load
     # $scope.getRandomGroup()
-    # $scope.getNextGroup()
+    $scope.getNextGroup()
 
                              ######################
                              # Additional filters #

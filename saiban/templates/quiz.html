@@ -15,7 +15,7 @@
         <!-- Kanji group -->
         <div class="active-kanji-group">
 
-            <!-- TODO: also show radicals on hover -->
+            <!-- TODO: also show radical info on hover -->
             <p class="kanji-zoom">{{ currentKanji.front }}</p>
             <div class="kanji-radicals">
                 <span class="kanji-radical" ng-repeat="rad in currentKanji.radicals">
@@ -34,18 +34,19 @@
 
             <!-- Active question -->
             <div class="kanji-quiz">
-                <!-- TODO: katakana and hiragana in different styles -->
+                <!-- Different readings -->
                 <div class="reading">
                   <span class="kun">
                     {{ quiz.readings.kun }}
                   </span>
                   <span class="on">
                     {{ quiz.readings.on }}
-                  </span>
+                  </span><br/>
                   <span class="nanori">
                     {{ quiz.readings.nanori }}
                   </span>
                 </div>
+                <!-- Meanings -->
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
                 <!-- TODO: highlight example compound/word -->
@@ -109,6 +110,8 @@
               </p>
               </div>
 
+              <!-- TODO: load more button? -->
+
             </div>
 
         </a>
@@ -118,8 +121,9 @@
 
     {% endverbatim %}
 
+    <!-- TODO: also show session stats! -->
     {% verbatim %}
-      <div class="groups-seen">
+      <!--div class="groups-seen">
         <span ng-repeat="group in groupsSeen">
           {{ group.info }}
           <div class="kanji-in-group">
@@ -128,8 +132,10 @@
             </span>
           </div>
         </span>
-      </div>
+      </div-->
     {% endverbatim %}
+
+    <!-- TODO: also show user stats! -->
 
 </div>
 

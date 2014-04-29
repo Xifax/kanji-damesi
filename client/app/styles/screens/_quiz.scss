@@ -83,6 +83,7 @@
     }
     .on {
       padding-right: 20px;
+      color: shade($foreground_light, 20%)
     }
     .nanori {
       color: shade($foreground_light, 50%)
@@ -104,12 +105,15 @@
 
 .answers {
 
+  padding-top: 20px;
+
   .log-item {
     font-family: $sansFont;
   }
 
   .item-header {
     text-align: center;
+    // TODO: dark color, cause default is too bright
 
     h4 {
       font-family: $jpFont;

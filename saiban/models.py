@@ -120,9 +120,9 @@ class Compound(models.Model):
 
     def as_json(self):
         return dict(
-            font=self.front,
-            reading=self.front,
-            gloss=self.front,
+            front=self.front,
+            reading=self.reading,
+            gloss=self.gloss,
             examples=[example.as_json() for example in self.examples.all()],
             antonyms=[antonym.as_json() for antonym in self.antonyms.all()],
             similar=[similar.as_json() for similar in self.similar.all()]
