@@ -6,7 +6,7 @@
 
 {% block content %}
 
-  <div class="container">
+  <div class="container" ng-controller="UserCtrl">
     <div class="row">
 
       {% include "partials/sidebar.html" %}
@@ -16,13 +16,27 @@
 
         {% include "partials/profile.header.html" %}
 
-          {# <select id="" name="level"> #}
-          {#     <option value="1">Level 1</option> #}
-          {#     <option value="2">Level 2</option> #}
-          {#     <option value="3">Level 3</option> #}
-          {#     <option value="4">Level 4</option> #}
-          {# </select> #}
+        <!-- Level selection -->
+        <h3>Select your level</h3>
 
+        <ul class="glow-buttons glow-buttons-container glow-buttons-small">
+            <li ng-class="{'glow-button': true, 'glow-button-active': level == 1}">
+              <a ng-click="changeLevel(1)" href="#">I</a>
+            </li>
+            <li ng-class="{'glow-button': true, 'glow-button-active': level == 2}">
+              <a ng-click="changeLevel(2)" href="#">II</a>
+            </li>
+            <li ng-class="{'glow-button': true, 'glow-button-active': level == 3}">
+              <a ng-click="changeLevel(3)" href="#">III</a>
+            </li>
+            <li ng-class="{'glow-button': true, 'glow-button-active': level == 4}">
+              <a ng-click="changeLevel(4)" href="#">IV</a>
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- Random stats -->
         <p class="lead">
         Here, have some totally unimportant statistics for the past
         {{ stats.days }} day(s):
