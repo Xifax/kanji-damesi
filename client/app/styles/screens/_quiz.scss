@@ -96,9 +96,15 @@
     color: tint($foreground_light, 50%)
   }
 
+  .group-key {
+    font-family: $sansFont;
+    color: shade($foreground_light, 30%)
+  }
+
   .example {
     color: shade($foreground_light, 30%)
   }
+
 }
 
 /* Answers log */
