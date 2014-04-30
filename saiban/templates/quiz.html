@@ -71,7 +71,7 @@
 
         <!-- Previous answer -->
         <a href="" class="log-item list-group-item"
-          ng-repeat="item in kanjiLog | reverse | limitTo: 3"
+          ng-repeat="item in kanjiLog | reverse | limitTo: 4"
           ng-click="toggleLogItemInfo(item)"
           ng-class="{
             'list-group-item-success': item.correct && !item.toggled,

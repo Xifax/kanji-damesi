@@ -59,6 +59,11 @@ def get_scheduled_kanji(user):
     if should_get_random:
         return get_new_random_kanji(user)
 
+    # If only one, two or three statuses, get random
+    if KanjiStatus.objects.filter(user=user, group_level=level).count() < 3:
+        return get_new_random_kanji(user)
+
+    # At last, try to get scheduled
     try:
         next_kanji = KanjiStatus.objects.filter(
             user=user, group_level=level
