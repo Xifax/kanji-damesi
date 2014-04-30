@@ -1,0 +1,11 @@
+  <div class="page-header">
+      <h1>ご機嫌よ, {{ user.username }}さん!
+        {% if user.username == 'Anonymous' %}
+        <small>
+          Please note, this is a public profile and anyone can use it.
+        </small>
+        {% else %}
+        <br><small>{{ motto }}</small>
+        {% endif %}
+      </h1>
+  </div>

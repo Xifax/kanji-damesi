@@ -1,0 +1,22 @@
+  <!-- Profile sidebar -->
+  <div class="col-sm-3 profile-nav">
+      <nav class="nav-sidebar">
+
+          <ul class="nav">
+              {% url 'profile' as url %}
+              <li {% if request.path == url %} class="active" {% endif %}>
+              <a href="{% url 'profile' %}">Home</a>
+              </li>
+              <li><a href="">Achievements</a></li>
+              <li><a href="">Kanji stats</a></li>
+              <li><a href="">Study log</a></li>
+
+              <li class="nav-divider"></li>
+              <li><a href="{% url 'logout' %}">
+                <i class="glyphicon glyphicon-off"></i> Log out</a>
+              </li>
+          </ul>
+
+      </nav>
+  </div>
+

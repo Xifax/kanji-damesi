@@ -40,7 +40,7 @@ angular.module('clientApp')
 
     $scope.kanjiLog = []
 
-    # Fill with test data
+    # #Fill with test data
     # $scope.kanjiLog.push({
     #   'answered': {'front': '明', 'compounds': [{'front': '明日'}]}
     #   'answer': {'front': '日', 'compounds': [{'front': '明日'}]}
@@ -161,6 +161,10 @@ angular.module('clientApp')
       )
 
       promise.success (data)->
+        # Shuffle compounds
+        shuffle($scope.quiz.answer.compounds)
+        shuffle(kanji.compounds)
+
         # Update kanji log
         $scope.kanjiLog.push({
           'answered': kanji,
@@ -202,7 +206,6 @@ angular.module('clientApp')
                                   ###########
 
     # Get new group on load
-    # $scope.getRandomGroup()
     $scope.getNextGroup()
 
                              ######################

@@ -71,7 +71,7 @@
 
         <!-- Previous answer -->
         <a href="" class="log-item list-group-item"
-          ng-repeat="item in kanjiLog | reverse | limitTo: 4"
+          ng-repeat="item in kanjiLog | reverse | limitTo: 3"
           ng-click="toggleLogItemInfo(item)"
           ng-class="{
             'list-group-item-success': item.correct && !item.toggled,
@@ -93,22 +93,35 @@
             <div ng-show="item.toggled" class="list-group-item-text">
 
               <div>
-                {{ item.answer.front }}
-                {{ item.answer.on }} {{ item.answer.kun }}
-                {{ item.answer.gloss }}
-                <p ng-repeat="compound in item.answer.compounds">
-                  {{compound.front}} [{{compound.reading}}]: {{compound.gloss}}
+
+                <hr>
+                <p class="details-kanji">
+                  <strong>{{ item.answer.front }}</strong> ～
+                  「{{ item.answer.on }} {{ item.answer.kun }}」
+                  {{ item.answer.gloss }}
                 </p>
+
+                <p class="details-compound"
+                  ng-repeat="compound in item.answer.compounds | limitTo: 3">
+                  {{compound.front}} 「{{compound.reading}}」: {{compound.gloss}}
+                </p>
+
               </div>
 
               <div ng-show="!item.correct">
+
                 <hr>
-                {{ item.answered.front }}
-                {{ item.answered.on }} {{ item.answered.kun }}
-                {{ item.answered.gloss }}
-              <p ng-repeat="compound in item.answered.compounds">
-                {{compound.front}} [{{compound.reading}}]: {{compound.gloss}}
-              </p>
+                <p class="details-kanji">
+                  <strong>{{ item.answered.front }}</strong> ～
+                  「{{ item.answered.on }} {{ item.answered.kun }}」
+                  {{ item.answered.gloss }}
+                </p>
+
+                <p class="details-compound"
+                  ng-repeat="compound in item.answered.compounds | limitTo: 3">
+                {{compound.front}} 「{{compound.reading}}」: {{compound.gloss}}
+                </p>
+
               </div>
 
               <!-- TODO: load more button? -->

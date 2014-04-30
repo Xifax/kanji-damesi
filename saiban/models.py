@@ -249,7 +249,7 @@ class KanjiStatus(models.Model):
         max_digits=3,
         decimal_places=2
     )
-    seen = models.PositiveIntegerField(default=0, null=True, blank=True)
+    seen = models.PositiveIntegerField(default=1, null=True, blank=True)
     next_practice = models.DateField(auto_now_add=True)
     easy_factor = models.FloatField(default=2.5)
 
@@ -259,9 +259,9 @@ class KanjiStatus(models.Model):
         Rating may vary from 0 (wtf is this) to 4 (known by heart)
         """
         self.level = rating
-        self.seen += 1
         days, ef = interval(self.seen, self.level, self.easy_factor)
         self.next_practice = date.today() + timedelta(days=days)
+        self.seen += 1
         self.easy_factor = ef
 
     def delay(self, days=1):

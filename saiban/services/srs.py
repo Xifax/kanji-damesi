@@ -3,12 +3,13 @@ Spaced repetition settings and algorithms
 """
 
 RATINGS = (
-        (0, 'Blanked'),
-        (1, 'Barely Know It'),
-        (2, 'Needs Work'),
-        (3, 'Remembered'),
-        (4, 'Solid')
+    (0, 'What is this thingy?'),
+    (1, 'Barely know it'),
+    (2, 'Needs some work'),
+    (3, 'I remember it'),
+    (4, 'Perfect!')
 )
+
 
 def interval(repition, rating, easy_factor=2.5):
     """
@@ -26,7 +27,6 @@ def interval(repition, rating, easy_factor=2.5):
     if repition == 2:
         return 6, ef
 
-    i, ef = interval(repition-1, rating, easy_factor)
+    i, ef = interval(repition - 1, rating, easy_factor)
     i *= easy_factor
     return i, ef
-

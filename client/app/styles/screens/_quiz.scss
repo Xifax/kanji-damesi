@@ -117,14 +117,18 @@
 
     h4 {
       font-family: $jpFont;
-      font-size: 22px;
-
-      // .correct {
-      //   color: tint($foreground_light, 50%);
-      // }
-
+      font-size: 26px;
     }
 
+  }
+
+  .details-kanji {
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .details-compound {
+    font-size: 17px;
   }
 
   // .correct {

@@ -1,8 +1,9 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns, url
 
 from controllers import views, api
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    '',
     # Landing
     url(r'^$', views.index, name='index'),
     # Auth
@@ -11,6 +12,9 @@ urlpatterns = patterns('',
     url(r'^try/', views.try_quiz, name='try'),
     # Profile
     url(r'^profile/', views.profile, name='profile'),
+    url(r'^profile/achievements', views.achievements, name='achievements'),
+    url(r'^profile/history', views.history, name='history'),
+    url(r'^profile/stats', views.stats, name='stats'),
     url(r'^logout/', views.logout, name='logout'),
     url(r'^quiz/', views.quiz, name='quiz'),
     # API
