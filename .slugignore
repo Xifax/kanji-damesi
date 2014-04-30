@@ -1,5 +1,14 @@
 test
 tests
-client
 local_settings.py
 local_settings.pyc
+node_modules
+bower.json
+Gruntfile.coffee
+karma-e2e-conf.js
+karma.conf.js
+package.json
+app
+docs
+Makefile
+Readme.md
