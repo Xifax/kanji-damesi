@@ -10,13 +10,21 @@ angular.module('clientApp')
     # Basic settings and utils
     api = '/saiban/api/'
 
+    # # Random seed
+    # $scope.random = ->
+    #   return 0.5 - Math.random()
+
+    # Session info
+    $scope.session =
+      correct: 0
+      wrong: 0
+
     # Init models and data
     $scope.currentKanji =
       front: '?',
       radicals: [front: '?']
 
     $scope.quiz =
-      # TODO: ponder, if shoud use 'meaning' or array of 'meanings' and so on
       readings:
         kun: '?',
         on: '?',
@@ -70,12 +78,30 @@ angular.module('clientApp')
       else
         console.log('Wrong!')
 
+    # Shuffle elements of array
+    shuffle = (array) ->
+      m = array.length
+
+      # While there remain elements to shuffle
+      while m
+        # Pick a remaining element…
+        i = Math.floor(Math.random() * m--)
+
+        # And swap it with the current element.
+        t = array[m]
+        array[m] = array[i]
+        array[i] = t
+
+      return array
+
     # Set new kanji group
     newKanjiGroup = (data) ->
       if $scope.activeGroup.kanji[0].front != '?'
         $scope.groupsSeen.push($scope.activeGroup)
 
       $scope.activeGroup = data.group
+      # Shuffle kanji order
+      shuffle($scope.activeGroup.kanji)
       $scope.currentKanji = {front: '?', radicals: [front: '?']}
       $scope.quiz = data.quiz
 
@@ -188,4 +214,3 @@ angular.module('clientApp')
   .filter 'reverse', ->
     (items) ->
       items.slice().reverse()
-

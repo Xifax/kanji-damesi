@@ -110,6 +110,23 @@ TEMPLATE_CONTEXT_PROCESSORS = TCP + (
 SITE_ID = 1
 ACCOUNT_ACTIVATION_DAYS = 1
 
+# Log to STDERR
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+        },
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+        }
+    }
+}
+
 # Try to import local settings (if any)
 try:
   from local_settings import *

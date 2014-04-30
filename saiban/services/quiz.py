@@ -51,6 +51,7 @@ def get_new_random_kanji(user):
 
 def get_scheduled_kanji(user):
     """Get next scheduled kanji group or random one"""
+    # TODO: if could not get profile for user -> create new one
     level = user.profile.get().group_level
 
     # Either get scheduled or get new/random kanji to study
