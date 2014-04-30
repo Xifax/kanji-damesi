@@ -39,6 +39,7 @@ angular.module('clientApp')
       answered: 0
 
     $scope.kanjiLog = []
+    $scope.logLimit = $scope.baseLimit = 3
 
     # #Fill with test data
     # $scope.kanjiLog.push({
@@ -200,6 +201,13 @@ angular.module('clientApp')
 
     # Show/hide kanji info from log
     $scope.toggleLogItemInfo = (item) -> item.toggled  = !item.toggled
+
+    # Toggle log limit
+    $scope.toggleLimit = ->
+      if $scope.logLimit == $scope.baseLimit
+        $scope.logLimit = 10
+      else
+        $scope.logLimit = $scope.baseLimit
 
                                   ###########
                                   # On load #

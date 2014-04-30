@@ -72,7 +72,7 @@
 
         <!-- Previous answer -->
         <a href="" class="log-item list-group-item"
-          ng-repeat="item in kanjiLog | reverse | limitTo: 4"
+          ng-repeat="item in kanjiLog | reverse | limitTo: logLimit"
           ng-click="toggleLogItemInfo(item)"
           ng-class="{
             'list-group-item-success': item.correct && !item.toggled,
@@ -129,6 +129,12 @@
 
             </div>
 
+        </a>
+        <!-- Show additional kanji from log -->
+        <a href="" class="log-item list-group-item list-group-item-info toggle-log"
+          ng-show="kanjiLog.length > baseLimit"
+          ng-click="toggleLimit()">
+            <span class="glyphicon glyphicon-sort"></span>
         </a>
 
       </div>
