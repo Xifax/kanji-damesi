@@ -17,9 +17,12 @@ urlpatterns = patterns(
     url(r'^profile/stats', views.stats, name='stats'),
     url(r'^logout/', views.logout, name='logout'),
     url(r'^quiz/', views.quiz, name='quiz'),
-    # API
+    # Quiz API
     url(r'^api/random-group/', api.random_group, name='random-group'),
     url(r'^api/next-group/', api.next_group, name='next-group'),
     url(r'^api/answer/', api.process_answer, name='answer'),
     url(r'^api/skip/', api.skip_kanji, name='skip-kanji'),
+    # Profile API
+    url(r'^api/get-level/', api.get_level, name='get-level'),
+    url(r'^api/change-level/', api.change_level, name='change-level'),
 )

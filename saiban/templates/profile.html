@@ -6,7 +6,8 @@
 
 {% block content %}
 
-  <div class="container" ng-controller="UserCtrl">
+<div class="container" ng-controller="UserCtrl">
+    {# ng-init="level={{user.profile.get.level}}"> #}
     <div class="row">
 
       {% include "partials/sidebar.html" %}
@@ -19,7 +20,9 @@
         <!-- Level selection -->
         <h3>Select your level</h3>
 
-        <ul class="glow-buttons glow-buttons-container glow-buttons-small">
+        {% verbatim %}
+
+        <ul class="glow-buttons glow-buttons-container glow-buttons-small" ng-cloak>
             <li ng-class="{'glow-button': true, 'glow-button-active': level == 1}">
               <a ng-click="changeLevel(1)" href="#">I</a>
             </li>
@@ -33,6 +36,10 @@
               <a ng-click="changeLevel(4)" href="#">IV</a>
             </li>
         </ul>
+
+        <p> {{ description }}</p>
+
+        {% endverbatim %}
 
         <hr>
 

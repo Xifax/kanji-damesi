@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('clientApp')
-  .controller 'UserCtrl', ($scope) ->
+  .controller 'UserCtrl', ($scope, $http) ->
 
                                     ########
                                     # Init #
@@ -11,20 +11,29 @@ angular.module('clientApp')
     api = '/saiban/api/'
 
     # Study level
-    $scope.level = 1
+    $scope.level = 0
+    $scope.description = ''
 
-    # $scope.getLevel = (user) ->
-    #   console.log(user)
+    # Get user level and description
+    $scope.getLevel = ->
+      promise = $http.get(api + 'get-level/')
+
+      promise.success (data)->
+        $scope.level = data.level
+        $scope.description = data.description
 
     # Update level
     $scope.changeLevel= (level)->
       $scope.level = level
-      console.log('test')
-      # TODO: update style
-      # promise = $http.post(api + 'change-level/', { level: level })
+      promise = $http.post(api + 'change-level/', { level: level })
 
-      # promise.success (data)->
-      #   console.log(data)
+      promise.success (data)->
+        $scope.level = data.level
+        $scope.description = data.description
 
-      # promise.error (data)->
-      #   console.log(data
+                                  ###########
+                                  # On load #
+                                  ###########
+
+    # Get user's level
+    $scope.getLevel()

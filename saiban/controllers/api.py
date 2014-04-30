@@ -8,6 +8,7 @@ from saiban.services.quiz import (
     rate_answer
 )
 from saiban.services.api import json_response, check_request, process_post
+from saiban.services.user import get_user_level, change_user_level
 
 ############
 # Quiz API #
@@ -76,3 +77,23 @@ def skip_kanji(request):
     # Delay kanji by its id
     delay_kanji(post['kanji'], request.user)
     return next_group(request)
+
+###############
+# Profile API #
+###############
+
+
+def get_level(request):
+    """Get authenticated user level"""
+    check_request(request)
+
+    return json_response(get_user_level(request.user))
+
+
+@csrf_exempt
+def change_level(request):
+    """Change study level for user"""
+    check_request(request)
+    post = process_post(request)
+
+    return json_response(change_user_level(request.user, post['level']))

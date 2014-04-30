@@ -64,3 +64,35 @@ def get_stats(user):
         'days': days,
     }
     return stats
+
+                            ######################
+                            # Profile management #
+                            ######################
+
+DESCRIPTIONS = {
+    1: 'I can study',
+    2: 'Bring it on',
+    3: 'Hurt me plenty',
+    4: 'Hardcore',
+}
+
+
+def get_user_level(user):
+    """Get level for specified user"""
+    level = user.profile.get().group_level
+    return {
+        'level': level,
+        'description': DESCRIPTIONS.get(level, '')
+    }
+
+
+def change_user_level(user, level):
+    """Change level for specified user"""
+    profile = user.profile.get()
+    profile.group_level = level
+    profile.save()
+
+    return {
+        'level': level,
+        'description': DESCRIPTIONS.get(level, '')
+    }
