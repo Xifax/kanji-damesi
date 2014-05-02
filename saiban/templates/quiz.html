@@ -12,29 +12,44 @@
     <!-- Quiz active group-->
     {% verbatim %}
     <div class="container quiz" ng-cloak>
-        <!-- Kanji group -->
         <div class="active-kanji-group">
 
+            <!-- Kanji preview -->
+            <p class="kanji-zoom hidden-xs hidden-sm" ng-show="showBigKanji">
+            {{ currentKanji.front }}
+            </p>
             <!-- TODO: also show radical info on hover -->
-            <p class="kanji-zoom">{{ currentKanji.front }}</p>
-            <div class="kanji-radicals">
+            <div class="kanji-radicals hidden-xs hidden-sm" ng-show="showBigKanji">
                 <!-- TODO: randomize kanji order -->
                 <span class="kanji-radical" ng-repeat="rad in currentKanji.radicals">
                     {{ rad.front }}
                 </span>
             </div>
-            <div id="{{kanji.id}}" class="kanji"
-                ng-mouseover="zoomKanji(kanji)"
-                ng-click="answerWith(kanji)"
-                ng-repeat="kanji in activeGroup.kanji">
-                {{ kanji.front }}
+            <!-- Kanji preview END -->
+
+            <!-- Kanji group -->
+            <div class="kanji-group">
+
+              <div id="{{kanji.id}}" class="kanji"
+                  ng-mouseover="zoomKanji(kanji)"
+                  ng-click="answerWith(kanji)"
+                  ng-repeat="kanji in activeGroup.kanji">
+                  {{ kanji.front }}
+                  <!-- TODO: include kana from examples in form of popup -->
+              </div>
+
+              <!-- Wildcard (I don't know button) -->
+              <div class="kanji-skip" ng-click="skipQuestion(quiz.answer)">
+                    <span class="glyphicon glyphicon-time"></span>
+                    <!-- TODO: include help popup -->
+              </div>
+
             </div>
-            <!-- Wildcard (I don't know button) -->
-            <!-- TODO: fix & debug -->
-            <div class="kanji" ng-click="skipQuestion(quiz.kanji)">?</div>
+            <!-- Kanji group end -->
 
             <!-- Active question -->
             <div class="kanji-quiz">
+
                 <!-- Different readings -->
                 <div class="reading">
                   <span class="kun">
@@ -47,6 +62,7 @@
                     {{ quiz.readings.nanori }}
                   </span>
                 </div>
+
                 <!-- Meanings -->
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <p class="group-key"> {{ activeGroup.info }} </p>
@@ -54,10 +70,11 @@
                 <!-- TODO: highlight example compound/word -->
                 <p class="example"> {{ quiz.examples }} </p>
             </div>
+            <!-- Active question END -->
 
         </div>
         <!-- Kanji group END -->
-        <!--button class="btn-dark" ng-click="getNextGroup()">Get scheduled group</button-->
+
     </div>
     {% endverbatim %}
 
@@ -97,8 +114,8 @@
 
                 <hr>
                 <p class="details-kanji">
-                  <strong>{{ item.answer.front }}</strong> ～
-                  「{{ item.answer.on }} {{ item.answer.kun }}」
+                  {{ item.answer.front }} ～
+                  「{{ item.answer.kun }} {{ item.answer.on }}」
                   {{ item.answer.gloss }}
                 </p>
 
@@ -113,8 +130,8 @@
 
                 <hr>
                 <p class="details-kanji">
-                  <strong>{{ item.answered.front }}</strong> ～
-                  「{{ item.answered.on }} {{ item.answered.kun }}」
+                  {{ item.answered.front }} ～
+                  「{{ item.answered.kun }} {{ item.answered.on }}」
                   {{ item.answered.gloss }}
                 </p>
 

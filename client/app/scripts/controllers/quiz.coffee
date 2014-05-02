@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('clientApp')
-  .controller 'QuizCtrl', ($scope, $http) ->
+  .controller 'QuizCtrl', ($scope, $http, $document) ->
 
                                     ########
                                     # Init #
@@ -10,9 +10,8 @@ angular.module('clientApp')
     # Basic settings and utils
     api = '/saiban/api/'
 
-    # # Random seed
-    # $scope.random = ->
-    #   return 0.5 - Math.random()
+    # Kanji zoom status
+    $scope.showBigKanji = true
 
     # Session info
     $scope.session =
@@ -40,6 +39,7 @@ angular.module('clientApp')
 
     $scope.kanjiLog = []
     $scope.logLimit = $scope.baseLimit = 3
+    maxLimit = 15
 
     # #Fill with test data
     # $scope.kanjiLog.push({
@@ -185,7 +185,7 @@ angular.module('clientApp')
     # Skip this kanji
     $scope.skipQuestion = (kanji) ->
       start()
-      promise = $http.post(api + 'skip/', {'kanji': kanji})
+      promise = $http.post(api + 'skip/', {'kanji': kanji.front})
 
       promise.success (data)->
         newKanjiGroup(data)
@@ -205,9 +205,17 @@ angular.module('clientApp')
     # Toggle log limit
     $scope.toggleLimit = ->
       if $scope.logLimit == $scope.baseLimit
-        $scope.logLimit = 10
+        $scope.logLimit = maxLimit
       else
         $scope.logLimit = $scope.baseLimit
+
+                                  ###########
+                                  # Hotkeys #
+                                  ###########
+
+    $document.bind '49', (event) =>
+        console.debug(event)
+
 
                                   ###########
                                   # On load #

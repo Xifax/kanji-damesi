@@ -17,6 +17,10 @@
   display: inline-block;
 }
 
+.kanji-group {
+  text-align: center;
+}
+
 .kanji {
   font-family: $jpFont;
   float: left;
@@ -31,12 +35,22 @@
     color: $yellow_light;
   }
 
+  &:active {
+    color: $yellow_main;
+    position: relative;
+    top: 1px;
+  }
+
 }
 
-.kanji:active {
-  color: $yellow_main;
-  position: relative;
-  top: 1px;
+.kanji-skip {
+  @extend .kanji;
+  font-size: 45px;
+
+  span {
+    padding-top: 33px;
+  }
+
 }
 
 .kanji-zoom {

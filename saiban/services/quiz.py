@@ -82,10 +82,12 @@ def delay_kanji(kanji, user):
     kanji = Kanji.objects.get(front=kanji)
 
     # Get kanji status (if any)
-    status = kanji.status.filter(user=user).get()
-    if status:
+    try:
+        status = KanjiStatus.objects.filter(kanji=kanji, user=user).get()
         status.delay()
-        kanji.status.save()
+        status.save()
+    except KanjiStatus.DoesNotExist:
+        pass
 
 
 def rate_answer(kanji, is_correct, user):

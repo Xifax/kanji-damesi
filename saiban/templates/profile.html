@@ -17,10 +17,11 @@
 
         {% include "partials/profile.header.html" %}
 
-        <!-- Level selection -->
-        <h3>Select your level</h3>
-
         {% verbatim %}
+
+        <!-- Level selection -->
+        <h3>Select your level: {{ description }}</h3>
+
 
         <ul class="glow-buttons glow-buttons-container glow-buttons-small" ng-cloak>
             <li ng-class="{'glow-button': true, 'glow-button-active': level == 1}">
@@ -36,8 +37,6 @@
               <a ng-click="changeLevel(4)" href="#">IV</a>
             </li>
         </ul>
-
-        <p> {{ description }}</p>
 
         {% endverbatim %}
 
