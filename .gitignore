@@ -9,3 +9,4 @@ uploads
 docs
 html
 .coverage
+*.csv

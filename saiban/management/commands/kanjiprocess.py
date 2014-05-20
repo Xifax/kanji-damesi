@@ -1,17 +1,22 @@
-from __future__ import unicode_literals
+# encoding: utf-8
+#from __future__ import unicode_literals
 from django.core.management.base import BaseCommand, CommandError
-from saiban.models import Kanji, Radical, Compound
+from saiban.models import Kanji, Radical, Compound, Example
 
 import os
 import random
+import csv
 from optparse import make_option
 
 from jpnetkit.kradfile import Kradfile
-from jpnetkit.weblio import Weblio
+#from jpnetkit.weblio import Weblio
 # from jpnetkit.wordnet import Wordnet
 # from jpnetkit.mecab import Mecab
 
+from saiban.mecab import MeCab
+
 import sqlite3
+from jcconv import kata2hira
 
 
 class Command(BaseCommand):
@@ -37,6 +42,11 @@ class Command(BaseCommand):
                     dest='examples',
                     default=False,
                     help='Find examples for compounds'),
+        make_option('--associate-examples',
+                    action='store_true',
+                    dest='associate-examples',
+                    default=False,
+                    help='Associate examples with compounds'),
         make_option('--check-status',
                     action='store_true',
                     dest='check',
@@ -255,6 +265,111 @@ class Command(BaseCommand):
     def update_examples(self):
         """Find examples for some|each of the compounds"""
 
+        # Tatoeba
+        examples = 'data/sentences.csv'
+        links = 'data/links.csv'
+        if os.path.exists(examples) and os.path.exists(links):
+
+            # Prepare translations
+            self.stdout.write('Processing sentence links...')
+            relations = {}
+            with open(links, 'rb') as tatoeba_links:
+                reader = csv.DictReader(
+                    tatoeba_links,
+                    fieldnames=('id', 'reference'),
+                    delimiter=b'\t'
+                )
+                for row in reader:
+                    relations.setdefault(row['id'], []).append(
+                        row['reference']
+                    )
+
+            self.stdout.write('Sentence links processed.')
+            self.stdout.write('Processing JP-ENG sentences...')
+
+            # Prepare examples
+            sentences = {}
+            translations = {}
+            with open(examples, 'rb') as tatoeba_examples:
+                reader = csv.DictReader(
+                    tatoeba_examples,
+                    fieldnames=('id', 'lang', 'sentence'),
+                    delimiter=b'\t'
+                )
+                for row in reader:
+                    if row['lang'] == 'jpn':
+                        sentences[row['id']] = {
+                            'sentence': row['sentence'],
+                            'relations': relations.get(row['id'], [])
+                        }
+                    elif row['lang'] == 'eng':
+                        translations[row['id']] = {
+                            'sentence': row['sentence'],
+                            'relations': relations.get(row['id'], [])
+                        }
+
+            self.stdout.write('JP-ENG sentences processed.')
+            self.stdout.write('Saving sentences to the DB...')
+
+            # Prepare example, translation and reading
+            duplicates = 0
+            tagger = MeCab.Tagger()
+            for id, example in sentences.iteritems():
+                # Examples and translation
+                gloss = ''
+                front = example['sentence']
+                for ref in example['relations']:
+                    translation = translations.get(ref, '')
+                    if translation:
+                        gloss = translation['sentence']
+
+                # Readings
+                readings = []
+
+                node = tagger.parseToNode(front)
+                while node:
+                    '''
+                    (
+                        pos,
+                        subpos,
+                        info,
+                        subinfo,
+                        classification,
+                        baseform,
+                        word,
+                        reading,
+                        another_reading
+                    ) = node.feature.split(',')
+                    '''
+
+                    features = node.feature.split(',')
+
+                    # Skip punctuation marks
+                    if len(features) == 9:
+                        reading = features[7]
+                        if reading != '*':
+                            readings.append(reading)
+                    node = node.next
+
+                reading = kata2hira(''.join(readings))
+
+                # Save example to DB
+                try:
+                    example = Example(
+                        front=front, reading=reading, gloss=gloss
+                    )
+                    example.save()
+                except Exception:
+                    duplicates += 1
+                    # self.stdout.write(u'Could not save %s' % front)
+
+            self.stdout.write(
+                'Finished saving. Total %d examples prepared! Duplicates: %d' %
+                (Example.objects.count(), duplicates)
+            )
+
+        # Weblio stuff
+        '''
         weblio = Weblio()
 
         for compound in Compound.objects.all():
@@ -265,6 +380,7 @@ class Command(BaseCommand):
                 for example, gloss in examples.iteritems():
                     print example, gloss
                 print '***'
+        '''
 
     def update_radicals(self):
         """Create radical decomposition for each kanji"""
