@@ -1,3 +1,4 @@
+# coding: utf-8
 from __future__ import unicode_literals
 from django.core.management.base import BaseCommand, CommandError
 from saiban.models import Kanji, KanjiGroup
@@ -8,16 +9,26 @@ import json
 from bs4 import BeautifulSoup
 import requests
 
+
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
         make_option('--json',
-            action='store_true',
-            dest='json',
-            default=False,
-            help='Dump json instead of importing entities to database'),
-        )
+                    action='store_true',
+                    dest='json',
+                    default=False,
+                    help='Dump json instead of importing entities to database'
+                    ),
+        make_option('--update',
+                    action='store_true',
+                    dest='update',
+                    default=False,
+                    help='Update groups info'),
+    )
     help = 'Populates database|dumps json data with kanji and kanji groups'
-    base_url = 'http://www.coscom.co.jp/ebksample/smp_2001kanji301/menumm/menubody-level%d-%d.html'
+    base_url = (
+        'http://www.coscom.co.jp/ebksample/'
+        'smp_2001kanji301/menumm/menubody-level%d-%d.html'
+    )
     levels = {
         1: 5,
         1: 5,
@@ -43,6 +54,7 @@ class Command(BaseCommand):
                     # div with groups, group subtitles and group tables
                     main = soup.find('div', class_='menuhonbun')
                     glosses = main.find_all('p', class_='grpimi')
+                    glosses.reverse()
                     groups = main.find_all('table', class_='group')
 
                     # compose list of kanji groups
@@ -64,6 +76,20 @@ class Command(BaseCommand):
         # either dump resulting data to json
         if options['json']:
             self.stdout.write(json.dumps(kanji_groups))
+
+        # update group info
+        elif options['update']:
+            for group in KanjiGroup.objects.all():
+                if kanji_groups:
+                    # get next updated group
+                    update = kanji_groups.pop(0)
+                    # skip this particular group
+                    if '々' in update['kanji']:
+                        update = kanji_groups.pop(0)
+
+                    # update group in DB
+                    group.info = update['info']
+                    group.save()
 
         # or save to database as corresponding entities
         else:
@@ -88,4 +114,3 @@ class Command(BaseCommand):
                         )
 
         self.stdout.write('Done!')
-
