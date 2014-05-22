@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 if not SECRET_KEY:
     try:
-        with open ('secret_key', 'r') as key:
+        with open('secret_key', 'r') as key:
             SECRET_KEY = key.read().strip()
     except:
         pass
@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'south',
+    'storages',
     'saiban'
 )
 
@@ -129,6 +130,29 @@ LOGGING = {
 
 # Try to import local settings (if any)
 try:
-  from local_settings import *
+    from local_settings import *
 except ImportError:
-  pass
+    pass
+
+# Serve static files from Amazon S3 bucket
+if not DEBUG:
+    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    #STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
+
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = S3_URL
+
+    AWS_HEADERS = {
+        "Cache-Control": "public, max-age=86400",
+    }
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_QUERYSTRING_AUTH = False
+    AWS_S3_SECURE_URLS = True
+    AWS_REDUCED_REDUNDANCY = False
+    AWS_IS_GZIPPED = False
+

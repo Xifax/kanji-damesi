@@ -10,3 +10,4 @@ docs
 html
 .coverage
 *.csv
+aws_storage

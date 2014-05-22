@@ -7,7 +7,12 @@ Django==1.6.2
 django-suit==0.2.7
 dj-database-url==0.3.0
 dj-static==0.0.5
+# Amazon S3 storage
+django-storages==1.1.8
+boto==2.27.0
+# migrations
 South==0.8.4
+# gunicorn alternative
 waitress==0.8.8
 
 # Additional utils
