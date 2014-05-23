@@ -7,7 +7,8 @@
 @import "bootstrap-sass-official/vendor/assets/stylesheets/bootstrap/bootstrap";
 @import "bootswatch-scss/slate/bootswatch";
 
-$icon-font-path: "/static/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+//$icon-font-path: "/static/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
+$icon-font-path: "/bower_components/bootstrap-sass-official/vendor/assets/fonts/bootstrap/";
 
 // bower:scss
 @import "../bower_components/bootstrap-sass-official/vendor/assets/stylesheets/bootstrap.scss";
