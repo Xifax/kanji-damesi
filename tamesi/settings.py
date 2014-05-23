@@ -140,12 +140,13 @@ if not DEBUG:
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
 
+    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+    #S3_URL = 'https://s3-us-west-2.amazonaws.com/%s/' % AWS_STORAGE_BUCKET_NAME
+    STATIC_URL = S3_URL
+
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     #STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
-
-    S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-    STATIC_URL = S3_URL
 
     AWS_HEADERS = {
         "Cache-Control": "public, max-age=86400",
