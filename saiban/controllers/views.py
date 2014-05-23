@@ -21,7 +21,7 @@ from saiban.services.user import (
 def index(request):
     """Show Saiban home page with login/register"""
     if request.user.is_authenticated():
-        redirect('profile')
+        return redirect('profile')
 
     return render(request, 'index.html')
 
@@ -33,7 +33,7 @@ def index(request):
 def profile(request):
     """Display main profile page"""
     if not request.user.is_authenticated():
-        redirect('index')
+        return redirect('index')
 
     return render(
         request,
