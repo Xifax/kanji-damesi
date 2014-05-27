@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'south',
     'storages',
+    # 'collectfast',
     'saiban'
 )
 
@@ -147,7 +148,9 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
     #STATICFILES_STORAGE = "require_s3.storage.OptimizedCachedStaticFilesStorage"
+    AWS_PRELOAD_METADATA = True
 
+    '''
     AWS_HEADERS = {
         "Cache-Control": "public, max-age=86400",
     }
@@ -156,4 +159,5 @@ if not DEBUG:
     AWS_S3_SECURE_URLS = True
     AWS_REDUCED_REDUNDANCY = False
     AWS_IS_GZIPPED = False
+    '''
 

@@ -13,7 +13,7 @@
       {% include "partials/sidebar.html" %}
 
       <!-- Central content -->
-      <div class="col-sm-9 main">
+      <div class="col-sm-9 main ng-cloak" ng-cloak>
 
         {% include "partials/profile.header.html" %}
 
@@ -23,7 +23,7 @@
         <h3>Select your level: <strong>{{ description }}</strong></h3>
 
 
-        <ul class="glow-buttons glow-buttons-container glow-buttons-small" ng-cloak>
+        <ul class="glow-buttons glow-buttons-container glow-buttons-small">
             <li ng-class="{'glow-button': true, 'glow-button-active': level == 1}">
               <a ng-click="changeLevel(1)" href="#">I</a>
             </li>
