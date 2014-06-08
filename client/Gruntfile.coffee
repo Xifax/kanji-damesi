@@ -115,7 +115,10 @@ module.exports = (grunt) ->
             ".tmp"
             "<%= yeoman.dist %>/*"
             "!<%= yeoman.dist %>/.git*"
-            "!furigana.js"
+            # Do not remove some of the prepared js libs from static scripts
+            "!<%= yeoman.dist %>/scripts/**"
+            "<%= yeoman.dist %>/scripts/*"
+            "!<%= yeoman.dist %>/scripts/furigana.js"
           ]
         ]
 
