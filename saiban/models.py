@@ -147,9 +147,9 @@ class Example(models.Model):
 
     def as_json(self):
         return dict(
-            font=self.front,
-            reading=self.front,
-            gloss=self.front
+            front=self.front,
+            reading=self.reading,
+            gloss=self.gloss
         )
 
 

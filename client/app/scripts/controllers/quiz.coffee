@@ -28,10 +28,10 @@ angular.module('clientApp')
         kun: '?',
         on: '?',
         nanori: '?',
+        examples: ['?'],
       meanings: '?',
       examples: '?',
       answer: '?'
-      # examples: 'にっぽんではえいごきょういくがさかんである',
 
     $scope.timer =
       began: 0,
@@ -171,7 +171,8 @@ angular.module('clientApp')
           'answered': kanji,
           'answer': $scope.quiz.answer,
           'correct': correct,
-          'toggled': false
+          'toggled': false,
+          'skipped': false
         })
 
         # Update current group
@@ -188,6 +189,14 @@ angular.module('clientApp')
       promise = $http.post(api + 'skip/', {'kanji': kanji.front})
 
       promise.success (data)->
+        # Update kanji log
+        $scope.kanjiLog.push({
+          'answered': $scope.quiz.answer,
+          'answer': $scope.quiz.answer,
+          'toggled': false,
+          'correct': false,
+          'skipped': true
+        })
         newKanjiGroup(data)
         fin()
 

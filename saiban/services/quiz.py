@@ -3,6 +3,7 @@ import random
 from saiban.models import(
     Kanji,
     KanjiGroup,
+    Example,
     # Profile,
     KanjiStatus
 )
@@ -98,3 +99,8 @@ def rate_answer(kanji, is_correct, user):
     rating = 0 if not is_correct else 4
     status.set_next_practice(rating)
     status.save()
+
+
+def get_examples(keyword, limit=2):
+    # TODO: if none found, try to use reading_contains
+    return Example.objects.filter(front__contains=keyword)[:limit]

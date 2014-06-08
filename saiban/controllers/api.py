@@ -5,7 +5,8 @@ from saiban.services.quiz import (
     get_random_kanji_group,
     get_scheduled_kanji,
     delay_kanji,
-    rate_answer
+    rate_answer,
+    get_examples
 )
 from saiban.services.api import json_response, check_request, process_post
 from saiban.services.user import get_user_level, change_user_level
@@ -33,7 +34,6 @@ def next_group(request):
 
     # Prepare response
     response = {
-        # TODO: randomize kanji order?
         'group': kanji.group.as_json(),
         'quiz': {
             'meanings': kanji.gloss,
@@ -42,11 +42,7 @@ def next_group(request):
                 compound.as_json() for compound in kanji.compounds.all()
             ],
             'answer': kanji.as_json(),
-            # 'answer': kanji.front,
-            # 'examples': kanji.compounds.all().examples.all().as_json(),
-            # 'radicals': [
-            #   radical.as_json() for radical in kanji.radicals.all()
-            # ],
+            'examples': [e.as_json() for e in get_examples(kanji.front)]
         },
     }
     return json_response(response)

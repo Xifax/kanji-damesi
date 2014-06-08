@@ -65,10 +65,10 @@
 
                 <!-- Meanings -->
                 <p class="meaning"> {{ quiz.meanings }} </p>
-                <p class="group-key"> {{ activeGroup.info }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
                 <!-- TODO: highlight example compound/word -->
-                <p class="example"> {{ quiz.examples }} </p>
+                <p class="example"> {{ quiz.examples[0].reading }} </p>
+                <p class="group-key"> {{ activeGroup.info }} </p>
             </div>
             <!-- Active question END -->
 
@@ -93,14 +93,15 @@
           ng-click="toggleLogItemInfo(item)"
           ng-class="{
             'list-group-item-success': item.correct && !item.toggled,
-            'list-group-item-danger': !item.correct && !item.toggled,
+            'list-group-item-danger': !item.correct && !item.skipped && !item.toggled,
+            'list-group-item-warning': item.skipped && !item.toggled,
             'active': item.toggled,
           }">
 
             <div class="list-group-item-heading item-header">
               <h4>
                 {{ item.answered.front }}
-                <span class="correct" ng-show="!item.correct">
+                <span class="correct" ng-show="!item.correct && !item.skipped">
                   <span class="glyphicon glyphicon-chevron-right"></span>
                   {{ item.answer.front }}
                 </span>
@@ -126,7 +127,7 @@
 
               </div>
 
-              <div ng-show="!item.correct">
+              <div ng-show="!item.correct && !item.skipped">
 
                 <hr>
                 <p class="details-kanji">
