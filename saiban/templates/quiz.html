@@ -113,32 +113,47 @@
 
               <div>
 
+                <!-- Correct item details -->
                 <hr>
                 <p class="details-kanji">
                   {{ item.answer.front }} ～
-                  「{{ item.answer.kun }} {{ item.answer.on }}」
-                  {{ item.answer.gloss }}
+                  <span class="reading">
+                    「{{ item.answer.kun }}｜{{ item.answer.on }}」
+                  </span>
+                  <span class="gloss">{{ item.answer.gloss }}</span>
+                  <div class="kanji-example">
+                    <ruby>
+                      {{ item.examples[0].front }}
+                      <rt> {{ item.examples[0].reading }} </rt>
+                    </ruby>
+                    <p class="gloss"> {{ item.examples[0].gloss }} </p>
+                  </div>
                 </p>
 
                 <p class="details-compound"
                   ng-repeat="compound in item.answer.compounds | limitTo: 3">
-                  {{compound.front}} 「{{compound.reading}}」: {{compound.gloss}}
+                  <span class="compound">{{compound.front}}</span>
+                  <span class="reading">「{{compound.reading}}」</span>:
+                  <span class="gloss">{{compound.gloss}}</span>
                 </p>
 
               </div>
 
+              <!-- Answered item details -->
               <div ng-show="!item.correct && !item.skipped">
 
                 <hr>
                 <p class="details-kanji">
                   {{ item.answered.front }} ～
                   「{{ item.answered.kun }} {{ item.answered.on }}」
-                  {{ item.answered.gloss }}
+                  <span class="gloss">{{ item.answered.gloss }}</span>
                 </p>
 
                 <p class="details-compound"
                   ng-repeat="compound in item.answered.compounds | limitTo: 3">
-                {{compound.front}} 「{{compound.reading}}」: {{compound.gloss}}
+                  <span class="compound">{{compound.front}}</span>
+                  <span class="reading">「{{compound.reading}}」</span>:
+                  <span class="gloss">{{compound.gloss}}</span>
                 </p>
 
               </div>

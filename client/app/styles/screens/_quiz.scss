@@ -137,18 +137,56 @@
 
     h4 {
       font-family: $jpFont;
-      font-size: 26px;
+      font-size: 30px;
     }
 
   }
 
   .details-kanji {
-    font-size: 18px;
+    font-family: $jpFont;
     text-align: center;
+    font-size: 18px;
+
+    .reading {
+      color: shade($foreground_light, 20%);
+    }
+    .gloss {
+      font-size: 16px;
+      font-family: $sansFont;
+    }
+
+  }
+
+  .kanji-example {
+    font-family: $jpFont;
+    text-align: center;
+    font-size: 22px;
+
+    ruby rt {
+      color: shade($foreground_light, 15%);
+      font-size: 15px;
+    }
+    p.gloss {
+      font-family: $sansFont;
+      font-size: 16px;
+      color: shade($foreground_light, 10%);
+    }
   }
 
   .details-compound {
+    font-family: $jpFont;
     font-size: 17px;
+
+    .compound {
+      font-size: 24px;
+    }
+    .reading {
+      color: shade($foreground_light, 20%);
+    }
+    .gloss {
+      font-size: 16px;
+      font-family: $sansFont;
+    }
   }
 
   // .correct {

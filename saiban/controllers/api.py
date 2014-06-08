@@ -11,6 +11,8 @@ from saiban.services.quiz import (
 from saiban.services.api import json_response, check_request, process_post
 from saiban.services.user import get_user_level, change_user_level
 
+import random
+
 ############
 # Quiz API #
 ############
@@ -42,7 +44,10 @@ def next_group(request):
                 compound.as_json() for compound in kanji.compounds.all()
             ],
             'answer': kanji.as_json(),
-            'examples': [e.as_json() for e in get_examples(kanji.front)]
+            'examples': sorted(
+                [e.as_json() for e in get_examples(kanji.front)],
+                key=lambda *args: random.random()
+            )
         },
     }
     return json_response(response)

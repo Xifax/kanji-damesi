@@ -115,6 +115,7 @@ module.exports = (grunt) ->
             ".tmp"
             "<%= yeoman.dist %>/*"
             "!<%= yeoman.dist %>/.git*"
+            "!furigana.js"
           ]
         ]
 

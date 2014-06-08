@@ -30,7 +30,6 @@ angular.module('clientApp')
         nanori: '?',
         examples: ['?'],
       meanings: '?',
-      examples: '?',
       answer: '?'
 
     $scope.timer =
@@ -122,6 +121,7 @@ angular.module('clientApp')
           'skipped': skipped,
           'toggled': false,
         })
+        console.log($scope.kanjiLog)
 
     # Log kanji as skipped
     logAsSkipped = () ->
