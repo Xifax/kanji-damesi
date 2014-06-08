@@ -135,6 +135,13 @@ try:
 except ImportError:
     pass
 
+# Try to import deploy setting if appropriate OS vairable is set
+if os.environ.get('DEPLOY') is not None:
+    try:
+        from deploy_settings import *
+    except ImportError:
+        pass
+
 # Serve static files from Amazon S3 bucket
 if not DEBUG:
     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
@@ -160,4 +167,3 @@ if not DEBUG:
     AWS_REDUCED_REDUNDANCY = False
     AWS_IS_GZIPPED = False
     '''
-

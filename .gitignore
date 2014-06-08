@@ -11,3 +11,4 @@ html
 .coverage
 *.csv
 aws_storage
+deploy_env
