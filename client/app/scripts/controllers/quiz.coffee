@@ -112,6 +112,22 @@ angular.module('clientApp')
     # Finish time-consuming action
     fin = -> $scope.loading = false
 
+    # Update log with answer
+    updateLog = (kanji, correct, skipped) ->
+        $scope.kanjiLog.push({
+          'answered': kanji,
+          'answer': $scope.quiz.answer,
+          'examples': $scope.quiz.examples,
+          'correct': correct,
+          'skipped': skipped,
+          'toggled': false,
+        })
+
+    # Log kanji as skipped
+    logAsSkipped = () ->
+      updateLog($scope.quiz.answer, false, true)
+
+
                                     #######
                                     # API #
                                     #######
@@ -167,13 +183,7 @@ angular.module('clientApp')
         shuffle(kanji.compounds)
 
         # Update kanji log
-        $scope.kanjiLog.push({
-          'answered': kanji,
-          'answer': $scope.quiz.answer,
-          'correct': correct,
-          'toggled': false,
-          'skipped': false
-        })
+        updateLog(kanji, correct, false)
 
         # Update current group
         newKanjiGroup(data)
@@ -190,13 +200,7 @@ angular.module('clientApp')
 
       promise.success (data)->
         # Update kanji log
-        $scope.kanjiLog.push({
-          'answered': $scope.quiz.answer,
-          'answer': $scope.quiz.answer,
-          'toggled': false,
-          'correct': false,
-          'skipped': true
-        })
+        logAsSkipped()
         newKanjiGroup(data)
         fin()
 
