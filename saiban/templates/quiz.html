@@ -118,7 +118,9 @@
                 <p class="details-kanji">
                   {{ item.answer.front }} ～
                   <span class="reading">
-                    「{{ item.answer.kun }}｜{{ item.answer.on }}」
+                    「{{ item.answer.kun }}
+                    <span ng-show="item.answer.kun">｜</span>
+                      {{ item.answer.on }}」
                   </span>
                   <span class="gloss">{{ item.answer.gloss }}</span>
                   <div class="kanji-example">
@@ -132,8 +134,10 @@
 
                 <p class="details-compound"
                   ng-repeat="compound in item.answer.compounds | limitTo: 3">
-                  <span class="compound">{{compound.front}}</span>
-                  <span class="reading">「{{compound.reading}}」</span>:
+                  <ruby>
+                    <span class="compound">{{compound.front}}</span>
+                    <rt class="reading">{{compound.reading}}</rt>
+                  </ruby>～
                   <span class="gloss">{{compound.gloss}}</span>
                 </p>
 
@@ -145,14 +149,20 @@
                 <hr>
                 <p class="details-kanji">
                   {{ item.answered.front }} ～
-                  「{{ item.answered.kun }} {{ item.answered.on }}」
+                  <span class="reading">
+                    「{{ item.answered.kun }}
+                    <span ng-show="item.answered.kun">｜</span>
+                    {{ item.answered.on }}」
+                  </span>
                   <span class="gloss">{{ item.answered.gloss }}</span>
                 </p>
 
                 <p class="details-compound"
                   ng-repeat="compound in item.answered.compounds | limitTo: 3">
-                  <span class="compound">{{compound.front}}</span>
-                  <span class="reading">「{{compound.reading}}」</span>:
+                  <ruby>
+                    <span class="compound">{{compound.front}}</span>
+                    <rt class="reading">{{compound.reading}}</rt>
+                  </ruby>～
                   <span class="gloss">{{compound.gloss}}</span>
                 </p>
 

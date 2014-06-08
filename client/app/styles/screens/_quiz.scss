@@ -137,7 +137,7 @@
 
     h4 {
       font-family: $jpFont;
-      font-size: 30px;
+      font-size: 32px;
     }
 
   }
@@ -178,10 +178,12 @@
     font-size: 17px;
 
     .compound {
-      font-size: 24px;
+      padding: 15px;
+      font-size: 26px;
     }
     .reading {
-      color: shade($foreground_light, 20%);
+      // font-size: 13px;
+      color: shade($foreground_light, 15%);
     }
     .gloss {
       font-size: 16px;
