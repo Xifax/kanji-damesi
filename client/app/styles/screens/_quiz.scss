@@ -178,16 +178,16 @@
     font-size: 17px;
 
     .compound {
-      padding: 15px;
+      padding: 25px;
       font-size: 26px;
     }
     .reading {
-      // font-size: 13px;
       color: shade($foreground_light, 15%);
     }
     .gloss {
       font-size: 16px;
       font-family: $sansFont;
+      color: shade($foreground_light, 5%);
     }
   }
 
