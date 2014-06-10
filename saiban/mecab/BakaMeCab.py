@@ -53,12 +53,12 @@ class BakaMeCab:
         # Word list
         for line in results:
             if 'EOS' not in line:
-                self.words.append(line.split('	').pop(0))
+                self.words.append(line.split('\t').pop(0))
 
         # Words info
         for line in results:
             if 'EOS' not in line:
-                word, info = line.split('	')
+                word, info = line.split('\t')
                 self.info[word] = [
                     i.strip() for i in info.split(',') if i != '*'
                 ]
@@ -69,7 +69,7 @@ class BakaMeCab:
             return subprocess.Popen(
                 command, shell=True,
                 stdout=subprocess.PIPE,
-                stderr=subprocess.STDOUT
+                # stderr=subprocess.STDOUT
             ).stdout.readlines()
         except OSError:
             return []
@@ -77,11 +77,11 @@ class BakaMeCab:
 if __name__ == '__main__':
     parser = BakaMeCab(u'任意のディレクトリ内で')
 
-    for word, info in parser.get_info().iteritems():
-        print word
-        for item in info:
-            print item
-        print '***'
+    # for word, info in parser.get_info().iteritems():
+    #     print word
+    #     for item in info:
+    #         print item
+    #     print '***'
 
     for reading in parser.get_readings():
         print reading
