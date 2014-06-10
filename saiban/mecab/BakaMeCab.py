@@ -1,5 +1,4 @@
 # encoding: utf-8
-# from __future__ import unicode_literals
 
 import subprocess
 
@@ -67,21 +66,23 @@ class BakaMeCab:
         """Execute shell command"""
         try:
             return subprocess.Popen(
-                command, shell=True,
+                command.encode('utf-8'), shell=True,
                 stdout=subprocess.PIPE,
-                # stderr=subprocess.STDOUT
+                stderr=subprocess.STDOUT
             ).stdout.readlines()
         except OSError:
             return []
 
+'''
 if __name__ == '__main__':
     parser = BakaMeCab(u'任意のディレクトリ内で')
 
-    # for word, info in parser.get_info().iteritems():
-    #     print word
-    #     for item in info:
-    #         print item
-    #     print '***'
+    for word, info in parser.get_info().iteritems():
+        print word
+        for item in info:
+            print item
+        print '***'
 
     for reading in parser.get_readings():
         print reading
+'''
