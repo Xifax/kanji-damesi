@@ -130,10 +130,11 @@ LOGGING = {
 }
 
 # Try to import local settings (if any)
-try:
-    from local_settings import *
-except ImportError:
-    pass
+if os.environ.get('DEPLOY') is None:
+    try:
+        from local_settings import *
+    except ImportError:
+        pass
 
 # Try to import deploy setting if appropriate OS vairable is set
 if os.environ.get('DEPLOY') is not None:

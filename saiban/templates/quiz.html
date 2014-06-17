@@ -12,7 +12,24 @@
     <!-- Quiz active group-->
     {% verbatim %}
     <div class="container quiz ng-cloak" ng-cloak>
+            <!-- Controls -->
+            <div>
+              <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': showBigKanji}"
+                  ng-click="showBigKanji = !showBigKanji">
+                  <span class="glyphicon glyphicon-tower"></span> Preview
+                </button>
+                <button ng-class="{'btn':true, 'btn-default': true,'btn-sm':true, 'active': showExample}"
+                  ng-click="showExample = !showExample">
+                  <span class="glyphicon glyphicon-search"></span> Example
+                </button>
+                <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': showGroupKey}"
+                  ng-click="showGroupKey = !showGroupKey">
+                  <span class="glyphicon glyphicon-road"></span> Group
+                </button>
+            </div>
+            <!-- /Controls -->
         <div class="active-kanji-group">
+
 
             <!-- Kanji preview -->
             <p class="kanji-zoom hidden-xs hidden-sm" ng-show="showBigKanji">
@@ -67,8 +84,8 @@
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
                 <!-- TODO: highlight example compound/word -->
-                <p class="example"> {{ quiz.examples[0].reading }} </p>
-                <p class="group-key"> {{ activeGroup.info }} </p>
+                <p class="example" ng-show="showExample"> {{ quiz.examples[0].reading }} </p>
+                <p class="group-key" ng-show="showGroupKey"> {{ activeGroup.info }} </p>
             </div>
             <!-- Active question END -->
 

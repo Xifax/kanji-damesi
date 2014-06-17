@@ -12,6 +12,8 @@ angular.module('clientApp')
 
     # Kanji zoom status
     $scope.showBigKanji = true
+    $scope.showExample = false
+    $scope.showGroupKey = true
 
     # Session info
     $scope.session =
@@ -39,24 +41,6 @@ angular.module('clientApp')
     $scope.kanjiLog = []
     $scope.logLimit = $scope.baseLimit = 3
     maxLimit = 15
-
-    # #Fill with test data
-    # $scope.kanjiLog.push({
-    #   'answered': {'front': '明', 'compounds': [{'front': '明日'}]}
-    #   'answer': {'front': '日', 'compounds': [{'front': '明日'}]}
-    #   'correct': true
-    # })
-    # $scope.kanjiLog.push({
-    #   'answered': {'front': '数', 'compounds': [{'front': '数学'}]}
-    #   'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
-    #   'correct': false
-    # })
-    # $scope.kanjiLog.push({
-    #   'answered': {'gloss': 'Number', 'front': '数', 'compounds': [{'front': '数学'}]}
-    #   'answer': {'front': '学', 'compounds': [{'front': '数学'}]}
-    #   'correct': true
-    #   'toggled': true
-    # })
 
     $scope.groupsSeen = []
     $scope.activeGroup = { kanji: [] }
@@ -246,3 +230,4 @@ angular.module('clientApp')
   .filter 'reverse', ->
     (items) ->
       items.slice().reverse()
+
