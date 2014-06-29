@@ -120,7 +120,6 @@ angular.module('clientApp')
           'skipped': skipped,
           'toggled': false,
         })
-        console.log($scope.kanjiLog)
 
     # Log kanji as skipped
     logAsSkipped = () ->

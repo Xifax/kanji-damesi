@@ -143,6 +143,7 @@ def update_profile(user, correct_answer, rating=1):
         gain_exp(profile, rating)
     else:
         profile.streak = 0
+        profile.save()
 
     # TODO: check for possible achievements to award!
 

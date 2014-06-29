@@ -208,7 +208,7 @@ class KanjiGroup(models.Model):
 class Profile(models.Model):
     """Contains profile studies achivements"""
     EXP = 1  # experience gained for correct answer
-    MULTIPLIER = 10  # level-up multiplier
+    MULTIPLIER = 100  # level-up multiplier
 
     user = models.ForeignKey(User, related_name='profile')
     group_level = models.PositiveIntegerField(default=1)
