@@ -29,7 +29,7 @@
   font-size: 70px;
   @include user-select(none);
 
-  @include transition(color 0.5s ease 0s);
+  @include transition(color 0.3s ease 0s);
 
   &:hover {
     cursor: pointer;
@@ -263,28 +263,28 @@
   height: 256px;
   background-size: 256px 256px;
 
-  @include transition(all 0.5s ease 0s);
+  @include transition(all 0.3s ease 0s);
 }
 
 .ok-circle {
   @extend .overlay-notice;
-  background: url(/static/images/circle-outline.svg);
+  background: url(/images/circle-outline.svg);
 }
 
 .no-cross {
   @extend .overlay-notice;
-  background: url(/static/images/x-mark.svg);
+  background: url(/images/x-mark.svg);
 }
 
 .dim {
-  height:100%;
-  width:100%;
-  position:fixed;
-  left:0;
-  top:0;
-  z-index:1 !important;
-  background-color:black;
-  @include opacity(0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  z-index: 1 !important;
+  background-color: black;
+  @include opacity(0.3);
 
-  @include transition(all 0.5s ease 0s);
+  @include transition(all 0.3s ease 0s);
 }

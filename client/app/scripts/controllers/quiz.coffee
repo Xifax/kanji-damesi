@@ -80,7 +80,7 @@ angular.module('clientApp')
 
       $timeout(
         () -> $scope.show[element] = false,
-        1000
+        700
       )
 
     # Show notification on server resopnse
