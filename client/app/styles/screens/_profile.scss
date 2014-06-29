@@ -1,7 +1,37 @@
 /* Profile screens */
 
 @import 'main/buttons';
+@import 'main/fonts';
 
 .profile-nav {
   padding-top: 12px;
+}
+
+/* Study list */
+
+.study-kanji {
+  font-family: $jpFont;
+  padding: 2px;
+  font-size: 27px;
+
+  &:hover {
+    cursor: pointer;
+    color: $yellow_light;
+  }
+}
+
+.good {
+  color: #54d57b;
+}
+
+.average {
+  color: #ffbf00;
+}
+
+.bad {
+  color: #a2add0;
+}
+
+.awful {
+  color: #f92c42;
 }

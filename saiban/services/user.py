@@ -2,11 +2,11 @@ import random
 
 from django.contrib.auth.models import User
 
-from saiban.models import Profile
+from saiban.models import Profile, KanjiStatus
 
-                              ###################
-                              # User management #
-                              ###################
+###################
+# User management #
+###################
 
 
 def new_profile(user):
@@ -50,6 +50,9 @@ def get_motto():
         "I love me some fresh kanji early in the morning.",
         "You're doing quite well! Probably.",
         "You know, kanji won't study themselves.",
+        "Once upon a time, there was a kanji novice...",
+        "Every kanji has it's day.",
+        "Good pace! Only a couple of thousands kanji left.",
     ])
 
 
@@ -65,9 +68,9 @@ def get_stats(user):
     }
     return stats
 
-                            ######################
-                            # Profile management #
-                            ######################
+######################
+# Profile management #
+######################
 
 DESCRIPTIONS = {
     1: 'I can study',
@@ -96,3 +99,8 @@ def change_user_level(user, level):
         'level': level,
         'description': DESCRIPTIONS.get(level, '')
     }
+
+
+def get_study_list(user):
+    """Get study list for specific user"""
+    return KanjiStatus.objects.filter(user=user)

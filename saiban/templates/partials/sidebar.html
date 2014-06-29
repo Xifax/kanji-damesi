@@ -7,9 +7,9 @@
               <li {% if request.path == url %} class="active" {% endif %}>
               <a href="{% url 'profile' %}">Home</a>
               </li>
-              <li><a href="">Achievements</a></li>
-              <li><a href="">Kanji stats</a></li>
-              <li><a href="">Study log</a></li>
+              <li><a href="{% url 'achievements' %}">Achievements</a></li>
+              <li><a href="{% url 'stats' %}">Kanji stats</a></li>
+              <li><a href="{% url 'history' %}">Study log</a></li>
 
               <li class="nav-divider"></li>
               <li><a href="{% url 'logout' %}">

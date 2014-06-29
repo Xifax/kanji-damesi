@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block header %}
+    {% include "layout/header.html" %}
+{% endblock %}
+
+{% block content %}
+
+<div class="container" ng-controller="UserCtrl">
+    <div class="row">
+
+      {% include "partials/sidebar.html" %}
+
+      <!-- Central content -->
+      <div class="col-sm-9 main ng-cloak" ng-cloak>
+
+        {% include "partials/profile.header.html" %}
+
+        <h3>Studied kanji list <small>in order of appearance</small></h3>
+
+        <div class="well">
+          {% for item in study_list %}
+            <span class="study-kanji {{item.readable_level}}">
+                {{ item.kanji }}
+              </span>
+          {% endfor %}
+        </div>
+
+        {% verbatim %}
+        {% endverbatim %}
+
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block footer %}
+    <!-- {% include "layout/footer.html" %} -->
+{% endblock %}

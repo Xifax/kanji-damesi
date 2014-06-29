@@ -11,10 +11,10 @@ urlpatterns = patterns(
     url(r'^register/', views.register, name='register'),
     url(r'^try/', views.try_quiz, name='try'),
     # Profile
-    url(r'^profile/', views.profile, name='profile'),
-    url(r'^profile/achievements', views.achievements, name='achievements'),
-    url(r'^profile/history', views.history, name='history'),
-    url(r'^profile/stats', views.stats, name='stats'),
+    url(r'^profile/$', views.profile, name='profile'),
+    url(r'^profile/achievements/', views.achievements, name='achievements'),
+    url(r'^profile/history/', views.history, name='history'),
+    url(r'^profile/stats/', views.stats, name='stats'),
     url(r'^logout/', views.logout, name='logout'),
     url(r'^quiz/', views.quiz, name='quiz'),
     # Quiz API

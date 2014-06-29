@@ -10,12 +10,13 @@ from saiban.services.user import (
     new_user_with_profile,
     get_anonymous_user,
     get_motto,
-    get_stats
+    get_stats,
+    get_study_list
 )
 
-                               ################
-                               # Landing page #
-                               ################
+################
+# Landing page #
+################
 
 
 def index(request):
@@ -26,9 +27,9 @@ def index(request):
     return render(request, 'index.html')
 
 
-                               #################
-                               # Profile pages #
-                               #################
+#################
+# Profile pages #
+#################
 
 def profile(request):
     """Display main profile page"""
@@ -48,21 +49,37 @@ def profile(request):
 
 def achievements(request):
     """Display user achievements"""
-    return render(request, 'profile/achievements.html')
+    if not request.user.is_authenticated():
+        return redirect('index')
+
+    return render(request, 'profile/achievements.html', {
+        'motto': get_motto()
+    })
 
 
 def history(request):
     """Display user study history"""
-    return render(request, 'profile/history.html')
+    if not request.user.is_authenticated():
+        return redirect('index')
+
+    return render(request, 'profile/history.html', {
+        'motto': get_motto()
+    })
 
 
 def stats(request):
     """Display user kanji stats"""
-    return render(request, 'profile/stats.html')
+    if not request.user.is_authenticated():
+        return redirect('index')
 
-                               #################
-                               # Authorization #
-                               #################
+    return render(request, 'profile/stats.html', {
+        'study_list': get_study_list(request.user),
+        'motto': get_motto(),
+    })
+
+#################
+# Authorization #
+#################
 
 
 def register(request):
@@ -107,7 +124,7 @@ def login(request):
                 'index.html',
                 {'error_message': 'Sorry, could not login', 'login': True}
                 # {'error_message':
-                #' '.join([e.as_text() for e in form.errors.values()])}
+                # ' '.join([e.as_text() for e in form.errors.values()])}
             )
 
         # If form is valid, try to authenticate user
@@ -136,13 +153,16 @@ def logout(request):
         logout_user(request)
         return redirect('index')
 
+##############
+# Kanji quiz #
+##############
 
-                                ##############
-                                # Kanji quiz #
-                                ##############
 
 def quiz(request):
     """Show quiz page"""
+    if not request.user.is_authenticated():
+        return redirect('index')
+
     return render(request, 'quiz.html')
 
 

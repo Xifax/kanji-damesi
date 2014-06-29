@@ -299,6 +299,17 @@ class KanjiStatus(models.Model):
             easy_factor=self.easy_factor
         )
 
+    def readable_level(self):
+        """Get readable level: good, bad, average"""
+        if self.level == 4:
+            return 'good'
+        elif 4 > self.level < 1:
+            return 'average'
+        elif 1 >= self.level < 0:
+            return 'bad'
+        else:
+            return 'awful'
+
     class Meta:
         ordering = ['next_practice']
 
