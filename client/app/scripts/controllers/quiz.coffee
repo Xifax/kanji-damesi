@@ -22,7 +22,7 @@ angular.module('clientApp')
     $scope.session =
       correct: 0
       wrong: 0
-      streak: 0
+      total: 0
       experience: 0
 
     # Global stats
@@ -38,6 +38,10 @@ angular.module('clientApp')
     $scope.currentKanji =
       front: '?',
       radicals: [front: '?']
+
+    # Selected answer
+    $scope.selectedKanji = {}
+    $scope.skippedKanji = false
 
     $scope.quiz =
       readings:
@@ -162,7 +166,7 @@ angular.module('clientApp')
       if $scope.loading
         return
 
-      $scope.currentKanji = kanji
+      $scope.selectedKanji = kanji
       start()
 
       # Check answer
@@ -170,6 +174,12 @@ angular.module('clientApp')
 
       # Display notification
       got_it(correct)
+
+      if correct
+        $scope.session.correct += 1
+      else
+        $scope.session.wrong += 1
+      $scope.session.total += 1
 
       promise = $http.post(api + 'answer/',
         {'correct': correct,
@@ -199,6 +209,7 @@ angular.module('clientApp')
       if $scope.loading
         return
 
+      $scope.skippedKanji = true
       start()
       promise = $http.post(api + 'skip/', {'kanji': kanji.front})
 
@@ -206,6 +217,7 @@ angular.module('clientApp')
         # Update kanji log
         logAsSkipped()
         newKanjiGroup(data)
+        $scope.skippedKanji = false
         fin()
 
       promise.error (data)->
@@ -236,7 +248,7 @@ angular.module('clientApp')
 
     # Check if kanji is selected
     $scope.isSelected = (kanji) ->
-      $scope.currentKanji == kanji
+      $scope.selectedKanji == kanji
 
                                   ###########
                                   # Hotkeys #

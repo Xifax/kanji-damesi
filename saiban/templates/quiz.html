@@ -65,7 +65,13 @@
               </div>
 
               <!-- Wildcard (I don't know button) -->
-              <div ng-class="{'kanji-skip':true, 'disabled': loading}"
+              <div ng-class="
+                {
+                  'kanji-skip': true,
+                  'disabled': loading && !skippedKanji,
+                  'selected': loading && skippedKanji,
+                }
+                "
                 ng-click="skipQuestion(quiz.answer)">
                     <span class="glyphicon glyphicon-remove"></span>
                     <!-- TODO: include help popup -->
@@ -213,11 +219,15 @@
 
     <!-- Show session stats! -->
     {% verbatim %}
-    <div class="container" ng-show="show.stats">
+    <div class="container stats" ng-show="show.stats">
 
-      Level: {{ profile.level }}
+      Level: <strong>{{ profile.level }}</strong>
+      <span ng-show="session.total" class="session">
+        Rate: <strong>{{ session.correct / session.total * 100 | number:0 }}%</strong>
+        [{{ session.correct }}/{{ session.total }}]
+      </span>
       <span class="pull-right">
-        Streak: {{ profile.streak }}
+        Streak: <strong>{{ profile.streak }}</strong>
       </span>
 
       <!-- 経験値 -->
