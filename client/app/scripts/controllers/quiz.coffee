@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('clientApp')
-  .controller 'QuizCtrl', ($scope, $http, $document, $hotkey) ->
+  .controller 'QuizCtrl', ($scope, $http, $document, $timeout, $hotkey) ->
 
                                     ########
                                     # Init #
@@ -12,10 +12,14 @@ angular.module('clientApp')
 
     # Visiblitiy status
     $scope.show = {
+      # Info sections
       bigKanji: true,
       example:  false,
       groupKey:  true,
       stats:  true,
+      # Notifications
+      ok: false,
+      no: false,
     }
 
     # Session stats
@@ -71,14 +75,24 @@ angular.module('clientApp')
                                    #########
 
     # Show notification
+    flashOverlay = (element) ->
+      $scope.show[element] = true
+
+      $timeout(
+        () -> $scope.show[element] = false,
+        1000
+      )
+
+    # Show notification on server resopnse
     fail = (message)-> console.log(message)
+    success = (message)-> console.log(message)
 
     # Show answer status
     got_it = (correct)->
       if correct
-        console.log('Correct!')
+        flashOverlay('ok')
       else
-        console.log('Wrong!')
+        flashOverlay('no')
 
     # Shuffle elements of array
     shuffle = (array) ->

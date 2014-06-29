@@ -2,6 +2,7 @@
 
 @import "compass/css3/user-interface";
 @import "compass/css3/transition";
+@import "compass/css3/opacity";
 
 @import "main/fonts";
 @import "main/colors";
@@ -206,16 +207,6 @@
     }
   }
 
-  // .correct {
-  //   background-color: rgb(98,196,98);
-  //   color: tint($foreground_light, 30%);
-  // }
-
-  // .wrong {
-  //   background-color: rgb(238,95,91);
-  //   color: tint($foreground_light, 60%);
-  // }
-
 }
 
 .toggle-log {
@@ -242,10 +233,58 @@
   }
 }
 
+/* Session stats */
+
 .stats {
   margin-top: 30px;
 }
 
 .session {
   margin-left: 35%;
+}
+
+.exp {
+  margin-top: 5px;
+}
+
+/* Notifications */
+
+.overlay-notice {
+  position: absolute;
+  margin: auto auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 10000;
+
+  text-indent: -9999px;
+  width: 256px;
+  height: 256px;
+  background-size: 256px 256px;
+
+  @include transition(all 0.5s ease 0s);
+}
+
+.ok-circle {
+  @extend .overlay-notice;
+  background: url(/static/images/circle-outline.svg);
+}
+
+.no-cross {
+  @extend .overlay-notice;
+  background: url(/static/images/x-mark.svg);
+}
+
+.dim {
+  height:100%;
+  width:100%;
+  position:fixed;
+  left:0;
+  top:0;
+  z-index:1 !important;
+  background-color:black;
+  @include opacity(0.5);
+
+  @include transition(all 0.5s ease 0s);
 }

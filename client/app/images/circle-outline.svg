@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<!-- The icon can be used freely in both personal and commercial projects with no attribution required, but always appreciated. 
+You may NOT sub-license, resell, rent, redistribute or otherwise transfer the icon without express written permission from iconmonstr.com -->
+
+
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+
+	 width="256px" height="256px" viewBox="0 0 512 512" enable-background="new 0 0 512 512" xml:space="preserve">
+
+<path id="circle-outline-icon" fill="#62c462" d="M256,50c113.771,0,206,92.229,206,206s-92.229,206-206,206S50,369.771,50,256S142.229,50,256,50z
+
+	 M99.75,256c0,86.295,69.955,156.25,156.25,156.25S412.25,342.295,412.25,256c0-86.294-69.955-156.25-156.25-156.25
+
+	S99.75,169.706,99.75,256z"/>
+
+</svg>
+

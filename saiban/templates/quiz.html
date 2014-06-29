@@ -8,9 +8,16 @@
 
 <div ng-controller="QuizCtrl">
 
+    {% verbatim %}
+
+    <!-- Overlay notifications -->
+    <div class="ok-circle ng-cloak" ng-show="show.ok"></div>
+    <div class="no-cross ng-cloak" ng-show="show.no"></div>
+
+    <div class="dim ng-cloak" ng-show="show.ok || show.no"></div>
+    <!-- Notifications end -->
 
     <!-- Quiz active group-->
-    {% verbatim %}
     <div class="container quiz ng-cloak" ng-cloak>
             <!-- Controls -->
             <div>
@@ -231,7 +238,7 @@
       </span>
 
       <!-- 経験値 -->
-      <div class="progress">
+      <div class="progress exp">
         <div ng-class="{
           'progress-bar': true,
           'progress-bar-danger': profile.experience < toNextLevel() * 1/3,
