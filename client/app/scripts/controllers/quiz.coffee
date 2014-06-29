@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('clientApp')
-  .controller 'QuizCtrl', ($scope, $http, $document) ->
+  .controller 'QuizCtrl', ($scope, $http, $document, $hotkey) ->
 
                                     ########
                                     # Init #
@@ -159,6 +159,10 @@ angular.module('clientApp')
     # Answer with kanji
     # TODO: allow to select by numbers
     $scope.answerWith = (kanji) ->
+      if $scope.loading
+        return
+
+      $scope.currentKanji = kanji
       start()
 
       # Check answer
@@ -192,6 +196,9 @@ angular.module('clientApp')
 
     # Skip this kanji
     $scope.skipQuestion = (kanji) ->
+      if $scope.loading
+        return
+
       start()
       promise = $http.post(api + 'skip/', {'kanji': kanji.front})
 
@@ -227,12 +234,27 @@ angular.module('clientApp')
     $scope.progressExp = () ->
       width: $scope.profile.experience / $scope.toNextLevel() * 100 + '%'
 
+    # Check if kanji is selected
+    $scope.isSelected = (kanji) ->
+      $scope.currentKanji == kanji
+
                                   ###########
                                   # Hotkeys #
                                   ###########
 
-    $document.bind '49', (event) =>
-        console.debug(event)
+
+    # Answer with keys
+    [1..5].map (key) ->
+      $hotkey.bind("#{key}", (event) =>
+        $scope.answerWith($scope.activeGroup.kanji[key - 1])
+      )
+
+    # Skip with 'S
+    $hotkey.bind("S", (event) =>
+      $scope.skipQuestion($scope.quiz.answer)
+    )
+
+
 
 
                                   ###########

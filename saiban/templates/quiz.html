@@ -51,7 +51,12 @@
             <!-- Kanji group -->
             <div class="kanji-group">
 
-              <div id="{{kanji.id}}" class="kanji"
+              <div id="{{kanji.id}}"
+                  ng-class="{
+                    'kanji': true,
+                    'disabled': loading && !isSelected(kanji),
+                    'selected': loading && isSelected(kanji)
+                  }"
                   ng-mouseover="zoomKanji(kanji)"
                   ng-click="answerWith(kanji)"
                   ng-repeat="kanji in activeGroup.kanji">
@@ -60,7 +65,8 @@
               </div>
 
               <!-- Wildcard (I don't know button) -->
-              <div class="kanji-skip" ng-click="skipQuestion(quiz.answer)">
+              <div ng-class="{'kanji-skip':true, 'disabled': loading}"
+                ng-click="skipQuestion(quiz.answer)">
                     <span class="glyphicon glyphicon-remove"></span>
                     <!-- TODO: include help popup -->
               </div>

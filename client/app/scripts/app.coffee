@@ -1,3 +1,3 @@
 'use strict'
 
-angular.module('clientApp', [])
+angular.module('clientApp', ['drahak.hotkeys'])

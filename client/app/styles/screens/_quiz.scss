@@ -43,6 +43,22 @@
 
 }
 
+.disabled {
+  color: shade($foreground_light, 50%);
+  &:hover {
+    color: shade($yellow_light, 50%);
+    cursor: progress;
+  }
+}
+
+.selected {
+  color: shade($foreground_light, 10%);
+  &:hover {
+    color: shade($yellow_light, 10%);
+    cursor: progress;
+  }
+}
+
 .kanji-skip {
   @extend .kanji;
   font-size: 50px;
