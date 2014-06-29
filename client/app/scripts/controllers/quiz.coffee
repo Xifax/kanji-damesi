@@ -10,15 +10,29 @@ angular.module('clientApp')
     # Basic settings and utils
     api = '/saiban/api/'
 
-    # Kanji zoom status
-    $scope.showBigKanji = true
-    $scope.showExample = false
-    $scope.showGroupKey = true
+    # Visiblitiy status
+    $scope.show = {
+      bigKanji: true,
+      example:  false,
+      groupKey:  true,
+      stats:  true,
+    }
 
-    # Session info
+    # Session stats
     $scope.session =
       correct: 0
       wrong: 0
+      streak: 0
+      experience: 0
+
+    # Global stats
+    $scope.profile =
+      streak: 0
+      experience: 0
+      level: 0
+      points: 1
+      multiplier: 100
+
 
     # Init models and data
     $scope.currentKanji =
@@ -88,6 +102,7 @@ angular.module('clientApp')
       shuffle($scope.activeGroup.kanji)
       $scope.currentKanji = {front: '?', radicals: [front: '?']}
       $scope.quiz = data.quiz
+      $scope.profile = data.profile
 
     # Start some time-consuming action
     start = -> $scope.loading = true
@@ -110,7 +125,6 @@ angular.module('clientApp')
     # Log kanji as skipped
     logAsSkipped = () ->
       updateLog($scope.quiz.answer, false, true)
-
 
                                     #######
                                     # API #
@@ -205,6 +219,14 @@ angular.module('clientApp')
         $scope.logLimit = maxLimit
       else
         $scope.logLimit = $scope.baseLimit
+
+    # Get exp to next level
+    $scope.toNextLevel = () ->
+      return ($scope.profile.level + 1) * $scope.profile.multiplier
+
+    # Get progressbar width
+    $scope.progressExp = () ->
+      width: $scope.profile.experience / $scope.toNextLevel() * 100 + '%'
 
                                   ###########
                                   # Hotkeys #

@@ -44,11 +44,14 @@ def next_group(request):
                 compound.as_json() for compound in kanji.compounds.all()
             ],
             'answer': kanji.as_json(),
+            # TODO: process using mecab
             'examples': sorted(
                 [e.as_json() for e in get_examples(kanji.front)],
                 key=lambda *args: random.random()
             )
         },
+        # TODO: include session/total stats
+        'profile': request.user.profile.get().as_json()
     }
     return json_response(response)
 

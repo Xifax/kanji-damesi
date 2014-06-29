@@ -14,17 +14,21 @@
     <div class="container quiz ng-cloak" ng-cloak>
             <!-- Controls -->
             <div>
-              <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': showBigKanji}"
-                  ng-click="showBigKanji = !showBigKanji">
+              <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': show.bigKanji}"
+                  ng-click="show.bigKanji = !show.bigKanji">
                   <span class="glyphicon glyphicon-tower"></span> Preview
                 </button>
-                <button ng-class="{'btn':true, 'btn-default': true,'btn-sm':true, 'active': showExample}"
-                  ng-click="showExample = !showExample">
+                <button ng-class="{'btn':true, 'btn-default': true,'btn-sm':true, 'active': show.example}"
+                  ng-click="show.example = !show.example">
                   <span class="glyphicon glyphicon-search"></span> Example
                 </button>
-                <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': showGroupKey}"
-                  ng-click="showGroupKey = !showGroupKey">
+                <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': show.groupKey}"
+                  ng-click="show.groupKey = !show.groupKey">
                   <span class="glyphicon glyphicon-road"></span> Group
+                </button>
+                <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': show.stats}"
+                  ng-click="show.stats = !show.stats">
+                  <span class="glyphicon glyphicon-user"></span> Stats
                 </button>
             </div>
             <!-- /Controls -->
@@ -32,11 +36,11 @@
 
 
             <!-- Kanji preview -->
-            <p class="kanji-zoom hidden-xs hidden-sm" ng-show="showBigKanji">
+            <p class="kanji-zoom hidden-xs hidden-sm" ng-show="show.bigKanji">
             {{ currentKanji.front }}
             </p>
             <!-- TODO: also show radical info on hover -->
-            <div class="kanji-radicals hidden-xs hidden-sm" ng-show="showBigKanji">
+            <div class="kanji-radicals hidden-xs hidden-sm" ng-show="show.bigKanji">
                 <!-- TODO: randomize kanji order -->
                 <span class="kanji-radical" ng-repeat="rad in currentKanji.radicals">
                     {{ rad.front }}
@@ -84,8 +88,8 @@
                 <p class="meaning"> {{ quiz.meanings }} </p>
                 <!-- TODO: show kanji in example but hide(transliterate) the word -->
                 <!-- TODO: highlight example compound/word -->
-                <p class="example" ng-show="showExample"> {{ quiz.examples[0].reading }} </p>
-                <p class="group-key" ng-show="showGroupKey"> {{ activeGroup.info }} </p>
+                <p class="example" ng-show="show.example"> {{ quiz.examples[0].reading }} </p>
+                <p class="group-key" ng-show="show.groupKey"> {{ activeGroup.info }} </p>
             </div>
             <!-- Active question END -->
 
@@ -201,21 +205,36 @@
 
     {% endverbatim %}
 
-    <!-- TODO: also show session stats! -->
+    <!-- Show session stats! -->
     {% verbatim %}
-      <!--div class="groups-seen">
-        <span ng-repeat="group in groupsSeen">
-          {{ group.info }}
-          <div class="kanji-in-group">
-            <span ng-repeat="kanji in group.kanji">
-              {{ kanji.front }}
-            </span>
-          </div>
-        </span>
-      </div-->
-    {% endverbatim %}
+    <div class="container" ng-show="show.stats">
 
-    <!-- TODO: also show user stats! -->
+      Level: {{ profile.level }}
+      <span class="pull-right">
+        Streak: {{ profile.streak }}
+      </span>
+
+      <!-- 経験値 -->
+      <div class="progress">
+        <div ng-class="{
+          'progress-bar': true,
+          'progress-bar-danger': profile.experience < toNextLevel() * 1/3,
+          'progress-bar-warning': profile.experience > toNextLevel() * 1/3
+            && profile.experience < toNextLevel() * 2/3,
+          'progress-bar-success': profile.experience > toNextLevel() * 2/3,
+          }"
+          role="progressbar"
+          aria-valuenow="{{profile.experience}}" aria-valuemin="0"
+          aria-valuemax="{{(profile.level + 1 ) * profile.multiplier}}"
+          ng-style="progressExp()">
+
+          {{ profile.experience }}/{{ (profile.level + 1) * profile.multiplier }}
+
+        </div>
+      </div>
+
+    </div>
+    {% endverbatim %}
 
 </div>
 

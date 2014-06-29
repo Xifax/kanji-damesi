@@ -4,11 +4,13 @@ from saiban.models import(
     Kanji,
     KanjiGroup,
     Example,
-    # Profile,
+    Profile,
     KanjiStatus
 )
 
-# Working with kanji and groups
+########
+# Quiz #
+########
 
 
 def get_random_kanji_group(level=1):
@@ -91,7 +93,7 @@ def delay_kanji(kanji, user):
         pass
 
 
-def rate_answer(kanji, is_correct, user):
+def rate_answer(kanji, is_correct, user, answering_time=0):
     kanji = Kanji.objects.get(front=kanji)
     status = kanji.status.filter(user=user).get()
 
@@ -100,7 +102,48 @@ def rate_answer(kanji, is_correct, user):
     status.set_next_practice(rating)
     status.save()
 
+    # Update profile
+    update_profile(user, is_correct, rating)
+
 
 def get_examples(keyword, limit=2):
     # TODO: if none found, try to use reading_contains
+    # TODO: process using mecab!
     return Example.objects.filter(front__contains=keyword)[:limit]
+
+#####################
+# Profile and stats #
+#####################
+
+
+def gain_exp(profile, rating=1):
+    # Update exp
+    profile.experience += (
+        profile.group_level  # exp based on group level
+        + profile.streak     # streak bonus
+        + profile.vanity_level  # bonus for user level
+        # + rating  # bonus for quick answer
+    ) * Profile.EXP
+    # Gain a level, if accumulated enough exp (level x 10)
+    new_level_exp = (profile.vanity_level + 1) * Profile.MULTIPLIER
+    if profile.experience >= new_level_exp:
+        profile.vanity_level += 1
+        # Redistribute experience
+        profile.experience = profile.experience - new_level_exp
+
+    profile.save()
+
+
+def update_profile(user, correct_answer, rating=1):
+    profile = user.profile.get()
+
+    # Update answering streak & exp
+    if correct_answer:
+        profile.streak += 1
+        gain_exp(profile, rating)
+    else:
+        profile.streak = 0
+
+    # TODO: check for possible achievements to award!
+
+    return profile

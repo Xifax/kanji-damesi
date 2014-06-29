@@ -6,9 +6,9 @@ from django.conf import settings
 
 from services.srs import interval
 
-                   #########################################
-                   # Kanji and related didactical entities #
-                   #########################################
+#########################################
+# Kanji and related didactical entities #
+#########################################
 
 
 class Kanji(models.Model):
@@ -200,19 +200,24 @@ class KanjiGroup(models.Model):
             kanji=[kanji.as_json() for kanji in self.kanji.all()]
         )
 
-                       #################################
-                       # Profile and SRS related stuff #
-                       #################################
+#################################
+# Profile and SRS related stuff #
+#################################
 
 
 class Profile(models.Model):
     """Contains profile studies achivements"""
+    EXP = 1  # experience gained for correct answer
+    MULTIPLIER = 10  # level-up multiplier
+
     user = models.ForeignKey(User, related_name='profile')
     group_level = models.PositiveIntegerField(default=1)
 
     # Vanity info
-    vanity_level = models.PositiveIntegerField(default=0)
+    vanity_level = models.PositiveIntegerField(default=1)
+    day_streak = models.PositiveIntegerField(default=0)
     streak = models.PositiveIntegerField(default=0)
+    experience = models.PositiveIntegerField(default=0)
     avatar = models.ImageField(
         upload_to=settings.MEDIA_ROOT,
         null=True,
@@ -226,7 +231,16 @@ class Profile(models.Model):
     )
 
     def __unicode__(self):
-        return '%s [streak: %d days]' % (self.user.username, self.streak)
+        return '%s [streak: %d days]' % (self.user.username, self.day_streak)
+
+    def as_json(self):
+        return dict(
+            level=self.vanity_level,
+            streak=self.streak,
+            experience=self.experience,
+            points=self.EXP,
+            multiplier=self.MULTIPLIER
+        )
 
 
 class KanjiStatus(models.Model):
