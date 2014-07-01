@@ -28,7 +28,12 @@ if not SECRET_KEY:
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = TEMPLATE_DEBUG = False
-ALLOWED_HOSTS = ['localhost', 'tamesi.herokuapp.com', '188.226.203.68']
+ALLOWED_HOSTS = [
+    'localhost',
+    'tamesi.herokuapp.com',
+    '188.226.203.68',
+    'tamesi.info'
+]
 
 
 # Application definition
