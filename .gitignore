@@ -12,3 +12,5 @@ html
 *.csv
 aws_storage
 deploy_env
+keys
+deploy/

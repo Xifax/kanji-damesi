@@ -38,3 +38,4 @@ sqlparse==0.1.11
 static==1.0.2
 waitress==0.8.8
 wsgiref==0.1.2
+Fabric==1.9.0
