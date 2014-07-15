@@ -3,6 +3,7 @@
 @import "compass/css3/user-interface";
 @import "compass/css3/transition";
 @import "compass/css3/opacity";
+@import "compass/css3/filter";
 
 @import "main/fonts";
 @import "main/colors";
@@ -181,7 +182,7 @@
 
     ruby rt {
       color: shade($foreground_light, 15%);
-      font-size: 15px;
+      font-size: 12px;
     }
     p.gloss {
       font-family: $sansFont;
@@ -284,7 +285,5 @@
   top: 0;
   z-index: 1 !important;
   background-color: black;
-  @include opacity(0.4);
-
-  // @include transition(all 0.3s ease 0s);
+  @include opacity(0.5);
 }

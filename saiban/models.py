@@ -1,3 +1,4 @@
+# coding: utf-8
 from datetime import date, timedelta
 
 from django.db import models
@@ -5,6 +6,9 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 from services.srs import interval
+from saiban.mecab.BakaMeCab import BakaMeCab
+
+from jcconv import kata2hira
 
 #########################################
 # Kanji and related didactical entities #
@@ -151,6 +155,26 @@ class Example(models.Model):
             reading=self.reading,
             gloss=self.gloss
         )
+
+    def as_mecab(self):
+        parser = BakaMeCab(self.front)
+        parsed_example = []
+        for word, info in parser.get_info().iteritems():
+            reading = u''
+            if(len(info) > 4):
+                kana = info[6] if len(info) > 6 else info[4]
+                hiragana = kata2hira(kana)
+                if kana != word and hiragana != word and word != 'は':
+                    reading = hiragana
+
+            parsed_example.append({'front': word, 'reading': reading})
+
+        return {
+            'parsed': parsed_example,
+            'original': self.front,
+            'reading': self.reading,
+            'gloss': self.gloss
+        }
 
 
 class Radical(models.Model):

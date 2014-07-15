@@ -32,7 +32,8 @@ ALLOWED_HOSTS = [
     'localhost',
     'tamesi.herokuapp.com',
     '188.226.203.68',
-    'tamesi.info'
+    'tamesi.info',
+    'www.tamesi.info'
 ]
 
 

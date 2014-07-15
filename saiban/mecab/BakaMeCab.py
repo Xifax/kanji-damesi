@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 import subprocess
+from collections import OrderedDict
 
 
 class BakaMeCab:
@@ -19,7 +20,7 @@ class BakaMeCab:
         self.command = u"echo %s | mecab"
         self.sentence = sentence
         self.words = []
-        self.info = {}
+        self.info = OrderedDict()
 
     def get_words(self):
         """Parse sentence and return list of words"""
@@ -72,17 +73,3 @@ class BakaMeCab:
             ).stdout.readlines()
         except OSError:
             return []
-
-'''
-if __name__ == '__main__':
-    parser = BakaMeCab(u'任意のディレクトリ内で')
-
-    for word, info in parser.get_info().iteritems():
-        print word
-        for item in info:
-            print item
-        print '***'
-
-    for reading in parser.get_readings():
-        print reading
-'''

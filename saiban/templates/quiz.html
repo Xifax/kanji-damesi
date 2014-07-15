@@ -163,10 +163,9 @@
                   </span>
                   <span class="gloss">{{ item.answer.gloss }}</span>
                   <div class="kanji-example">
-                    <!-- TODO: wrap separate words only! -->
-                    <ruby>
-                      {{ item.examples[0].front }}
-                      <rt> {{ item.examples[0].reading }} </rt>
+                    <ruby ng-repeat="word in item.examples[0].parsed">
+                      <rb>{{word.front}}</rb>
+                      <rt>{{word.reading}}</rt>
                     </ruby>
                     <p class="gloss"> {{ item.examples[0].gloss }} </p>
                   </div>
