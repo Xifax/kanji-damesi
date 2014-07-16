@@ -120,7 +120,6 @@ angular.module('clientApp')
       shuffle($scope.activeGroup.kanji)
       $scope.currentKanji = {front: '?', radicals: [front: '?']}
       $scope.quiz = data.quiz
-      console.log($scope.quiz.examples)
       $scope.profile = data.profile
 
     # Start some time-consuming action
