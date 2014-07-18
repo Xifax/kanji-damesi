@@ -153,6 +153,13 @@ def logout(request):
         logout_user(request)
         return redirect('index')
 
+
+def switch(request):
+    """Switch user"""
+    if request.user.is_authenticated():
+        logout_user(request)
+        return redirect('login')
+
 ##############
 # Kanji quiz #
 ##############

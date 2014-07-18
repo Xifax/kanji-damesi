@@ -8,6 +8,8 @@ urlpatterns = patterns(
     url(r'^$', views.index, name='index'),
     # Auth
     url(r'^login/', views.login, name='login'),
+    url(r'^logout/', views.logout, name='logout'),
+    url(r'^switch/', views.switch, name='switch'),
     url(r'^register/', views.register, name='register'),
     url(r'^try/', views.try_quiz, name='try'),
     # Profile
@@ -15,7 +17,6 @@ urlpatterns = patterns(
     url(r'^profile/achievements/', views.achievements, name='achievements'),
     url(r'^profile/history/', views.history, name='history'),
     url(r'^profile/stats/', views.stats, name='stats'),
-    url(r'^logout/', views.logout, name='logout'),
     url(r'^quiz/', views.quiz, name='quiz'),
     # Quiz API
     url(r'^api/random-group/', api.random_group, name='random-group'),
