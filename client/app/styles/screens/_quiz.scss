@@ -290,6 +290,13 @@
   background: url(/images/x-mark.svg);
 }
 
+.total-time {
+  @extend .overlay-notice;
+  font-size: 30px;
+  text-align: center;
+  text-indent: 0px;
+}
+
 .dim {
   position: fixed;
   height: 100%;

@@ -14,6 +14,11 @@
     <div class="ok-circle ng-cloak" ng-show="show.ok"></div>
     <div class="no-cross ng-cloak" ng-show="show.no"></div>
 
+    <! -- Include total time -->
+    <div class="total-time" ng-show="show.ok || show.no">
+      {{ ponderingTime | date:'s.s' }}
+    </div>
+
     <div class="dim ng-cloak" ng-show="show.ok || show.no"></div>
     <!-- Notifications end -->
 
@@ -232,6 +237,9 @@
     <!-- Show session stats! -->
     {% verbatim %}
     <div class="container stats" ng-show="show.stats">
+
+      <!-- Session timer -->
+      <timer/>
 
       Level: <strong>{{ profile.level }}</strong>
       <span ng-show="session.total" class="session">

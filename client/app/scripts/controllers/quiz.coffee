@@ -11,7 +11,7 @@ angular.module('clientApp')
     api = '/saiban/api/'
 
     # Visiblitiy status
-    $scope.show = {
+    $scope.show =
       # Info sections
       bigKanji: true,
       example:  false,
@@ -20,7 +20,6 @@ angular.module('clientApp')
       # Notifications
       ok: false,
       no: false,
-    }
 
     # Session stats
     $scope.session =
@@ -28,6 +27,9 @@ angular.module('clientApp')
       wrong: 0
       total: 0
       experience: 0
+
+    # Timer
+    $scope.ponderingTime = 0
 
     # Global stats
     $scope.profile =
@@ -122,6 +124,9 @@ angular.module('clientApp')
       $scope.quiz = data.quiz
       $scope.profile = data.profile
 
+      # Start timer
+      $scope.$broadcast('timer-start')
+
     # Start some time-consuming action
     start = -> $scope.loading = true
 
@@ -175,10 +180,12 @@ angular.module('clientApp')
         fin()
 
     # Answer with kanji
-    # TODO: allow to select by numbers
     $scope.answerWith = (kanji) ->
       if $scope.loading
         return
+
+      $scope.$broadcast('timer-stop')
+      # console.log($scope.ponderingTime)
 
       $scope.selectedKanji = kanji
       start()
@@ -264,6 +271,18 @@ angular.module('clientApp')
     $scope.isSelected = (kanji) ->
       $scope.selectedKanji == kanji
 
+    # Get date format based on time length
+    $scope.timeFormat = (time) ->
+      console.log(time)
+      readable = switch time
+        when time < 9000 then 'Yep!'
+          # return $filter('date')(time, 's.s')
+        # when 60 * 1000 > time > 9 * 1000 then return 'ss.s'
+        # when time > 60 * 1000 then return 'm:ss'
+        else 'What'
+
+      console.log(readable)
+
                                   ###########
                                   # Hotkeys #
                                   ###########
@@ -280,6 +299,21 @@ angular.module('clientApp')
       $scope.skipQuestion($scope.quiz.answer)
     )
 
+                                   #########
+                                   # Timer #
+                                   #########
+
+    # Update timer when finished answering
+    $scope.$on(
+      'timer-stopped',
+      (event, data) => $scope.ponderingTime = data.millis
+    )
+
+    # $scope.$on(
+    #   'timer-tick',
+    #   (event, data) =>
+    #     $scope.ponderingTime = data.millis
+    # )
 
 
 
