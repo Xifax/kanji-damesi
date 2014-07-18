@@ -141,6 +141,10 @@
       color: shade($foreground_light, 30%);
     }
 
+    .word {
+      background-color: $charcoal;
+    }
+
     .highlight {
       color: tint($foreground_light, 30%);
     }

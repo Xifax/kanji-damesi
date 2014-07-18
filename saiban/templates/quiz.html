@@ -107,7 +107,10 @@
                 <p class="example" ng-show="show.example">
                   <!-- {{ quiz.examples[0].reading }} -->
                   <span ng-repeat="word in quiz.examples[0].parsed"
-                    ng-class="{'highlight': $even}">
+                    ng-class="{
+                    'word': word.reading.length > 0,
+                    'highlight': $even
+                    }">
                     {{ ((word.reading.length > 0) ? word.reading : word.front) }}
                   </span>
                 </p>
