@@ -135,6 +135,15 @@
 
   .example {
     color: $foreground_light;
+
+    span {
+      display: inline-block;
+      color: shade($foreground_light, 30%);
+    }
+
+    .highlight {
+      color: tint($foreground_light, 30%);
+    }
   }
 
 }

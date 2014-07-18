@@ -44,8 +44,6 @@ def next_group(request):
                 compound.as_json() for compound in kanji.compounds.all()
             ],
             'answer': kanji.as_json(),
-            # TODO: process using mecab
-            # 'examples': [e.as_mecab() for e in get_examples(kanji.front)],
             'examples': sorted(
                 [e.as_mecab() for e in get_examples(kanji.front)],
                 key=lambda *args: random.random()

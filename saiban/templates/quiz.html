@@ -104,9 +104,13 @@
 
                 <!-- Meanings -->
                 <p class="meaning"> {{ quiz.meanings }} </p>
-                <!-- TODO: show kanji in example but hide(transliterate) the word -->
-                <!-- TODO: highlight example compound/word -->
-                <p class="example" ng-show="show.example"> {{ quiz.examples[0].reading }} </p>
+                <p class="example" ng-show="show.example">
+                  <!-- {{ quiz.examples[0].reading }} -->
+                  <span ng-repeat="word in quiz.examples[0].parsed"
+                    ng-class="{'highlight': $even}">
+                    {{ ((word.reading.length > 0) ? word.reading : word.front) }}
+                  </span>
+                </p>
                 <p class="group-key" ng-show="show.groupKey"> {{ activeGroup.info }} </p>
             </div>
             <!-- Active question END -->
