@@ -26,4 +26,6 @@ urlpatterns = patterns(
     # Profile API
     url(r'^api/get-level/', api.get_level, name='get-level'),
     url(r'^api/change-level/', api.change_level, name='change-level'),
+    url(r'^api/get-kanji/(?P<id>\d+)/$',
+        api.get_kanji, name='get-kanji'),
 )

@@ -23,13 +23,27 @@ angular.module('clientApp')
         $scope.description = data.description
 
     # Update level
-    $scope.changeLevel= (level)->
+    $scope.changeLevel = (level)->
       $scope.level = level
       promise = $http.post(api + 'change-level/', { level: level })
 
       promise.success (data)->
         $scope.level = data.level
         $scope.description = data.description
+
+                                 ##############
+                                 # Kanji grid #
+                                 ##############
+
+    $scope.kanjiStatus = {}
+
+    # Show kanji info
+    $scope.showInfo = (kanji) ->
+      promise = $http.get("#{api}get-kanji/#{kanji}/")
+
+      promise.success (data) ->
+        $scope.kanjiStatus = data
+        $('#kanjiInfo').modal('show')
 
                                   ###########
                                   # On load #

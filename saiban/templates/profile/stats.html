@@ -18,17 +18,61 @@
 
         <h3>Studied kanji grid <small>in order of awfulness</small></h3>
 
+        <!-- Kanji grid -->
         {% if study_list %}
         <div class="well">
           {% for item in study_list %}
-            <span class="study-kanji {{item.readable_level}}">
+          <span ng-click="showInfo({{item.id}})"
+            class="study-kanji {{item.readable_level}}">
                 {{ item.kanji }}
               </span>
           {% endfor %}
         </div>
         {% endif %}
 
+        <!-- Kanji info -->
         {% verbatim %}
+
+        <div id="kanjiInfo" class="modal">
+          <div class="modal-dialog modal-sm">
+
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                  <span aria-hidden="true">&times;</span><span class="sr-only">
+                    Close
+                  </span></button>
+
+                <h4 class="modal-title">Kanji status</h4>
+              </div>
+
+              <div class="modal-body">
+
+                <h1>{{ kanjiStatus.kanji.front }}</h1>
+                <p ng-show="kanjiStatus.kanji.kun">Kun: {{ kanjiStatus.kanji.kun }}</p>
+                <p ng-show="kanjiStatus.kanji.on">On: {{ kanjiStatus.kanji.on }}</p>
+                <p ng-show="kanjiStatus.kanji.namae">Namae: {{ kanjiStatus.kanji.namae }}</p>
+                <p>Gloss: {{ kanjiStatus.kanji.gloss }}</p>
+                <p>Group: {{ kanjiStatus.kanji.group }}</p>
+                <hr/>
+
+                <p>Level: <strong>{{ kanjiStatus.level }}</strong></p>
+                <p>Next practice: <strong>{{ kanjiStatus.next_practice }}</strong></p>
+                <p>Seen times : <strong>{{ kanjiStatus.seen }}</strong></p>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-block btn-default"
+                  data-dismiss="modal">
+                  OK
+                </button>
+              </div>
+
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
         {% endverbatim %}
 
       </div>

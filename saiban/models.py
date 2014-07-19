@@ -319,7 +319,7 @@ class KanjiStatus(models.Model):
             kanji=self.kanji.as_json(),
             level=self.level,
             seen=self.seen,
-            next_practice=self.next_practice,
+            next_practice=str(self.next_practice),
             easy_factor=self.easy_factor
         )
 

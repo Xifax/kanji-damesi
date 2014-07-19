@@ -1,6 +1,7 @@
 from django.http import HttpResponseServerError
 from django.views.decorators.csrf import csrf_exempt
 
+from saiban.models import KanjiStatus
 from saiban.services.quiz import (
     get_random_kanji_group,
     get_scheduled_kanji,
@@ -100,3 +101,8 @@ def change_level(request):
     post = process_post(request)
 
     return json_response(change_user_level(request.user, post['level']))
+
+
+def get_kanji(request, id):
+    """Get kanji info + kanji stats by id"""
+    return json_response(KanjiStatus.objects.get(id=id).as_json())
