@@ -26,7 +26,10 @@ angular.module('clientApp')
       correct: 0
       wrong: 0
       total: 0
-      experience: 0
+      answerExp: 0
+      totalExp: 0
+      averageTime: 0
+      totalTime: 0
 
     # Timer
     $scope.ponderingTime = 0
@@ -122,7 +125,14 @@ angular.module('clientApp')
       shuffle($scope.activeGroup.kanji)
       $scope.currentKanji = {front: '?', radicals: [front: '?']}
       $scope.quiz = data.quiz
+
+      # Update session and profile
+      if $scope.profile.experience != 0
+        $scope.session.answerExp = data.profile.experience - $scope.profile.experience
+      $scope.session.totalExp += $scope.session.answerExp
+
       $scope.profile = data.profile
+
 
       # Start timer
       $scope.$broadcast('timer-start')
@@ -202,6 +212,8 @@ angular.module('clientApp')
         $scope.session.wrong += 1
       $scope.session.total += 1
 
+      $scope.session.averageTime = $scope.session.totalTime / $scope.session.total
+
       promise = $http.post(api + 'answer/',
         {'correct': correct,
         # TODO: measure time for an answer
@@ -271,17 +283,6 @@ angular.module('clientApp')
     $scope.isSelected = (kanji) ->
       $scope.selectedKanji == kanji
 
-    # Get date format based on time length
-    $scope.timeFormat = (time) ->
-      console.log(time)
-      readable = switch time
-        when time < 9000 then 'Yep!'
-          # return $filter('date')(time, 's.s')
-        # when 60 * 1000 > time > 9 * 1000 then return 'ss.s'
-        # when time > 60 * 1000 then return 'm:ss'
-        else 'What'
-
-      console.log(readable)
 
                                   ###########
                                   # Hotkeys #
@@ -306,7 +307,9 @@ angular.module('clientApp')
     # Update timer when finished answering
     $scope.$on(
       'timer-stopped',
-      (event, data) => $scope.ponderingTime = data.millis
+      (event, data) =>
+        $scope.ponderingTime = data.millis
+        $scope.session.totalTime += data.millis
     )
 
     # $scope.$on(

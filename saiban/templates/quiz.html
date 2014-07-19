@@ -243,10 +243,19 @@
 
       Level: <strong>{{ profile.level }}</strong>
       <span ng-show="session.total" class="session">
-        Rate: <strong>{{ session.correct / session.total * 100 | number:0 }}%</strong>
+        <span class="pull-right">
+          Rate: <strong>{{ session.correct / session.total * 100 | number:0 }}%</strong>
         [{{ session.correct }}/{{ session.total }}]
+        </span><br/>
+
+        <span class="pull-right" ng-show="session.totalExp">
+          Total XP: <strong>{{ session.totalExp }}</strong>
+        </span>
+
+        Session time: <strong>{{session.totalTime | date:'mm:ss'}}</strong></br>
+        Average answer: <strong>{{session.averageTime | date:'mm:ss'}}</strong>
       </span>
-      <span class="pull-right">
+      <span class="pull-right" ng-show="profile.streak">
         Streak: <strong>{{ profile.streak }}</strong>
       </span>
 
