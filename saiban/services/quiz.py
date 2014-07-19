@@ -19,6 +19,8 @@ def get_random_kanji_group(level=1):
     # NB: could be slow (yet, lazy querysets should be fast!)
     try:
         # TODO: profile and optimize!
+        # TODO: may also use order_by('?')
+        # TODO: measure the difference!
         return random.choice(KanjiGroup.objects.filter(level=level))
     except IndexError:
         return None

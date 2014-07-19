@@ -12,7 +12,7 @@
 .study-kanji {
   font-family: $jpFont;
   padding: 2px;
-  font-size: 27px;
+  font-size: 30px;
 
   &:hover {
     cursor: pointer;
@@ -29,9 +29,9 @@
 }
 
 .bad {
-  color: #a2add0;
+  color: #f92c42;
 }
 
 .awful {
-  color: #f92c42;
+  color:#a2add0;
 }

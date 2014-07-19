@@ -16,8 +16,9 @@
 
         {% include "partials/profile.header.html" %}
 
-        <h3>Studied kanji list <small>in order of appearance</small></h3>
+        <h3>Studied kanji grid <small>in order of awfulness</small></h3>
 
+        {% if study_list %}
         <div class="well">
           {% for item in study_list %}
             <span class="study-kanji {{item.readable_level}}">
@@ -25,6 +26,7 @@
               </span>
           {% endfor %}
         </div>
+        {% endif %}
 
         {% verbatim %}
         {% endverbatim %}

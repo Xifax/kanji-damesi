@@ -103,4 +103,4 @@ def change_user_level(user, level):
 
 def get_study_list(user):
     """Get study list for specific user"""
-    return KanjiStatus.objects.filter(user=user)
+    return KanjiStatus.objects.filter(user=user).order_by('level')

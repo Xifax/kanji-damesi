@@ -327,9 +327,9 @@ class KanjiStatus(models.Model):
         """Get readable level: good, bad, average"""
         if self.level == 4:
             return 'good'
-        elif 4 > self.level < 1:
+        elif 1 < self.level < 4:
             return 'average'
-        elif 1 >= self.level < 0:
+        elif 0 < self.level <= 1:
             return 'bad'
         else:
             return 'awful'
