@@ -118,10 +118,10 @@ def get_examples(keyword, limit=2):
 def gain_exp(profile, rating=1):
     # Update exp
     profile.experience += (
-        profile.group_level  # exp based on group level
-        + profile.streak     # streak bonus
+        profile.group_level     # exp based on group level
+        + profile.streak        # streak bonus
         + profile.vanity_level  # bonus for user level
-        # + rating  # bonus for quick answer
+        + rating                # bonus for quick answer
     ) * Profile.EXP
     # Gain a level, if accumulated enough exp (level x 10)
     new_level_exp = (profile.vanity_level + 1) * Profile.MULTIPLIER
