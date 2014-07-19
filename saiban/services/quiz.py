@@ -7,6 +7,7 @@ from saiban.models import(
     Profile,
     KanjiStatus
 )
+from saiban.services.srs import rate_by_time
 
 ########
 # Quiz #
@@ -97,8 +98,7 @@ def rate_answer(kanji, is_correct, user, answering_time=0):
     kanji = Kanji.objects.get(front=kanji)
     status = kanji.status.filter(user=user).get()
 
-    # TODO: base rating also upon time it took user to answer
-    rating = 0 if not is_correct else 4
+    rating = 0 if not is_correct else rate_by_time(answering_time)
     status.set_next_practice(rating)
     status.save()
 
@@ -108,7 +108,6 @@ def rate_answer(kanji, is_correct, user, answering_time=0):
 
 def get_examples(keyword, limit=2):
     # TODO: if none found, try to use reading_contains
-    # TODO: process using mecab!
     return Example.objects.filter(front__contains=keyword)[:limit]
 
 #####################

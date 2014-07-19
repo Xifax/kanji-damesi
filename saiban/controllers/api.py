@@ -49,7 +49,6 @@ def next_group(request):
                 key=lambda *args: random.random()
             )
         },
-        # TODO: include session/total stats
         'profile': request.user.profile.get().as_json()
     }
     return json_response(response)
@@ -64,9 +63,10 @@ def process_answer(request):
     # NB: this check is performed on the client
     is_correct = post['correct']
     kanji = post['kanji']
-    # delay = post['delay']
+    # In milliseconds
+    delay = post['delay']
 
-    rate_answer(kanji, is_correct, request.user)
+    rate_answer(kanji, is_correct, request.user, delay)
     # get next group
     return next_group(request)
 

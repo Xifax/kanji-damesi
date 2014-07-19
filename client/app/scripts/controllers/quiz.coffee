@@ -216,8 +216,7 @@ angular.module('clientApp')
 
       promise = $http.post(api + 'answer/',
         {'correct': correct,
-        # TODO: measure time for an answer
-        'delay': 10,
+        'delay': $scope.ponderingTime,
         'kanji': $scope.quiz.answer.front}
       )
 

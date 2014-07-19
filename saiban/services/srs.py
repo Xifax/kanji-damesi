@@ -11,6 +11,21 @@ RATINGS = (
 )
 
 
+# Time in milliseconds
+def rate_by_time(time):
+    """Rate answer by time"""
+    if time in range(0, 3999):
+        return 4
+    elif time in range(4000, 9999):
+        return 3
+    elif time in range(10000, 19999):
+        return 2
+    elif time in range(20000, 39999):
+        return 1
+    else:
+        return 0
+
+
 def interval(repition, rating, easy_factor=2.5):
     """
     Calculate SRS repetition interval
