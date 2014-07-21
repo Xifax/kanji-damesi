@@ -21,6 +21,9 @@ angular.module('clientApp')
       ok: false,
       no: false,
 
+    # Timer status
+    $scope.timerActive = true
+
     # Session stats
     $scope.session =
       correct: 0
@@ -135,7 +138,10 @@ angular.module('clientApp')
 
 
       # Start timer
-      $scope.$broadcast('timer-start')
+      if $scope.timerActive
+        $scope.$broadcast('timer-start')
+      else
+        $scope.ponderingTime = 0
 
     # Start some time-consuming action
     start = -> $scope.loading = true
@@ -261,7 +267,9 @@ angular.module('clientApp')
     # TODO: Zoom radical
 
     # Show/hide kanji info from log
-    $scope.toggleLogItemInfo = (item) -> item.toggled  = !item.toggled
+    $scope.toggleLogItemInfo = (item) ->
+      item.toggled  = !item.toggled
+      # TODO: if at least one item is toggled -> pause the timer
 
     # Toggle log limit
     $scope.toggleLimit = ->
@@ -281,6 +289,15 @@ angular.module('clientApp')
     # Check if kanji is selected
     $scope.isSelected = (kanji) ->
       $scope.selectedKanji == kanji
+
+    # Pause/resume timer
+    $scope.pauseResumeTimer = () ->
+      if $scope.timerActive
+        $scope.$broadcast('timer-stop')
+      else
+        $scope.$broadcast('timer-resume')
+
+      $scope.timerActive = !$scope.timerActive
 
 
                                   ###########

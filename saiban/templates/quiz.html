@@ -15,7 +15,7 @@
     <div class="no-cross ng-cloak" ng-show="show.no"></div>
 
     <! -- Include total time -->
-    <div class="total-time" ng-show="show.ok || show.no">
+    <div class="total-time" ng-show="(show.ok || show.no) && timerActive">
       {{ ponderingTime | date:'s.s' }}
     </div>
 
@@ -41,6 +41,10 @@
                 <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': show.stats}"
                   ng-click="show.stats = !show.stats">
                   <span class="glyphicon glyphicon-user"></span> Stats
+                </button>
+                <button ng-class="{'btn':true, 'btn-default': true, 'btn-sm':true, 'active': timerActive}"
+                  ng-click="pauseResumeTimer()">
+                  <span class="glyphicon glyphicon-time"></span> Timer
                 </button>
             </div>
             <!-- /Controls -->
