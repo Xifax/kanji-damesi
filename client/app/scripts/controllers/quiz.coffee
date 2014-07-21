@@ -269,7 +269,15 @@ angular.module('clientApp')
     # Show/hide kanji info from log
     $scope.toggleLogItemInfo = (item) ->
       item.toggled  = !item.toggled
-      # TODO: if at least one item is toggled -> pause the timer
+      # Pause timer if item info is toggled
+      if item.toggled
+        $scope.timerActive = false
+        $scope.$broadcast('timer-stop')
+      # Check all the items in kanjiLog
+      else
+        if ($scope.kanjiLog.every (item) -> not item.toggled)
+          $scope.timerActive = true
+          $scope.$broadcast('timer-resume')
 
     # Toggle log limit
     $scope.toggleLimit = ->
