@@ -25,6 +25,5 @@
   },
   "_source": "git://github.com/nrub/bootswatch-scss.git",
   "_target": "~3.0.3",
-  "_originalSource": "bootswatch-scss",
-  "_direct": true
+  "_originalSource": "bootswatch-scss"
 }

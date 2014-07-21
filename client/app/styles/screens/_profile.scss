@@ -4,17 +4,19 @@
 @import 'main/fonts';
 
 /* Modal window fixes */
-body, body.modal {
-    margin-right: 0 !important;
+
+/*
+.modal {
+    overflow-y: auto;
 }
 
-body.modal {
-    overflow-y: hidden;
+.modal-open {
+   overflow: auto;
+   overflow-x: hidden;
 }
+*/
 
-.modal-open, .modal-open .navbar-fixed-top {
-  margin-right: 0 !important;
-}
+/* Navbar tweak */
 
 .profile-nav {
   padding-top: 12px;
