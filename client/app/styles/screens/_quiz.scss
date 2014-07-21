@@ -277,6 +277,7 @@
   height: 256px;
   background-size: 256px 256px;
 
+  font-family: $monoFont;
   // @include transition(all 0.3s ease 0s);
 }
 
@@ -290,12 +291,21 @@
   background: url(/images/x-mark.svg);
 }
 
-.total-time {
+.total-xp {
   @extend .overlay-notice;
-  font-size: 30px;
+  font-size: 25px;
   text-align: center;
   text-indent: 0px;
   line-height: 256px;
+}
+
+.total-time {
+  @extend .overlay-notice;
+  font-size: 20px;
+  text-align: center;
+  text-indent: 0px;
+  line-height: 290px;
+  color: shade($foreground_light, 10%);
 }
 
 .dim {
@@ -306,5 +316,15 @@
   top: 0;
   z-index: 1 !important;
   background-color: black;
-  @include opacity(0.5);
+  @include opacity(0.6);
 }
+
+.loading {
+  position: absolute;
+  top: 10px;
+  z-index: 10000;
+  margin: 0px auto;
+  height: 99%;
+  width: 100%;
+}
+

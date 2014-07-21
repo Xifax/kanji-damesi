@@ -14,9 +14,18 @@
     <div class="ok-circle ng-cloak" ng-show="show.ok"></div>
     <div class="no-cross ng-cloak" ng-show="show.no"></div>
 
-    <! -- Include total time -->
+    <!-- Include answer xp -->
+    <div class="total-xp" ng-show="(show.ok || show.no)">
+      <span ng-show="session.answerExp">
+        +<strong>{{ session.answerExp }}</strong>XP
+      </span>
+      <span ng-hide="session.answerExp">
+        NOPE
+      </span>
+    </div>
+    <!-- Include answer time -->
     <div class="total-time" ng-show="(show.ok || show.no) && timerActive">
-      {{ ponderingTime | date:'s.s' }}
+      <small>{{ ponderingTime | date:'s' }}s</small>
     </div>
 
     <div class="dim ng-cloak" ng-show="show.ok || show.no"></div>
@@ -133,13 +142,8 @@
     </div>
     {% endverbatim %}
 
-    <!-- Loader -->
-    <div ng-show="loading">
-        {% include "partials/loader.html" %}
-    </div>
-
     {% verbatim %}
-    <div class="container answers ng-cloak" ng-hide="loading" ng-cloak>
+    <div class="container answers ng-cloak" ng-cloak>
       <div class="list-group">
 
         <!-- Previous answer -->
@@ -285,11 +289,12 @@
     </div>
     {% endverbatim %}
 
-</div>
+    <!-- Loader -->
+    <div class="loading" ng-show="loading">
+        {% include "partials/loader.html" %}
+    </div>
 
-<!--div class="container">
-  <div class="alert alert-danger">Yaay, you did it!</div>
-</div-->
+</div>
 
 {% endblock %}
 

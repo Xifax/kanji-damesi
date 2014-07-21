@@ -130,7 +130,7 @@ angular.module('clientApp')
       $scope.quiz = data.quiz
 
       # Update session and profile
-      if $scope.profile.experience != 0
+      if ($scope.profile.experience != 0) and (data.profile.experience != 0)
         $scope.session.answerExp = data.profile.experience - $scope.profile.experience
       $scope.session.totalExp += $scope.session.answerExp
 
@@ -201,7 +201,6 @@ angular.module('clientApp')
         return
 
       $scope.$broadcast('timer-stop')
-      # console.log($scope.ponderingTime)
 
       $scope.selectedKanji = kanji
       start()

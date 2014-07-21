@@ -1,14 +1,14 @@
 /* Import Google fonts */
 
-@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
+@import url(http://fonts.googleapis.com/css?family=Roboto:300,400|Share+Tech+Mono);
 
 /* Fonts settings */
 
 $sansFont: 'Segoe UI', 'Frutiger', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
 $serifFont: 'Cambria', 'Georgia', 'Times', 'Times New Roman', serif !default;
-$monoFont: 'Ubuntu Mono', Monaco, Menlo, Consolas, "Courier New", monospace !default;
+$monoFont: 'Share Tech Mono', Monaco, Menlo, Consolas, "Courier New", monospace !default;
 $jpFont: "IPAMincho", "TakaoExMincho", "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-// $stylishFont:
+$thinFont: 'Roboto', sans-serif !default;
 
 body {
   font-smooth: always;
@@ -18,3 +18,8 @@ body {
 
 $titleSize: 60px;
 $subTitleSize: 18px;
+
+.thin {
+  font-family: $thinFont;
+  font-weight: 300;
+}
