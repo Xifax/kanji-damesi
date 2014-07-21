@@ -209,6 +209,7 @@ angular.module('clientApp')
       correct = kanji.front == $scope.quiz.answer.front
 
       # Display notification
+      # TODO: calculate experience on client!
       got_it(correct)
 
       if correct
