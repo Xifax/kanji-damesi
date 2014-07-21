@@ -3,9 +3,23 @@
 @import 'main/buttons';
 @import 'main/fonts';
 
+/* Modal window fixes */
+body, body.modal {
+    margin-right: 0 !important;
+}
+
+body.modal {
+    overflow-y: hidden;
+}
+
+.modal-open, .modal-open .navbar-fixed-top {
+  margin-right: 0 !important;
+}
+
 .profile-nav {
   padding-top: 12px;
 }
+
 
 /* Study list */
 

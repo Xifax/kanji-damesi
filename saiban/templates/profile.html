@@ -20,10 +20,10 @@
         {% verbatim %}
 
         <!-- Level selection -->
-        <h3>Select your level: <strong>{{ description }}</strong></h3>
+        <h3 ng-cloak>Select your level: <strong>{{ description }}</strong></h3>
 
 
-        <ul class="glow-buttons glow-buttons-container glow-buttons-small">
+        <ul class="glow-buttons glow-buttons-container glow-buttons-small" ng-cloak>
             <li ng-class="{'glow-button': true, 'glow-button-active': level == 1}">
               <a ng-click="changeLevel(1)" href="#">I</a>
             </li>
