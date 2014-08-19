@@ -60,7 +60,7 @@
         </p>
         {% endwith %}
 
-        <!-- TODO: total kanji studied in the last days -->
+        <!-- total kanji studied in the last days -->
         <p><strong>Total kanji studied:</strong>
         {{ stats.kanji_studied }}
         </p>
@@ -68,11 +68,15 @@
         <p><strong>Total unique kanji studied:</strong>
         {{ stats.new_kanji_studied }}
         </p>
-        <!-- TODO: total errors -->
+        <!-- total errors -->
         <p><strong>Total errors made:</strong>
         {{ stats.errors_made }}
         </p>
-        <!-- TODO: got right percentage -->
+        <!-- xp gained -->
+        <p><strong>XP gained:</strong>
+        {{ stats.xp }}
+        </p>
+        <!-- got right percentage -->
         <p><strong>Percentage of kanji you got right:</strong>
         {{ stats.percentage }}%
         </p>

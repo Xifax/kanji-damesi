@@ -1,8 +1,9 @@
 import random
+import datetime
 
 from django.contrib.auth.models import User
 
-from saiban.models import Profile, KanjiStatus
+from saiban.models import Profile, KanjiStatus, StudySession
 
 ###################
 # User management #
@@ -58,14 +59,31 @@ def get_motto():
 
 def get_stats(user):
     """Get some user stats"""
+
     days = random.randint(1, 7)
+    now = datetime.datetime.now()
+    since = now - datetime.timedelta(days=days)
+
+    sessions = StudySession.objects.filter(user=user, date__range=[since, now])
     stats = {
         'kanji_studied': 0,
         'new_kanji_studied': 0,
         'errors_made': 0,
         'percentage': 0,
+        'xp': 0,
         'days': days,
     }
+    for session in sessions:
+        stats['kanji_studied'] += session.total_kanji
+        stats['errors_made'] += session.total_errors
+        stats['xp'] += session.xp_gained
+        # TODO: filter unique kanji
+        # stats['new_kanji_studied'] += unique(session.kanji_studied)
+
+    stats['percentage'] = (
+        float(session.total_kanji - session.total_errors) / session.total_kanji
+    ) * 100
+
     return stats
 
 ######################
