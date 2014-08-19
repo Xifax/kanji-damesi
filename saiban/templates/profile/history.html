@@ -18,6 +18,11 @@
 
         <h3>Study sessions log <small>from newest to oldest</small></h3>
 
+        {% for session in sessions %}
+          <p><strong>{{ session.date }}</strong>
+          Total kanji: <small>{{ session.total_kanji}}</small></p>
+        {% endfor %}
+
       </div>
 
     </div>

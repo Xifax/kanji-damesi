@@ -6,6 +6,8 @@ from django.contrib.auth import(
 )
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
+from saiban.models import StudySession
+
 from saiban.services.user import (
     new_user_with_profile,
     get_anonymous_user,
@@ -63,7 +65,8 @@ def history(request):
         return redirect('index')
 
     return render(request, 'profile/history.html', {
-        'motto': get_motto()
+        'motto': get_motto(),
+        'sessions': StudySession.objects.filter(user=request.user)
     })
 
 
