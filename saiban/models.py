@@ -350,3 +350,38 @@ class Achievement(models.Model):
 
     def __unicode__(self):
         return '%s [%d]' % (self.description, self.points)
+
+
+class StudySession(models.Model):
+    """Study session for this day (all micro sessions combined)"""
+    user = models.ForeignKey(User)
+    date = models.DateField(auto_now_add=True)
+
+    # Stats
+    total_kanji = models.PositiveIntegerField(
+        default=0, null=True, blank=True)
+    total_errors = models.PositiveIntegerField(
+        default=0, null=True, blank=True)
+    correct_streak = models.PositiveIntegerField(
+        default=0, null=True, blank=True)
+    xp_gained = models.PositiveIntegerField(
+        default=0, null=True, blank=True)
+
+    # Advanced stats
+    last_practice = models.DateTimeField(auto_now_add=True)
+    total_time = models.PositiveIntegerField(default=0, null=True, blank=True)
+
+    # Unique kanji number is calculated based on this list
+    kanji_studied = models.ManyToManyField(
+        'Kanji',
+        related_name='sessions',
+        null=True,
+        blank=True
+    )
+
+    def __unicode__(self):
+        return '%s [%s] +%sXP' % (
+            self.user.username,
+            self.date,
+            self.xp_gained
+        )

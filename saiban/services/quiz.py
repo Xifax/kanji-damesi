@@ -1,11 +1,13 @@
 import random
+import datetime
 
 from saiban.models import(
     Kanji,
     KanjiGroup,
     Example,
     Profile,
-    KanjiStatus
+    KanjiStatus,
+    StudySession
 )
 from saiban.services.srs import rate_by_time
 
@@ -105,7 +107,7 @@ def rate_answer(kanji, is_correct, user, answering_time=0):
     status.save()
 
     # Update profile
-    update_profile(user, is_correct, rating)
+    update_profile(user, is_correct, kanji, rating, answering_time)
 
 
 def get_examples(keyword, limit=2):
@@ -119,12 +121,13 @@ def get_examples(keyword, limit=2):
 
 def gain_exp(profile, rating=1):
     # Update exp
-    profile.experience += (
+    xp_gained = (
         profile.group_level     # exp based on group level
         + profile.streak        # streak bonus
         + profile.vanity_level  # bonus for user level
         + rating                # bonus for quick answer
     ) * Profile.EXP
+    profile.experience += xp_gained
     # Gain a level, if accumulated enough exp (level x 10)
     new_level_exp = (profile.vanity_level + 1) * Profile.MULTIPLIER
     if profile.experience >= new_level_exp:
@@ -133,18 +136,42 @@ def gain_exp(profile, rating=1):
         profile.experience = profile.experience - new_level_exp
 
     profile.save()
+    return xp_gained
 
 
-def update_profile(user, correct_answer, rating=1):
+def update_profile(user, correct_answer, kanji, rating=1, answering_time=0):
     profile = user.profile.get()
 
     # Update answering streak & exp
     if correct_answer:
         profile.streak += 1
-        gain_exp(profile, rating)
+        xp_gained = gain_exp(profile, rating)
     else:
         profile.streak = 0
         profile.save()
+
+    # Check, if there's already a session for today
+    try:
+        current_session = StudySession.objects.get(
+            date=datetime.datetime.now()
+        )
+    # Create, if none exist
+    except StudySession.DoesNotExist:
+        current_session = StudySession()
+        current_session.user = user
+        current_session.save()
+
+    # Update session stats
+    current_session.total_kanji += 1
+    if correct_answer:
+        current_session.correct_streak += 1
+        current_session.xp_gained += xp_gained
+    else:
+        current_session.total_errors += 1
+
+    current_session.kanji_studied.add(kanji)
+    current_session.total_time += answering_time
+    current_session.save()
 
     # TODO: check for possible achievements to award!
 

@@ -9,7 +9,9 @@ from saiban.models import (
     # SRS
     Profile,
     Achievement,
-    KanjiStatus
+    KanjiStatus,
+    # Stats
+    StudySession
 )
 
 # Register models for admin management
@@ -26,5 +28,11 @@ admin.site.register(Kanji, KanjiAdmin)
 admin.site.register(Compound, CompoundAdmin)
 
 admin.site.register([
-    Radical, KanjiGroup, KanjiStatus, Example, Profile, Achievement
+    Radical,
+    KanjiGroup,
+    KanjiStatus,
+    Example,
+    Profile,
+    Achievement,
+    StudySession
 ])
