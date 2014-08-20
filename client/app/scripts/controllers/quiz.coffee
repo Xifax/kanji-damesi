@@ -219,6 +219,9 @@ angular.module('clientApp')
           $scope.profile.level +
           4 # TODO: should calculate based on response time
         ) * EXP
+      else
+        $scope.session.answerExp = 0
+
       # Display notification
       got_it(correct)
 
