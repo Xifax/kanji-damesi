@@ -10,6 +10,9 @@ angular.module('clientApp')
     # Basic settings and utils
     api = '/saiban/api/'
 
+    # XP for correct answer
+    EXP = 1
+
     # Visiblitiy status
     $scope.show =
       # Info sections
@@ -208,8 +211,15 @@ angular.module('clientApp')
       # Check answer
       correct = kanji.front == $scope.quiz.answer.front
 
+      # Calculate experience on client!
+      if correct
+        $scope.session.answerExp = (
+          $scope.activeGroup.level +
+          $scope.profile.streak +
+          $scope.profile.level +
+          4 # TODO: should calculate based on response time
+        ) * EXP
       # Display notification
-      # TODO: calculate experience on client!
       got_it(correct)
 
       if correct
