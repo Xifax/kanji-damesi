@@ -18,18 +18,31 @@
 
         <h3>Study sessions log <small>from newest to oldest</small></h3>
 
+        <ul class="list-group">
         {% for session in sessions %}
-          <p><strong>{{ session.date }}</strong>
-          Total kanji: <small>{{ session.total_kanji}}</small></p>
+
+          <li class="list-group-item list-group-item-info">
+
+            <strong>{{ session.date }}</strong>
+                <span class="badge alert-danger">
+                  Kanji: {{ session.total_kanji }}
+                </span>
+                <span class="badge alert-warning">
+                  Time: {{ session.get_total_time }}
+                </span>
+                <span class="badge">
+                  XP: {{ session.xp_gained }}
+                </span>
+            </span>
+
+          </li>
+
         {% endfor %}
+        </ul>
 
       </div>
 
     </div>
   </div>
 
-{% endblock %}
-
-{% block footer %}
-    {% include "layout/footer.html" %}
 {% endblock %}

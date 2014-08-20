@@ -369,6 +369,7 @@ class StudySession(models.Model):
 
     # Advanced stats
     last_practice = models.DateTimeField(auto_now_add=True)
+    # In ms
     total_time = models.PositiveIntegerField(default=0, null=True, blank=True)
 
     # Unique kanji number is calculated based on this list
@@ -378,6 +379,9 @@ class StudySession(models.Model):
         null=True,
         blank=True
     )
+
+    def get_total_time(self):
+        return str(timedelta(seconds=self.total_time / 100))
 
     def __unicode__(self):
         return '%s [%s] +%sXP' % (

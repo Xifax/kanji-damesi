@@ -67,7 +67,7 @@ def get_stats(user):
     sessions = StudySession.objects.filter(user=user, date__range=[since, now])
     stats = {
         'kanji_studied': 0,
-        'new_kanji_studied': 0,
+        'new_kanji_studied': [],
         'errors_made': 0,
         'percentage': 0,
         'xp': 0,
@@ -77,9 +77,9 @@ def get_stats(user):
         stats['kanji_studied'] += session.total_kanji
         stats['errors_made'] += session.total_errors
         stats['xp'] += session.xp_gained
-        # TODO: filter unique kanji
-        # stats['new_kanji_studied'] += unique(session.kanji_studied)
+        stats['new_kanji_studied'] += session.kanji_studied.all()
 
+    stats['new_kanji_studied'] = len(set(stats['new_kanji_studied']))
     stats['percentage'] = (
         float(session.total_kanji - session.total_errors) / session.total_kanji
     ) * 100

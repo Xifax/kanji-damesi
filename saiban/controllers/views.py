@@ -66,7 +66,8 @@ def history(request):
 
     return render(request, 'profile/history.html', {
         'motto': get_motto(),
-        'sessions': StudySession.objects.filter(user=request.user)
+        'sessions':
+        StudySession.objects.filter(user=request.user).order_by('-date')
     })
 
 
