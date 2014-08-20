@@ -81,7 +81,8 @@ def get_stats(user):
 
     stats['new_kanji_studied'] = len(set(stats['new_kanji_studied']))
     stats['percentage'] = (
-        float(session.total_kanji - session.total_errors) / session.total_kanji
+        float(stats['kanji_studied'] - stats['errors_made'])
+        / stats['kanji_studied']
     ) * 100
 
     return stats
