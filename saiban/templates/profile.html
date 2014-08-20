@@ -48,17 +48,17 @@
         {{ stats.days }} day(s):
         </p>
 
-        {% with user.profile.get.streak as streak %}
-        <p><strong>Streak:</strong>
-
-          {% if streak == 0 %}
-            You're taking your sweet time, good sir.
-          {% else %}
-            You are studying <strong>{{ user.profile.get.streak }}</strong> days in a row!
-          {% endif %}
-
-        </p>
-        {% endwith %}
+        {# {% with user.profile.get.streak as streak %} #}
+        {# <p><strong>Streak:</strong> #}
+        {#  #}
+        {#   {% if streak == 0 %} #}
+        {#     You're taking your sweet time, good sir. #}
+        {#   {% else %} #}
+        {#     You are studying <strong>{{ user.profile.get.streak }}</strong> days in a row! #}
+        {#   {% endif %} #}
+        {#  #}
+        {# </p> #}
+        {# {% endwith %} #}
 
         <!-- total kanji studied in the last days -->
         <p><strong>Total kanji studied:</strong>
@@ -78,7 +78,7 @@
         </p>
         <!-- got right percentage -->
         <p><strong>Percentage of kanji you got right:</strong>
-        {{ stats.percentage }}%
+        {{ stats.percentage|floatformat }}%
         </p>
 
 
