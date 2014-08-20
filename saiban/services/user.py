@@ -69,7 +69,7 @@ def get_stats(user):
         'kanji_studied': 0,
         'new_kanji_studied': [],
         'errors_made': 0,
-        'percentage': 0,
+        'percentage': 0.0,
         'xp': 0,
         'days': days,
     }
@@ -80,10 +80,11 @@ def get_stats(user):
         stats['new_kanji_studied'] += session.kanji_studied.all()
 
     stats['new_kanji_studied'] = len(set(stats['new_kanji_studied']))
-    stats['percentage'] = (
-        float(stats['kanji_studied'] - stats['errors_made'])
-        / stats['kanji_studied']
-    ) * 100
+    if stats['kanji_studied'] > 0:
+        stats['percentage'] = (
+            float(stats['kanji_studied'] - stats['errors_made'])
+            / stats['kanji_studied']
+        ) * 100
 
     return stats
 
