@@ -34,6 +34,15 @@ html, body {
   height: 100%;
 }
 
+/*
+  Allow angular.js to be loaded in body, hiding cloaked elements until
+  templates compile.  The !important is important given that there may be
+  other selectors that are more specific or come later and might alter display.
+ */
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
+
 #footer {
   height: 60px;
   background-image: linear-gradient(#484E55, #3A3F44 60%, #313539);

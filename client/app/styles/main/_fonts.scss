@@ -1,6 +1,6 @@
 /* Import Google fonts */
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:300,400|Share+Tech+Mono);
+@import url(http://fonts.googleapis.com/css?family=Roboto:100,300|Share+Tech+Mono);
 
 /* Fonts settings */
 
@@ -21,5 +21,5 @@ $subTitleSize: 18px;
 
 .thin {
   font-family: $thinFont;
-  font-weight: 300;
+  font-weight: 100;
 }

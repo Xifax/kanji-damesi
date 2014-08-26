@@ -133,8 +133,10 @@ angular.module('clientApp')
       $scope.quiz = data.quiz
 
       # Update session and profile
-      if ($scope.profile.experience != 0) and (data.profile.experience != 0)
-        $scope.session.answerExp = data.profile.experience - $scope.profile.experience
+      console.log(data.profile)
+      console.log($scope.profile)
+      # if ($scope.profile.experience != 0) and (data.profile.experience != 0)
+      #   $scope.session.answerExp = data.profile.experience - $scope.profile.experience
       $scope.session.totalExp += $scope.session.answerExp
 
       $scope.profile = data.profile
@@ -213,11 +215,24 @@ angular.module('clientApp')
 
       # Calculate experience on client!
       if correct
+        # Calculate rating based on response time
+        if $scope.ponderingTime in [0..3999]
+          rating = 4
+        else if $scope.ponderingTime in [4000..9999]
+          rating = 3
+        else if $scope.ponderingTime in [10000..19999]
+          rating = 2
+        else if $scope.ponderingTime in [20000..39999]
+          rating = 1
+        else
+          rating = 0
+
+        # Calculate XP gain
         $scope.session.answerExp = (
           $scope.activeGroup.level +
           $scope.profile.streak +
           $scope.profile.level +
-          4 # TODO: should calculate based on response time
+          rating
         ) * EXP
       else
         $scope.session.answerExp = 0
